@@ -42,6 +42,26 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 
+MOTS_IGNORES = {"vase", "vases"}
+
+
+def cle_souple(s):
+    """« vase-ikebana-mini » ~ « ikebana-mini », « bol-v-uni » ~ « bol-v-unie »."""
+    return "-".join(t[:-1] if len(t) > 2 and t.endswith("e") else t
+                    for t in s.split("-") if t not in MOTS_IGNORES)
+
+
+def photos_de(photos, sid):
+    """Photos d'une pièce : nom exact du dossier, sinon nom approchant (pièce renommée dans Notion)."""
+    if photos["pieces"].get(sid):
+        return sid
+    souple = cle_souple(sid)
+    for k in photos["pieces"]:
+        if cle_souple(k) == souple:
+            return k
+    return None
+
+
 def api(method, chemin, corps=None):
     req = urllib.request.Request(
         "https://api.notion.com/v1/" + chemin,
@@ -171,7 +191,10 @@ def construire():
             pid = p["id"].replace("-", "")
             nom = prop(p, "Nom") or ""
             sid = slug(nom)
-            a_photo = bool(photos["pieces"].get(sid))
+            k = photos_de(photos, sid)
+            if k and k != sid:
+                photos["pieces"][sid] = photos["pieces"][k]
+            a_photo = bool(k)
             if "Photo manquante" in p["properties"] and bool(prop(p, "Photo manquante")) == a_photo:
                 maj_photos.append((p["id"], not a_photo))
             if not prop(p, "Publié"):

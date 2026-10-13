@@ -537,8 +537,12 @@ const slugCat = {"Art de la table":"table", "Vases":"vases", "Petits objets":"ob
 const slugSous = {"Assiettes":"assiettes", "Plats":"plats", "Bols":"bols", "Coquetiers":"coquetiers", "Tasses":"tasses", "Porte-savon":"porte-savon", "Porte-encens":"porte-encens"};
 const tri = (x, y) => (x.ordre ?? 1e9) - (y.ordre ?? 1e9);
 
+/* Photos d'une pièce : dossier au nom exact, sinon nom approchant (pièce renommée dans Notion,
+   ex. « Vase “Sylvestre” » ↔ dossier « Sylvestre », « Bol V uni » ↔ « Bol V unie ») */
+const cleSouple = s => s.split("-").filter(t => t !== "vase" && t !== "vases").map(t => t.length > 2 && t.endsWith("e") ? t.slice(0, -1) : t).join("-");
+const photosDe = id => PHOTOS.pieces[id] || (Object.entries(PHOTOS.pieces).find(([k]) => cleSouple(k) === cleSouple(id)) || [, []])[1];
 const PIECES = NOTION_PIECES.slice().sort(tri).map(p => ({
-  id:p.id, nom:p.nom, desc:p.desc, compo:p.compo, delai:p.delai, photos:PHOTOS.pieces[p.id] || [],
+  id:p.id, nom:p.nom, desc:p.desc, compo:p.compo, delai:p.delai, photos:photosDe(p.id),
   cats:p.cats.map(c => slugCat[c]).filter(Boolean),
   sous:p.sous ? slugSous[p.sous] : undefined,
   f:lireFormats(p.formats),
