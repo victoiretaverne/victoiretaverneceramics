@@ -122,7 +122,17 @@ def prop(p, nom):
     if t == "multi_select":
         return [o["name"] for o in v["multi_select"]]
     if t == "relation":
-        return [r["id"].replace("-", "") for r in v["relation"]]
+        ids = [r["id"].replace("-", "") for r in v["relation"]]
+        if v.get("has_more"):
+            # L'API ne renvoie que 25 liens par propriété : on va chercher la liste complète
+            ids, curseur = [], None
+            while True:
+                r = api("GET", f"pages/{p['id']}/properties/{v['id']}?page_size=100" + (f"&start_cursor={curseur}" if curseur else ""))
+                ids += [x["relation"]["id"].replace("-", "") for x in r.get("results", [])]
+                if not r.get("has_more"):
+                    break
+                curseur = r["next_cursor"]
+        return ids
     return None
 
 
