@@ -1,0 +1,147 @@
+{
+ "pieces": {
+  "coquetier-saliere-en-terre-melee": [
+   "photos/coquetier-saliere-en-terre-melee-1.jpg"
+  ],
+  "porte-oeufs": [
+   "photos/porte-oeufs-1.jpg",
+   "photos/porte-oeufs-2.jpg"
+  ],
+  "coquetier-simple": [
+   "photos/coquetier-simple-1.jpg",
+   "photos/coquetier-simple-2.jpg"
+  ],
+  "coquetier-saliere": [
+   "photos/coquetier-saliere-1.jpg",
+   "photos/coquetier-saliere-2.jpg",
+   "photos/coquetier-saliere-3.jpg"
+  ],
+  "gamelle-a-pois": [
+   "photos/gamelle-a-pois-1.jpg"
+  ],
+  "bol-v-unie": [
+   "photos/bol-v-unie-1.jpg"
+  ],
+  "bol-v-a-pois": [
+   "photos/bol-v-a-pois-1.jpg"
+  ],
+  "assiette-creuse-picasso": [
+   "photos/assiette-creuse-picasso-1.jpg"
+  ],
+  "assiettes-a-dessert-petales": [
+   "photos/assiettes-a-dessert-petales-1.jpg",
+   "photos/assiettes-a-dessert-petales-2.jpg"
+  ],
+  "assiette-en-terre-melee": [
+   "photos/assiette-en-terre-melee-1.jpg",
+   "photos/assiette-en-terre-melee-2.jpg",
+   "photos/assiette-en-terre-melee-3.jpg"
+  ],
+  "porte-encens": [
+   "photos/porte-encens-1.jpg",
+   "photos/porte-encens-2.jpg",
+   "photos/porte-encens-3.jpg"
+  ],
+  "oreille": [
+   "photos/oreille-1.jpg",
+   "photos/oreille-2.jpg"
+  ],
+  "etoiles-de-noel": [
+   "photos/etoiles-de-noel-1.jpg"
+  ],
+  "porte-savon-rond": [
+   "photos/porte-savon-rond-1.jpg",
+   "photos/porte-savon-rond-2.jpg",
+   "photos/porte-savon-rond-3.jpg"
+  ],
+  "porte-savon-motifs-graphiques": [
+   "photos/porte-savon-motifs-graphiques-1.jpg"
+  ],
+  "couverts-a-salade": [
+   "photos/couverts-a-salade-1.jpg"
+  ],
+  "isabelle": [
+   "photos/isabelle-1.jpg"
+  ],
+  "ikebana": [
+   "photos/ikebana-1.jpg"
+  ],
+  "ophelie": [
+   "photos/ophelie-1.jpg",
+   "photos/ophelie-2.jpg"
+  ],
+  "swirl": [
+   "photos/swirl-1.jpg",
+   "photos/swirl-2.jpg"
+  ],
+  "sylvestre": [
+   "photos/sylvestre-1.jpg",
+   "photos/sylvestre-2.jpg"
+  ],
+  "camille": [
+   "photos/camille-1.jpg",
+   "photos/camille-2.jpg"
+  ],
+  "lilas": [
+   "photos/lilas-1.jpg",
+   "photos/lilas-2.jpg",
+   "photos/lilas-3.jpg"
+  ],
+  "ikebana-mini": [
+   "photos/ikebana-mini-1.jpg",
+   "photos/ikebana-mini-2.jpg"
+  ],
+  "plat-motifs-graphiques": [
+   "photos/plat-motifs-graphiques-1.jpg"
+  ],
+  "bougeoir-mural-brut": [
+   "photos/bougeoir-mural-brut-1.jpg",
+   "photos/bougeoir-mural-brut-2.jpg",
+   "photos/bougeoir-mural-brut-3.jpg",
+   "photos/bougeoir-mural-brut-4.jpg"
+  ],
+  "bougeoir-mural-argent": [
+   "photos/bougeoir-mural-argent-1.jpg",
+   "photos/bougeoir-mural-argent-2.jpg",
+   "photos/bougeoir-mural-argent-3.jpg"
+  ],
+  "tasse-n1": [
+   "photos/tasse-n1-1.jpg"
+  ],
+  "tasse-n2": [
+   "photos/tasse-n2-1.jpg"
+  ],
+  "tasse-espresso": [
+   "photos/tasse-espresso-1.jpg"
+  ]
+ },
+ "collections": {
+  "terre-melees": [
+   "photos/coll-terre-melees-1.jpg",
+   "photos/coll-terre-melees-2.jpg"
+  ],
+  "graphics": [
+   "photos/coll-graphics-1.jpg"
+  ],
+  "carreaux": [
+   "photos/coll-carreaux-1.jpg"
+  ],
+  "pois": [
+   "photos/coll-pois-1.jpg",
+   "photos/coll-pois-2.jpg"
+  ]
+ },
+ "categories": {
+  "table": [
+   "photos/cat-table-1.jpg"
+  ],
+  "objets": [
+   "photos/cat-objets-1.jpg"
+  ],
+  "vases": [
+   "photos/cat-vases-1.jpg",
+   "photos/cat-vases-2.jpg"
+  ]
+ },
+ "cover": "bandeau.jpg"
+}

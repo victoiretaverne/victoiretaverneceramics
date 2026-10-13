@@ -1,0 +1,38 @@
+name: Mise à jour du site depuis Notion
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # toutes les heures
+  workflow_dispatch:        # bouton « Run workflow » pour forcer une mise à jour
+  push:
+    branches: [main]
+    paths: ["outil/**"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site
+  cancel-in-progress: false
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Construire le site depuis Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: python outil/build.py
+      - name: Enregistrer si le site a changé
+        run: |
+          if ! git diff --quiet -- site/; then
+            git config user.name "Mise à jour automatique"
+            git config user.email "actions@users.noreply.github.com"
+            git add site/
+            git commit -m "Mise à jour depuis Notion"
+            git push
+          fi
