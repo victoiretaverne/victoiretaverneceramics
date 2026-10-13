@@ -172,16 +172,19 @@ def construire():
             c1 = (prop(c, "Code 1") or "").strip()
             if not nom or not re.fullmatch(r"#?[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?", c1):
                 continue
-            c2 = (prop(c, "Code 2") or "").strip()
-            if not re.fullmatch(r"#?[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?", c2):
-                c2 = ""
+            def code(n):
+                v = (prop(c, n) or "").strip()
+                return v if re.fullmatch(r"#?[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?", v) else ""
+            c2, c3 = code("Code 2"), code("Code 3")
+            if c3 and not c2:
+                c2, c3 = c3, ""
             hexa = lambda s: ("#" + s.lstrip("#")).upper() if s else ""
             cid = slug(nom)
             id_coul[c["id"].replace("-", "")] = cid
-            couleurs.append({"id": cid, "nom": nom, "c1": hexa(c1), "c2": hexa(c2), "ordre": prop(c, "Ordre")})
+            couleurs.append({"id": cid, "nom": nom, "c1": hexa(c1), "c2": hexa(c2), "c3": hexa(c3), "ordre": prop(c, "Ordre")})
         couleurs.sort(key=lambda d: (d["ordre"] is None, d["ordre"] or 0, d["nom"]))
         bloc = "const NOTION_COULEURS = [\n" + ",\n".join(
-            "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2")}) for d in couleurs)
+            "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2", "c3") if d[k] or k != "c3"}) for d in couleurs)
         if "const NOTION_COULEURS = [" in html:  # gabarit sans pastilles : on ignore
             html = remplacer_bloc(html, "const NOTION_COULEURS = [", "\n];", bloc)
 
