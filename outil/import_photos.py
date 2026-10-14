@@ -13,7 +13,10 @@ COLL = {"terre-melees": "terre-melees", "les-pois": "pois", "graphics": "graphic
 CAT = {"art-de-la-table": "table", "vases": "vases", "petits-objets": "objets"}
 man = {"pieces": {}, "collections": {}, "categories": {}, "cover": None}
 def conv(src, name, w=1600):
-    im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
+    try: im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
+    except Exception:  # photo iPhone au format HEIC (même nommée .jpeg)
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import heic
+        im = heic.lire(src)
     if max(im.size) > w:
         r = w / max(im.size); im = im.resize((round(im.width*r), round(im.height*r)), Image.LANCZOS)
     dst = os.path.join(OUT, name); im.save(dst, 'JPEG', quality=80, optimize=True, progressive=True)
