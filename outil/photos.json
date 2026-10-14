@@ -14,13 +14,14 @@
   "coquetier-saliere": [
    "photos/coquetier-saliere-1.jpg",
    "photos/coquetier-saliere-2.jpg",
-   "photos/coquetier-saliere-3.jpg"
+   "photos/coquetier-saliere-3.jpg",
+   "photos/coquetier-saliere-4.jpg"
+  ],
+  "bol-v-uni": [
+   "photos/bol-v-uni-1.jpg"
   ],
   "gamelle-a-pois": [
    "photos/gamelle-a-pois-1.jpg"
-  ],
-  "bol-v-unie": [
-   "photos/bol-v-unie-1.jpg"
   ],
   "bol-v-a-pois": [
    "photos/bol-v-a-pois-1.jpg"
@@ -35,7 +36,8 @@
   "assiette-en-terre-melee": [
    "photos/assiette-en-terre-melee-1.jpg",
    "photos/assiette-en-terre-melee-2.jpg",
-   "photos/assiette-en-terre-melee-3.jpg"
+   "photos/assiette-en-terre-melee-3.jpg",
+   "photos/assiette-en-terre-melee-4.jpg"
   ],
   "porte-encens": [
    "photos/porte-encens-1.jpg",
@@ -60,36 +62,40 @@
   "couverts-a-salade": [
    "photos/couverts-a-salade-1.jpg"
   ],
-  "isabelle": [
-   "photos/isabelle-1.jpg"
+  "vase-ikebana-mini": [
+   "photos/vase-ikebana-mini-1.jpg",
+   "photos/vase-ikebana-mini-2.jpg",
+   "photos/vase-ikebana-mini-3.jpg",
+   "photos/vase-ikebana-mini-4.jpg"
   ],
-  "ikebana": [
-   "photos/ikebana-1.jpg"
+  "vase-camille": [
+   "photos/vase-camille-1.jpg",
+   "photos/vase-camille-2.jpg"
   ],
-  "ophelie": [
-   "photos/ophelie-1.jpg",
-   "photos/ophelie-2.jpg"
+  "vase-lilas": [
+   "photos/vase-lilas-1.jpg",
+   "photos/vase-lilas-2.jpg",
+   "photos/vase-lilas-3.jpg"
   ],
-  "swirl": [
-   "photos/swirl-1.jpg",
-   "photos/swirl-2.jpg"
+  "vase-ikebana": [
+   "photos/vase-ikebana-1.jpg",
+   "photos/vase-ikebana-2.jpg",
+   "photos/vase-ikebana-3.jpg"
   ],
-  "sylvestre": [
-   "photos/sylvestre-1.jpg",
-   "photos/sylvestre-2.jpg"
+  "vase-isabelle": [
+   "photos/vase-isabelle-1.jpg"
   ],
-  "camille": [
-   "photos/camille-1.jpg",
-   "photos/camille-2.jpg"
+  "vase-swirl": [
+   "photos/vase-swirl-1.jpg",
+   "photos/vase-swirl-2.jpg"
   ],
-  "lilas": [
-   "photos/lilas-1.jpg",
-   "photos/lilas-2.jpg",
-   "photos/lilas-3.jpg"
+  "vase-ophelie": [
+   "photos/vase-ophelie-1.jpg",
+   "photos/vase-ophelie-2.jpg"
   ],
-  "ikebana-mini": [
-   "photos/ikebana-mini-1.jpg",
-   "photos/ikebana-mini-2.jpg"
+  "vase-sylvestre": [
+   "photos/vase-sylvestre-1.jpg",
+   "photos/vase-sylvestre-2.jpg"
   ],
   "plat-motifs-graphiques": [
    "photos/plat-motifs-graphiques-1.jpg"
@@ -104,6 +110,9 @@
    "photos/bougeoir-mural-argent-1.jpg",
    "photos/bougeoir-mural-argent-2.jpg",
    "photos/bougeoir-mural-argent-3.jpg"
+  ],
+  "tasse-n3": [
+   "photos/tasse-n3-1.jpg"
   ],
   "tasse-n1": [
    "photos/tasse-n1-1.jpg"

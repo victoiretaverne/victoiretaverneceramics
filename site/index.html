@@ -80,6 +80,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 .fav{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:10px;color:var(--encre)}
 .fav svg{width:18px;height:18px;fill:none;stroke-width:1.3;transition:fill .15s}
 .fav.on svg{fill:var(--rose)}
+.fav-large.on svg{fill:var(--encre);stroke:var(--encre)}
 .fav-coin.on svg{fill:#fff}
 .fav:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
 .fav-coin{position:absolute;top:4px;right:4px;width:34px;height:34px;justify-content:center;color:#fff}
@@ -93,15 +94,36 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 header .bar{position:relative}
 @media (max-width:1180px) and (min-width:761px){header nav ul{flex-wrap:nowrap;white-space:nowrap;gap:6px 14px;font-size:clamp(.66rem,1.05vw,.82rem)}header .fav-lien{font-size:clamp(.66rem,1.05vw,.82rem)}header .droite{gap:14px}header .marque{gap:12px}header .marque span{font-size:clamp(.7rem,1.2vw,.95rem)}header .marque .logo{width:30px}}
 @media (max-width:880px) and (min-width:761px){header nav ul{gap:6px 10px;font-size:.62rem}header .fav-lien{font-size:.62rem}header .marque span{font-size:.66rem}header .bar{gap:12px}header .droite{gap:10px}header .marque{gap:8px}}
-@media (max-width:760px){.fav-lien{position:absolute;top:14px;right:clamp(16px,3vw,40px)}}
+.outils{display:flex;align-items:center;gap:18px;flex:none}
+.rech-btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;color:inherit;font-size:.82rem;padding-block:4px}
+.rech-btn svg{width:1.25em;height:1.25em;stroke-width:1.4}
+.rech-btn:focus-visible{outline:1.5px solid currentColor;outline-offset:3px}
+.rech{border-top:1px solid var(--ligne);background:var(--fond);color:var(--encre)}
+.rech-in{display:flex;align-items:center;gap:12px;padding-block:12px}
+.rech-in svg{width:18px;height:18px;stroke-width:1.4;flex:none}
+.rech-in input{flex:1;min-width:0;border:0;border-bottom:var(--filet);background:transparent;color:var(--encre);border-radius:0;padding:8px 2px;font-family:var(--police-titre);font-weight:300;font-size:1rem;letter-spacing:.03em;-webkit-appearance:none;appearance:none}
+.rech-in input::placeholder{color:var(--doux);font-family:var(--police-texte);font-style:italic;letter-spacing:0}
+.rech-in input:focus{outline:none;border-bottom-color:var(--encre)}
+.rech-in input::-webkit-search-cancel-button{display:none}
+.rech-fermer{all:unset;cursor:pointer;font-family:var(--police-titre);font-weight:300;font-size:.7rem;letter-spacing:var(--espacement-titre);text-transform:uppercase;color:var(--doux)}
+.rech-fermer:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
+body.accueil header:has(.rech:not([hidden])){background:var(--fond);color:var(--encre);border-bottom-color:var(--ligne)}
+@media (max-width:1180px) and (min-width:761px){header .rech-btn{font-size:clamp(.66rem,1.05vw,.82rem)}header .outils{gap:12px}}
+@media (max-width:760px){.outils{position:absolute;top:14px;right:clamp(16px,3vw,40px);gap:14px}header .marque{max-width:calc(100% - var(--l-outils,90px))}header .marque span{white-space:normal}}
 @media (max-width:560px){.fav-txt{display:none}}
 @media (max-width:760px){.droite{width:100%}.droite nav{flex:1}}
 /* Page favoris en panier */
 .panier{padding-bottom:clamp(48px,8vw,96px)}
-.panier-entete{display:grid;grid-template-columns:minmax(0,1fr) 120px 120px;gap:24px;font-size:.72rem;color:var(--doux);padding-bottom:10px;border-bottom:var(--filet)}
-.panier-entete span:nth-child(2){text-align:center}.panier-entete span:nth-child(3){text-align:right}
+.panier-entete,.panier-ligne{grid-template-columns:96px minmax(0,1fr) 170px 190px 110px 90px;gap:20px}
+.panier-entete{display:grid;font-size:.72rem;color:var(--doux);padding-bottom:10px;border-bottom:var(--filet)}
+.panier-entete span:first-child{grid-column:1 / 3}.panier-entete span:nth-child(4){text-align:center}.panier-entete span:nth-child(5){text-align:right}
+.panier-col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.panier-col .select select{padding:9px 32px 9px 10px;font-size:.8rem}
+.panier-col .select::after{right:12px;width:6px;height:6px}
+.panier-tiret{color:var(--doux)}
+@media (max-width:1000px){.panier-entete,.panier-ligne{grid-template-columns:72px minmax(0,1fr) 120px 140px 100px 76px;gap:14px}}
 .panier-liste{list-style:none;margin:0;padding:0}
-.panier-ligne{display:grid;grid-template-columns:96px minmax(0,1fr) 120px 120px;gap:24px;align-items:start;padding:22px 0;border-bottom:1px solid var(--ligne)}
+.panier-ligne{display:grid;align-items:start;padding:22px 0;border-bottom:1px solid var(--ligne)}
 .panier-photo{display:block}.panier-photo .ph{aspect-ratio:4/5}
 .panier-infos{display:flex;flex-direction:column;gap:10px;min-width:0}
 .panier-nom{text-decoration:none;font-size:.9rem}
@@ -119,15 +141,19 @@ header .bar{position:relative}
 .panier-qte button:focus-visible,.panier-retirer:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
 .panier-prix{margin:0;text-align:right;font-size:.95rem}.panier-prix b{white-space:nowrap}
 .panier-prix b,.panier-somme b{font-family:var(--police-prix);font-weight:300;font-style:italic}
-.panier-total{display:flex;justify-content:space-between;align-items:baseline;padding:22px 0 6px;border-top:var(--filet);margin-top:-1px}
-.panier-total p{margin:0}.panier-total .caps{font-size:.85rem}
+.panier-total{display:flex;justify-content:flex-end;align-items:baseline;gap:18px;padding:22px 0 6px;border-top:var(--filet);margin-top:-1px}
+.panier-total p{margin:0}
+.panier-livraison{display:flex;justify-content:flex-end;align-items:baseline;gap:18px;padding:18px 0;border-bottom:1px solid var(--ligne)}
+.panier-livraison p{margin:0}.panier-livraison .caps{font-size:.85rem}
+.panier-liv-texte{font-family:var(--police-texte);font-style:italic;color:var(--doux);font-size:var(--taille-petit);text-align:right}.panier-total .caps{font-size:1.25rem}
 .panier-somme{font-size:1.25rem}
 .panier-note{margin:4px 0 0;font-size:var(--taille-petit);color:var(--doux);font-style:italic;text-align:right}
 .panier-actions{margin-top:28px;margin-left:auto;max-width:420px;display:flex;flex-direction:column;gap:10px}
 @media (max-width:700px){
   .panier-entete{display:none}
-  .panier-ligne{grid-template-columns:80px minmax(0,1fr);grid-template-areas:"photo infos" "photo qte" "photo prix";gap:10px 16px}
-  .panier-photo{grid-area:photo}.panier-infos{grid-area:infos}.panier-qte{grid-area:qte;justify-content:flex-start}.panier-prix{grid-area:prix;text-align:left}
+  .panier-ligne{grid-template-columns:80px minmax(0,1fr);grid-template-areas:"photo infos" "photo coul" "photo format" "photo qte" "photo prix";gap:10px 16px}
+  .panier-photo{grid-area:photo}.panier-infos{grid-area:infos}.panier-c-coul{grid-area:coul}.panier-c-format{grid-area:format}.panier-qte{grid-area:qte;justify-content:flex-start}.panier-prix{grid-area:prix;text-align:left}
+  .panier-col:has(.panier-tiret){display:none}
   .panier-actions{max-width:none}
 }
 /* Accueil : menu transparent posé sur la photo, redevient opaque au défilement */
@@ -308,6 +334,17 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .select{position:relative}
 .select::after{content:"";position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:1px solid var(--encre);border-bottom:1px solid var(--encre);transform:translateY(-70%) rotate(45deg);pointer-events:none}
 .select select{appearance:none;-webkit-appearance:none;width:100%;background:var(--fond);color:var(--encre);border:var(--filet);border-radius:0;padding:13px 44px 13px 14px;font-family:var(--police-titre);font-weight:300;font-size:.92rem;letter-spacing:.03em;cursor:pointer}
+.riche-btn{all:unset;box-sizing:border-box;display:block;width:100%;background:var(--fond);color:var(--encre);border:var(--filet);padding:13px 44px 13px 14px;font-family:var(--police-titre);font-weight:300;font-size:.92rem;letter-spacing:.03em;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.riche-btn:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
+.riche-liste{position:absolute;z-index:6;left:0;right:0;top:calc(100% - 1px);margin:0;padding:4px 0;list-style:none;background:var(--fond);border:var(--filet);max-height:320px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.riche-liste li{padding:10px 14px;font-family:var(--police-titre);font-weight:300;font-size:.9rem;letter-spacing:.03em;cursor:pointer}
+.riche-liste li:hover,.riche-liste li:focus{background:rgba(0,0,0,.05);outline:none}
+.riche-liste li[aria-selected="true"]{background:rgba(0,0,0,.08)}
+em.taille{font-family:var(--police-texte);font-style:italic;font-weight:400;letter-spacing:0}
+.format-unique{margin:-8px 0 0;font-size:var(--taille-petit)}
+.panier-format{margin:0;font-family:var(--police-titre);font-weight:300;font-size:.85rem}
+.panier-col .riche-btn{padding:9px 32px 9px 10px;font-size:.8rem}
+.panier-col .riche-liste li{font-size:.8rem;padding:8px 10px}
 .select select:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
 #format-detail{margin:0;color:var(--doux);font-size:var(--taille-petit);min-height:1.4em}
 .cta{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--encre);color:var(--fond);text-decoration:none;padding:16px 20px;font-size:.85rem;transition:background .2s}
@@ -349,6 +386,7 @@ body > header,body > footer{flex:none}
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="coeur" viewBox="0 0 24 24"><path d="M12 20.3s-7.3-4.4-8.9-9.2C2 7.8 4.1 4.7 7.4 4.7c2 0 3.6 1.1 4.6 2.7 1-1.6 2.6-2.7 4.6-2.7 3.3 0 5.4 3.1 4.3 6.4-1.6 4.8-8.9 9.2-8.9 9.2z" stroke="currentColor" stroke-linejoin="round"/></symbol>
+  <symbol id="loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor"/><path d="M15.3 15.3 20.5 20.5" stroke="currentColor" stroke-linecap="round"/></symbol>
   <symbol id="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></symbol>
 </svg>
 
@@ -360,8 +398,18 @@ body > header,body > footer{flex:none}
     </a>
     <div class="droite">
       <nav aria-label="Catégories"><ul id="menu"></ul></nav>
-      <a class="fav-lien" href="#favoris"><span class="caps fav-txt">Mes favoris</span><span class="fav-ico"><svg aria-hidden="true"><use href="#coeur"/></svg><span class="fav-n" id="fav-n"></span></span></a>
+      <div class="outils">
+        <button type="button" class="rech-btn" id="rech-btn" aria-label="Rechercher" aria-expanded="false" aria-controls="rech"><svg aria-hidden="true"><use href="#loupe"/></svg></button>
+        <a class="fav-lien" href="#favoris"><span class="caps fav-txt">Mes favoris</span><span class="fav-ico"><svg aria-hidden="true"><use href="#coeur"/></svg><span class="fav-n" id="fav-n"></span></span></a>
+      </div>
     </div>
+  </div>
+  <div class="rech" id="rech" hidden>
+    <form class="wrap rech-in" role="search" onsubmit="return false">
+      <svg aria-hidden="true"><use href="#loupe"/></svg>
+      <input type="search" id="rech-q" placeholder="Rechercher une pièce, une couleur, une collection…" aria-label="Rechercher" autocomplete="off" enterkeyhint="search">
+      <button type="button" class="rech-fermer" id="rech-fermer" aria-label="Fermer la recherche">Fermer</button>
+    </form>
   </div>
 </header>
 
@@ -418,7 +466,7 @@ const CATEGORIES = [
    (dans le vrai site, ce bloc sera lu directement depuis Notion)
    ============================================================ */
 /* Photos importées depuis Documents > WORK > 4. CÉRAMIQUE > photos fiches produits */
-const PHOTOS = {"pieces": {"coquetier-saliere-en-terre-melee": ["photos/coquetier-saliere-en-terre-melee-1.jpg"], "porte-oeufs": ["photos/porte-oeufs-1.jpg", "photos/porte-oeufs-2.jpg"], "coquetier-simple": ["photos/coquetier-simple-1.jpg", "photos/coquetier-simple-2.jpg"], "coquetier-saliere": ["photos/coquetier-saliere-1.jpg", "photos/coquetier-saliere-2.jpg", "photos/coquetier-saliere-3.jpg"], "gamelle-a-pois": ["photos/gamelle-a-pois-1.jpg"], "bol-v-unie": ["photos/bol-v-unie-1.jpg"], "bol-v-a-pois": ["photos/bol-v-a-pois-1.jpg"], "assiette-creuse-picasso": ["photos/assiette-creuse-picasso-1.jpg"], "assiettes-a-dessert-petales": ["photos/assiettes-a-dessert-petales-1.jpg", "photos/assiettes-a-dessert-petales-2.jpg"], "assiette-en-terre-melee": ["photos/assiette-en-terre-melee-1.jpg", "photos/assiette-en-terre-melee-2.jpg", "photos/assiette-en-terre-melee-3.jpg"], "porte-encens": ["photos/porte-encens-1.jpg", "photos/porte-encens-2.jpg", "photos/porte-encens-3.jpg"], "oreille": ["photos/oreille-1.jpg", "photos/oreille-2.jpg"], "etoiles-de-noel": ["photos/etoiles-de-noel-1.jpg"], "porte-savon-rond": ["photos/porte-savon-rond-1.jpg", "photos/porte-savon-rond-2.jpg", "photos/porte-savon-rond-3.jpg"], "porte-savon-motifs-graphiques": ["photos/porte-savon-motifs-graphiques-1.jpg"], "couverts-a-salade": ["photos/couverts-a-salade-1.jpg"], "isabelle": ["photos/isabelle-1.jpg"], "ikebana": ["photos/ikebana-1.jpg"], "ophelie": ["photos/ophelie-1.jpg", "photos/ophelie-2.jpg"], "swirl": ["photos/swirl-1.jpg", "photos/swirl-2.jpg"], "sylvestre": ["photos/sylvestre-1.jpg", "photos/sylvestre-2.jpg"], "camille": ["photos/camille-1.jpg", "photos/camille-2.jpg"], "lilas": ["photos/lilas-1.jpg", "photos/lilas-2.jpg", "photos/lilas-3.jpg"], "ikebana-mini": ["photos/ikebana-mini-1.jpg", "photos/ikebana-mini-2.jpg"], "plat-motifs-graphiques": ["photos/plat-motifs-graphiques-1.jpg"], "bougeoir-mural-brut": ["photos/bougeoir-mural-brut-1.jpg", "photos/bougeoir-mural-brut-2.jpg", "photos/bougeoir-mural-brut-3.jpg", "photos/bougeoir-mural-brut-4.jpg"], "bougeoir-mural-argent": ["photos/bougeoir-mural-argent-1.jpg", "photos/bougeoir-mural-argent-2.jpg", "photos/bougeoir-mural-argent-3.jpg"], "tasse-n1": ["photos/tasse-n1-1.jpg"], "tasse-n2": ["photos/tasse-n2-1.jpg"], "tasse-espresso": ["photos/tasse-espresso-1.jpg"], "vase-ikebana-mini": ["photos/ikebana-mini-1.jpg", "photos/ikebana-mini-2.jpg"], "vase-ikebana": ["photos/ikebana-1.jpg"], "bol-v-uni": ["photos/bol-v-unie-1.jpg"], "vase-ophelie": ["photos/ophelie-1.jpg", "photos/ophelie-2.jpg"], "vase-swirl": ["photos/swirl-1.jpg", "photos/swirl-2.jpg"], "vase-lilas": ["photos/lilas-1.jpg", "photos/lilas-2.jpg", "photos/lilas-3.jpg"], "vase-camille": ["photos/camille-1.jpg", "photos/camille-2.jpg"], "vase-isabelle": ["photos/isabelle-1.jpg"], "vase-sylvestre": ["photos/sylvestre-1.jpg", "photos/sylvestre-2.jpg"]}, "collections": {"terre-melees": ["photos/coll-terre-melees-1.jpg", "photos/coll-terre-melees-2.jpg"], "graphics": ["photos/coll-graphics-1.jpg"], "carreaux": ["photos/coll-carreaux-1.jpg"], "pois": ["photos/coll-pois-1.jpg", "photos/coll-pois-2.jpg"]}, "categories": {"table": ["photos/cat-table-1.jpg"], "objets": ["photos/cat-objets-1.jpg"], "vases": ["photos/cat-vases-1.jpg", "photos/cat-vases-2.jpg"]}};
+const PHOTOS = {"pieces": {"coquetier-saliere-en-terre-melee": ["photos/coquetier-saliere-en-terre-melee-1.jpg"], "porte-oeufs": ["photos/porte-oeufs-1.jpg", "photos/porte-oeufs-2.jpg"], "coquetier-simple": ["photos/coquetier-simple-1.jpg", "photos/coquetier-simple-2.jpg"], "coquetier-saliere": ["photos/coquetier-saliere-1.jpg", "photos/coquetier-saliere-2.jpg", "photos/coquetier-saliere-3.jpg", "photos/coquetier-saliere-4.jpg"], "bol-v-uni": ["photos/bol-v-uni-1.jpg"], "gamelle-a-pois": ["photos/gamelle-a-pois-1.jpg"], "bol-v-a-pois": ["photos/bol-v-a-pois-1.jpg"], "assiette-creuse-picasso": ["photos/assiette-creuse-picasso-1.jpg"], "assiettes-a-dessert-petales": ["photos/assiettes-a-dessert-petales-1.jpg", "photos/assiettes-a-dessert-petales-2.jpg"], "assiette-en-terre-melee": ["photos/assiette-en-terre-melee-1.jpg", "photos/assiette-en-terre-melee-2.jpg", "photos/assiette-en-terre-melee-3.jpg", "photos/assiette-en-terre-melee-4.jpg"], "porte-encens": ["photos/porte-encens-1.jpg", "photos/porte-encens-2.jpg", "photos/porte-encens-3.jpg"], "oreille": ["photos/oreille-1.jpg", "photos/oreille-2.jpg"], "etoiles-de-noel": ["photos/etoiles-de-noel-1.jpg"], "porte-savon-rond": ["photos/porte-savon-rond-1.jpg", "photos/porte-savon-rond-2.jpg", "photos/porte-savon-rond-3.jpg"], "porte-savon-motifs-graphiques": ["photos/porte-savon-motifs-graphiques-1.jpg"], "couverts-a-salade": ["photos/couverts-a-salade-1.jpg"], "vase-ikebana-mini": ["photos/vase-ikebana-mini-1.jpg", "photos/vase-ikebana-mini-2.jpg", "photos/vase-ikebana-mini-3.jpg", "photos/vase-ikebana-mini-4.jpg"], "vase-camille": ["photos/vase-camille-1.jpg", "photos/vase-camille-2.jpg"], "vase-lilas": ["photos/vase-lilas-1.jpg", "photos/vase-lilas-2.jpg", "photos/vase-lilas-3.jpg"], "vase-ikebana": ["photos/vase-ikebana-1.jpg", "photos/vase-ikebana-2.jpg", "photos/vase-ikebana-3.jpg"], "vase-isabelle": ["photos/vase-isabelle-1.jpg"], "vase-swirl": ["photos/vase-swirl-1.jpg", "photos/vase-swirl-2.jpg"], "vase-ophelie": ["photos/vase-ophelie-1.jpg", "photos/vase-ophelie-2.jpg"], "vase-sylvestre": ["photos/vase-sylvestre-1.jpg", "photos/vase-sylvestre-2.jpg"], "plat-motifs-graphiques": ["photos/plat-motifs-graphiques-1.jpg"], "bougeoir-mural-brut": ["photos/bougeoir-mural-brut-1.jpg", "photos/bougeoir-mural-brut-2.jpg", "photos/bougeoir-mural-brut-3.jpg", "photos/bougeoir-mural-brut-4.jpg"], "bougeoir-mural-argent": ["photos/bougeoir-mural-argent-1.jpg", "photos/bougeoir-mural-argent-2.jpg", "photos/bougeoir-mural-argent-3.jpg"], "tasse-n3": ["photos/tasse-n3-1.jpg"], "tasse-n1": ["photos/tasse-n1-1.jpg"], "tasse-n2": ["photos/tasse-n2-1.jpg"], "tasse-espresso": ["photos/tasse-espresso-1.jpg"]}, "collections": {"terre-melees": ["photos/coll-terre-melees-1.jpg", "photos/coll-terre-melees-2.jpg"], "graphics": ["photos/coll-graphics-1.jpg"], "carreaux": ["photos/coll-carreaux-1.jpg"], "pois": ["photos/coll-pois-1.jpg", "photos/coll-pois-2.jpg"]}, "categories": {"table": ["photos/cat-table-1.jpg"], "objets": ["photos/cat-objets-1.jpg"], "vases": ["photos/cat-vases-1.jpg", "photos/cat-vases-2.jpg"]}};
 const NOTION_COLLECTIONS = [
   {id:"carreaux", nom:"N°1 : Les carreaux", ordre:40, publie:true, intro:"Collection de pièces ornés d’un quadrillage dessiné à main levée."},
   {id:"graphics", nom:"N°4 : Graphics", ordre:10, publie:true, intro:"Collection explorant une déclinaison de motifs graphiques réalisés à partir de la technique du « sgraffito ». Une méthode qui consiste à inciser la surface de l’argile pour révéler une couche de terre ou d’engobe d’une autre couleur, faisant apparaître le motif au fil du geste.\n\nChaque pièce est façonnée, décorée et émaillée à la main. Le motif devient ainsi le résultat d’un processus, où la matière, le geste et les imperfections propres au travail artisanal trouvent leur place."},
@@ -585,8 +633,49 @@ const igUrl = "https://ig.me/m/" + SITE.instagram;
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const euros = n => n == null || isNaN(n) ? "Prix sur demande" : (Number.isInteger(n) ? n : n.toFixed(2).replace(".", ",")) + " €";
-/* Pastille de couleur : un code = rond plein, deux codes = deux moitiés */
-const fondPastille = c => c.c2 ? `linear-gradient(90deg, ${c.c1} 50%, ${c.c2} 50%)` : c.c1;
+/* Libellé d'un format en HTML : la taille en italique, le reste en romain.
+   ex. « Lot de 1 · <em>20 cm environ</em> · 25 € » */
+const estTaille = s => /\d\s*(cm|mm)\b|Ø|\b[HLP]\s*\d/i.test(s);
+function formatHtml(l, prix, repli){
+  const parts = [l.nom, ...String(l.detail || "").split(" · ")].map(x => String(x || "").replace(/\*/g, "").trim()).filter(Boolean);
+  const out = parts.map(x => estTaille(x) ? `<em class="taille">${esc(x)}</em>` : esc(x));
+  if (!out.length && repli) out.push(esc(repli));
+  if (prix && l.prix != null) out.push(esc(euros(l.prix)));
+  return out.join(" · ");
+}
+/* Menu déroulant « riche » : remplace l'affichage d'un <select data-riche> pour permettre l'italique.
+   Le <select> reste la source de vérité (valeur, évènement change). */
+function menusRiches(racine){
+  (racine || document).querySelectorAll("select[data-riche]:not([data-pret])").forEach(sel => {
+    sel.dataset.pret = "1";
+    const boite = sel.parentElement; boite.classList.add("riche");
+    const btn = document.createElement("button"); btn.type = "button"; btn.className = "riche-btn";
+    btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", sel.getAttribute("aria-label") || (sel.id && document.querySelector(`label[for="${sel.id}"]`) || {}).textContent || "Choisir");
+    const liste = document.createElement("ul"); liste.className = "riche-liste"; liste.setAttribute("role", "listbox"); liste.hidden = true;
+    const opts = [...sel.options];
+    liste.innerHTML = opts.filter(o => !o.disabled).map(o => `<li role="option" tabindex="-1" data-v="${esc(o.value)}" aria-selected="${o.selected}">${o.dataset.html || esc(o.textContent)}</li>`).join("");
+    const maj = () => { const o = sel.options[sel.selectedIndex]; btn.innerHTML = o ? (o.dataset.html || esc(o.textContent)) : ""; liste.querySelectorAll("li").forEach(li => li.setAttribute("aria-selected", li.dataset.v === sel.value)); };
+    const fermer = () => { liste.hidden = true; btn.setAttribute("aria-expanded", "false"); };
+    const ouvrir = () => { liste.hidden = false; btn.setAttribute("aria-expanded", "true"); (liste.querySelector('[aria-selected="true"]') || liste.firstElementChild).focus(); };
+    const choisir = li => { sel.value = li.dataset.v; maj(); fermer(); btn.focus(); sel.dispatchEvent(new Event("change", {bubbles: true})); };
+    btn.addEventListener("click", () => liste.hidden ? ouvrir() : fermer());
+    liste.addEventListener("click", e => { const li = e.target.closest("li"); if (li) choisir(li); });
+    liste.addEventListener("keydown", e => {
+      const li = document.activeElement.closest("li"); if (!li) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); (li.nextElementSibling || li).focus(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); (li.previousElementSibling || li).focus(); }
+      else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choisir(li); }
+      else if (e.key === "Escape" || e.key === "Tab") { fermer(); btn.focus(); }
+    });
+    document.addEventListener("click", e => { if (!boite.contains(e.target)) fermer(); });
+    sel.hidden = true; sel.tabIndex = -1;
+    boite.append(btn, liste); maj();
+  });
+}
+/* Pastille de couleur : un code = rond plein, deux codes = deux moitiés, trois codes = trois bandes */
+const fondPastille = c => c.c2 && c.c3 ? `linear-gradient(90deg, ${c.c1} 33.34%, ${c.c2} 33.34% 66.67%, ${c.c3} 66.67%)`
+  : c.c2 ? `linear-gradient(90deg, ${c.c1} 50%, ${c.c2} 50%)` : c.c1;
 function pastilles(p, actif, attr, taille){
   return `<div class="pastilles${taille ? " " + taille : ""}" role="radiogroup" aria-label="Couleur de ${esc(p.nom)}">${p.coul.map((c, i) =>
     `<button type="button" class="pastille" role="radio" aria-checked="${i === actif}" ${attr}="${i}" title="${esc(c.nom)}" aria-label="${esc(c.nom)}" style="background:${fondPastille(c)}"></button>`).join("")}</div>`;
@@ -597,7 +686,7 @@ const catNom = id => (CATEGORIES.find(c => c.id === id) || {}).nom;
 const tuile = (i, label) => `<div class="ph t${(i % 3) + 1}"><span class="logo" aria-hidden="true"></span>${label ? `<i>${label}</i>` : ""}</div>`;
 const hash = (p) => p.nom.length;
 /* Photo réelle si disponible, sinon emplacement */
-const ZOOM_PHOTOS = {"photos/assiette-en-terre-melee-1.jpg": 1.1, "photos/ophelie-1.jpg": 1.3, "photos/sylvestre-1.jpg": 1.2, "photos/gamelle-a-pois-1.jpg": 1.2};  /* zoom ponctuel sur certaines photos */
+const ZOOM_PHOTOS = {"photos/assiette-en-terre-melee-1.jpg": 1.1, "photos/vase-ophelie-1.jpg": 1.3, "photos/vase-sylvestre-1.jpg": 1.2, "photos/gamelle-a-pois-1.jpg": 1.2};  /* zoom ponctuel sur certaines photos */
 const visuel = (src, i, label) => src ? `<div class="ph ph-photo"><img src="${esc(src)}" alt="" loading="lazy"${ZOOM_PHOTOS[src] ? ` style="transform:scale(${ZOOM_PHOTOS[src]})"` : ""}></div>` : `<div class="ph ph-vide"><span>Photo à venir</span></div>`;
 
 function carte(p){
@@ -792,6 +881,7 @@ function fiche(id){
   const n = p.photos.length || 1;
   const photos = Array.from({length:n}, (_, i) => i);
   const L = p.f.lignes;
+  const favFiche = favDe(p.id);
   /* Libellé d'une option : nom · taille · prix (le détail va dans le menu) */
   const etiquette = (l, i) => [l.nom || (l.detail ? "" : "Format " + (i + 1)), l.detail, euros(l.prix)]
     .map(x => String(x || "").replace(/\*/g, "").trim()).filter(Boolean).join(" · ");
@@ -799,7 +889,7 @@ function fiche(id){
   const deuxNiveaux = p.f.niveaux === 2 && finitions.length > 1;
   const detailUnique = L.length === 1 ? (L[0].detail || (L[0].nom && !/^pièce unique$/i.test(L[0].nom) && L[0].nom !== p.nom ? L[0].nom : "")) : "";
   const optionsHtml = L.length === 1
-    ? (detailUnique ? `<p class="detail" style="margin:-8px 0 0;color:var(--doux);font-size:var(--taille-petit)">${md(detailUnique)}</p>` : "")
+    ? (detailUnique ? `<p class="detail format-unique">${formatHtml(L[0].detail ? L[0] : {nom: L[0].nom, detail: ""}, false)}</p>` : "")
     : deuxNiveaux
       ? `<div class="choix">
           <label class="caps" for="finition">Couleur</label>
@@ -813,12 +903,13 @@ function fiche(id){
         </div>`
       : `<div class="choix">
           <label class="caps" for="format">${p.coul.length ? "Taille" : "Format"}</label>
-          <div class="select"><select id="format">${L.map((l, i) => `<option value="${i}">${esc(etiquette(l, i))}</option>`).join("")}</select></div>
+          <div class="select"><select id="format" data-riche>${L.map((l, i) => `<option value="${i}"${favFiche && favFiche.opt === i ? " selected" : ""} data-html="${esc(formatHtml(l, true, "Format " + (i + 1)))}">${esc(etiquette(l, i))}</option>`).join("")}</select></div>
           <p class="detail" id="format-detail"></p>
         </div>`;
+  const coulInit = favFiche && favFiche.coul != null ? favFiche.coul : 0;
   const couleursHtml = p.coul.length ? `<div class="choix">
-      <p class="caps choix-titre">Couleur<span class="coul-nom" id="coul-nom">${esc(p.coul[0].nom)}</span></p>
-      ${pastilles(p, 0, "data-coul")}
+      <p class="caps choix-titre">Couleur<span class="coul-nom" id="coul-nom">${coulInit != null ? esc(p.coul[coulInit].nom) : "À choisir"}</span></p>
+      ${pastilles(p, coulInit, "data-coul")}
     </div>` : "";
   const prixTete = L.length > 1
     ? `<span class="apd">dès</span> <b>${euros(prixMin(p))}</b>`
@@ -872,6 +963,7 @@ function fiche(id){
     if (selFin) { selFin.addEventListener("change", majFin); majFin(); } else majDetail();
   }
 
+  menusRiches($("#page"));
   document.querySelectorAll(".fiche [data-coul]").forEach(b => b.addEventListener("click", () => {
     document.querySelectorAll(".fiche [data-coul]").forEach(x => x.setAttribute("aria-checked", x === b));
     $("#coul-nom").textContent = p.coul[+b.dataset.coul].nom;
@@ -898,16 +990,19 @@ let FAVORIS = (() => {
 const estFav = id => FAVORIS.some(f => f.id === id);
 const favDe = id => FAVORIS.find(f => f.id === id);
 function sauverFav(){ try { localStorage.setItem(CLE_FAV, JSON.stringify(FAVORIS)); } catch (e) {} majCompteurFav(); }
+function largeurOutils(){ const o = document.querySelector(".outils"); if (o) document.documentElement.style.setProperty("--l-outils", (o.offsetWidth + 14) + "px"); }
+window.addEventListener("resize", largeurOutils);
 function majCompteurFav(){
   const n = $("#fav-n"), l = document.querySelector(".fav-lien"), k = FAVORIS.length;
   if (n) { n.textContent = k ? `(${k})` : ""; n.hidden = !k; }
+  requestAnimationFrame(largeurOutils);
   if (l) { l.classList.toggle("a-favs", k > 0); l.setAttribute("aria-label", k ? `Mes favoris : ${k} pièce${k > 1 ? "s" : ""}` : "Mes favoris"); }
 }
 /* Libellé d'un format, sans le prix : « Marbré brun · Ø20 cm » */
 const libelleFormat = (p, i) => { const l = p.f.lignes[i]; return [l.fin, l.nom, l.detail].map(x => String(x || "").replace(/\*/g, "").trim()).filter(Boolean).join(" · "); };
 function boutonFav(p, style){
   const on = estFav(p.id);
-  const label = style === "large" ? `<span class="caps">${on ? "Dans mes favoris" : "Ajouter aux favoris"}</span>` : "";
+  const label = style === "large" ? `<span class="caps">${on ? "Ajouté à mes favoris" : "Ajouter aux favoris"}</span>` : "";
   return `<button type="button" class="fav fav-${style}${on ? " on" : ""}" data-fav="${p.id}" aria-pressed="${on}" aria-label="${on ? "Retirer des favoris" : "Ajouter aux favoris"} : ${esc(p.nom)}"><svg aria-hidden="true"><use href="#coeur"/></svg>${label}</button>`;
 }
 /* Couleur sélectionnée sur la fiche produit ouverte (si c'est cette pièce) */
@@ -944,39 +1039,41 @@ function ligneFav(f, k){
   const p = PIECES.find(q => q.id === f.id), L = p.f.lignes;
   const fins = [...new Set(L.map(l => l.fin))];
   const deux = p.f.niveaux === 2 && fins.length > 1;
-  let choix = "";
-  if (L.length === 1) {
-    const d = libelleFormat(p, 0);
-    choix = d && d !== p.nom ? `<p class="panier-detail">${esc(d)}</p>` : "";
-  } else if (deux) {
+  const sansPrix = i => esc([L[i].nom, L[i].detail].filter(Boolean).join(" · ").replace(/\*/g, "") || "Format " + (i + 1));
+  const vide = `<span class="panier-tiret" aria-hidden="true">—</span>`;
+  /* Colonne couleur */
+  let couleur = vide;
+  if (p.coul.length) couleur = `${pastilles(p, f.coul, "data-coulfav-" + k, "petites")}<p class="panier-detail">${f.coul != null ? esc(nomCouleur(p, f)) : "À choisir"}</p>`;
+  else if (deux) {
     const finActuelle = f.opt != null ? L[f.opt].fin : null;
-    const formats = L.map((l, i) => i).filter(i => finActuelle != null && L[i].fin === finActuelle);
-    choix = `<div class="panier-choix">
-      <div class="select"><select data-fin="${k}" aria-label="Couleur de ${esc(p.nom)}">
-        ${finActuelle == null ? `<option value="" selected disabled>Choisir une couleur</option>` : ""}
+    couleur = `<div class="select"><select data-fin="${k}" aria-label="Couleur de ${esc(p.nom)}">
+        ${finActuelle == null ? `<option value="" selected disabled>Choisir</option>` : ""}
         ${fins.map(fi => `<option value="${esc(fi)}"${fi === finActuelle ? " selected" : ""}>${esc(fi)}</option>`).join("")}
-      </select></div>
-      ${finActuelle != null ? `<div class="select"><select data-opt="${k}" aria-label="Format de ${esc(p.nom)}">
-        ${formats.map(i => `<option value="${i}"${i === f.opt ? " selected" : ""}>${esc([L[i].nom, L[i].detail].filter(Boolean).join(" · ").replace(/\*/g, ""))} · ${euros(L[i].prix)}</option>`).join("")}
-      </select></div>` : ""}
-    </div>`;
-  } else {
-    choix = `<div class="panier-choix"><div class="select"><select data-opt="${k}" aria-label="Format de ${esc(p.nom)}">
-      ${f.opt == null ? `<option value="" selected disabled>Choisir un format</option>` : ""}
-      ${L.map((l, i) => `<option value="${i}"${i === f.opt ? " selected" : ""}>${esc(libelleFormat(p, i) || "Format " + (i + 1))} · ${euros(l.prix)}</option>`).join("")}
-    </select></div></div>`;
+      </select></div>`;
   }
-  if (p.coul.length) choix = `<div class="panier-coul">${pastilles(p, f.coul, "data-coulfav-" + k, "petites")}<span class="panier-detail">${f.coul != null ? esc(nomCouleur(p, f)) : "Choisir une couleur"}</span></div>` + choix;
+  /* Colonne format */
+  let format;
+  if (L.length === 1) {
+    const d = [L[0].nom, L[0].detail].filter(Boolean).join(" · ").replace(/\*/g, "");
+    format = d && d !== p.nom ? `<p class="panier-format">${formatHtml(L[0], false)}</p>` : vide;
+  } else {
+    const ids = deux ? L.map((l, i) => i).filter(i => f.opt != null && L[i].fin === L[f.opt].fin) : L.map((l, i) => i);
+    format = deux && f.opt == null ? `<p class="panier-detail">Choisir d'abord la couleur</p>` : `<div class="select"><select data-opt="${k}" data-riche aria-label="Format de ${esc(p.nom)}">
+      ${f.opt == null ? `<option value="" selected disabled>Choisir</option>` : ""}
+      ${ids.map(i => `<option value="${i}"${i === f.opt ? " selected" : ""} data-html="${esc(formatHtml(L[i], false, "Format " + (i + 1)))}">${sansPrix(i)}</option>`).join("")}
+    </select></div>`;
+  }
   const pu = f.opt != null ? L[f.opt].prix : prixMin(p);
-  const prix = pu == null ? `<span class="apd">Prix sur demande</span>`
+  const prix = pu == null ? `<span class="apd">Sur demande</span>`
     : f.opt != null ? `<b>${euros(pu * f.qte)}</b>` : `<span class="apd">dès</span> <b>${euros(pu * f.qte)}</b>`;
   return `<li class="panier-ligne">
     <a class="panier-photo" href="#p-${p.id}">${visuel(p.photos[0], hash(p), "")}</a>
     <div class="panier-infos">
       <a class="panier-nom caps" href="#p-${p.id}">${esc(p.nom)}</a>
-      ${choix}
-      <div class="panier-liens">${L.length > 1 || p.coul.length > 1 ? `<button type="button" class="panier-retirer" data-dupliquer="${k}" aria-label="Dupliquer ${esc(p.nom)} pour choisir un autre format">Dupliquer</button>` : ""}<button type="button" class="panier-retirer" data-retirer="${k}">Retirer</button></div>
+      <div class="panier-liens">${L.length > 1 || p.coul.length > 1 ? `<button type="button" class="panier-retirer" data-dupliquer="${k}" aria-label="Dupliquer ${esc(p.nom)} pour choisir une autre option">Dupliquer</button>` : ""}<button type="button" class="panier-retirer" data-retirer="${k}">Retirer</button></div>
     </div>
+    <div class="panier-col panier-c-coul" data-label="Couleur">${couleur}</div>
+    <div class="panier-col panier-c-format" data-label="Format">${format}</div>
     <div class="panier-qte" role="group" aria-label="Quantité de ${esc(p.nom)}">
       <button type="button" data-moins="${k}" aria-label="Diminuer la quantité"${f.qte <= 1 ? " disabled" : ""}>−</button>
       <span aria-live="polite">${f.qte}</span>
@@ -1002,10 +1099,10 @@ function messageWishlist(){
     const fmt = [p.coul.length ? (nomCouleur(p, f) || "couleur à préciser") : "",
       f.opt != null ? libelleFormat(p, f.opt) : (p.f.lignes.length > 1 ? "format à préciser" : "")].filter(x => x && x !== p.nom).join(" · ");
     const pu = f.opt != null ? p.f.lignes[f.opt].prix : null;
-    return `- ${p.nom}${fmt && fmt !== p.nom ? ` (${fmt})` : ""} × ${f.qte}${pu != null ? ` : ${euros(pu * f.qte)}` : ""}`;
+    return `> ${p.nom}${fmt && fmt !== p.nom ? ` (${fmt})` : ""} × ${f.qte}${pu != null ? ` : ${euros(pu * f.qte)}` : ""}`;
   });
   const t = totalFavoris();
-  return `Bonjour ! Voici ma wishlist Victoire Taverne Céramiques :\n${lignes.join("\n")}\n\nTotal${t.aPreciser ? " estimé" : ""} : ${euros(t.total)}${t.surDemande ? " (hors pièces sur demande)" : ""}\n\nMerci !`;
+  return `Bonjour ! Voici le détail de ma commande :\n${lignes.join("\n")}\nTotal estimé : ${euros(t.total)}${t.surDemande ? " (hors pièces sur demande)" : ""}\n\nMerci`;
 }
 function favorisPage(){
   menu("favoris");
@@ -1020,20 +1117,25 @@ function favorisPage(){
     return;
   }
   const t = totalFavoris();
+  const coulManquante = FAVORIS.some(f => { const p = PIECES.find(q => q.id === f.id); return p.coul.length > 1 && f.coul == null; });
   $("#page").innerHTML = `
   <section class="wrap page-tete">
     <div class="fil"><a href="#accueil">Accueil</a> / Favoris</div>
     <h1 class="caps">Favoris</h1>
-    <p>${k} pièce${k > 1 ? "s" : ""} dans votre wishlist. Choisissez la couleur, le format et la quantité de chaque pièce, puis envoyez votre sélection sur Instagram pour passer commande.</p>
+    <p>${k} pièce${k > 1 ? "s" : ""} dans votre wishlist. Ajustez la couleur, le format et la quantité de chaque pièce, puis envoyez votre sélection sur Instagram pour passer commande.</p>
   </section>
   <section class="wrap panier">
-    <div class="panier-entete caps" aria-hidden="true"><span>Pièce</span><span>Quantité</span><span>Prix</span></div>
+    <div class="panier-entete caps" aria-hidden="true"><span>Pièce</span><span>Couleur</span><span>Format</span><span>Quantité</span><span>Prix</span></div>
     <ul class="panier-liste">${FAVORIS.map(ligneFav).join("")}</ul>
+    <div class="panier-livraison">
+      <p class="caps">Livraison</p>
+      <p class="panier-liv-texte">À calculer selon le nombre de pièces et la destination</p>
+    </div>
     <div class="panier-total">
       <p class="caps">Total${t.aPreciser ? " estimé" : ""}</p>
       <p class="panier-somme">${t.aPreciser ? `<span class="apd">dès</span> ` : ""}<b>${euros(t.total)}</b></p>
     </div>
-    ${t.aPreciser || t.surDemande ? `<p class="panier-note">${[t.aPreciser ? "Choisissez un format pour chaque pièce afin d'obtenir le total exact." : "", t.surDemande ? "Les pièces « prix sur demande » ne sont pas comptées dans le total." : ""].filter(Boolean).join(" ")}</p>` : ""}
+    ${t.aPreciser || t.surDemande || coulManquante ? `<p class="panier-note">${[coulManquante ? "Choisissez la couleur de chaque pièce." : "", t.aPreciser ? "Choisissez un format pour chaque pièce afin d'obtenir le total exact." : "", t.surDemande ? "Les pièces « prix sur demande » ne sont pas comptées dans le total." : ""].filter(Boolean).join(" ")}</p>` : ""}
     <div class="panier-actions">
       <a class="cta caps" id="envoyer-wishlist" href="${igUrl}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ig"/></svg>Envoyer ma wishlist</a>
       <p class="cta-note detail" id="wishlist-note">Ouvre une conversation avec @${esc(SITE.instagram)}, avec le récapitulatif de vos pièces déjà écrit.</p>
@@ -1046,6 +1148,7 @@ function favorisPage(){
     try { navigator.clipboard && navigator.clipboard.writeText(messageWishlist()); } catch (e) {}
     $("#wishlist-note").textContent = "Le récapitulatif est aussi copié : s'il n'apparaît pas dans la conversation, collez-le simplement.";
   });
+  menusRiches($("#page"));
 }
 /* Interactions du panier */
 document.addEventListener("click", e => {
@@ -1073,13 +1176,72 @@ document.addEventListener("change", e => {
   sauverFav(); favorisPage();
 });
 
+/* ---------- Recherche ---------- */
+const sansAccents = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/œ/g, "oe").toLowerCase().replace(/[“”«»"'’*]/g, " ");
+function texteRecherche(p){
+  const sous = CATEGORIES.flatMap(c => c.sous || []).filter(s => s.id === p.sous).map(s => s.nom);
+  return sansAccents([p.nom, p.desc, p.compo, ...p.cats.map(catNom), ...sous,
+    ...COLLECTIONS.filter(c => c.pieces.includes(p.id)).map(c => c.nom),
+    ...p.coul.map(c => c.nom), ...p.f.lignes.map(l => [l.fin, l.nom, l.detail].join(" "))].join(" "));
+}
+function chercher(q){
+  const mots = sansAccents(q).split(/\s+/).filter(m => m.length > 1 || /\d/.test(m));
+  if (!mots.length) return [];
+  return PIECES.map(p => {
+    const t = texteRecherche(p), nom = sansAccents(p.nom);
+    if (!mots.every(m => t.includes(m))) return null;
+    return {p, score: mots.filter(m => nom.includes(m)).length * 10 + (nom.startsWith(mots[0]) ? 5 : 0)};
+  }).filter(Boolean).sort((a, b) => b.score - a.score).map(x => x.p);
+}
+const qDuHash = () => { const m = location.hash.match(/^#recherche(?:\?q=(.*))?$/); return m && m[1] ? decodeURIComponent(m[1]) : ""; };
+function recherchePage(){
+  menu("recherche");
+  ouvrirRecherche(false);
+  const q = qDuHash(), champ = $("#rech-q");
+  if (champ && champ.value !== q && document.activeElement !== champ) champ.value = q;
+  const res = chercher(q);
+  const resume = !q.trim() ? "Tapez un nom de pièce, une couleur, une collection ou une matière."
+    : res.length ? `${res.length} pièce${res.length > 1 ? "s" : ""} pour « ${esc(q.trim())} »`
+    : `Aucune pièce ne correspond à « ${esc(q.trim())} ».`;
+  $("#page").innerHTML = `
+  <section class="wrap page-tete">
+    <div class="fil"><a href="#accueil">Accueil</a> / Recherche</div>
+    <h1 class="caps">Recherche</h1>
+    <div class="fav-intro"><p class="detail">${resume}</p>${q.trim() && !res.length ? `<a class="lien-jost" href="#tout">Voir tous les produits</a>` : ""}</div>
+  </section>
+  ${res.length ? `<section class="wrap"><div class="grille">${res.map(carte).join("")}</div></section>` : ""}`;
+}
+function ouvrirRecherche(focus){
+  const r = $("#rech"), b = $("#rech-btn"); if (!r) return;
+  r.hidden = false; b.setAttribute("aria-expanded", "true");
+  if (focus) $("#rech-q").focus();
+}
+function fermerRecherche(){
+  const r = $("#rech"); if (!r) return;
+  r.hidden = true; $("#rech-btn").setAttribute("aria-expanded", "false"); $("#rech-q").value = "";
+  if (location.hash.startsWith("#recherche")) location.hash = "#tout";
+}
+(() => {
+  const btn = $("#rech-btn"), champ = $("#rech-q");
+  btn.addEventListener("click", () => $("#rech").hidden ? ouvrirRecherche(true) : fermerRecherche());
+  $("#rech-fermer").addEventListener("click", fermerRecherche);
+  champ.addEventListener("input", () => {
+    const cible = "#recherche" + (champ.value ? "?q=" + encodeURIComponent(champ.value) : "");
+    if (location.hash.startsWith("#recherche")) { history.replaceState(null, "", cible); recherchePage(); }
+    else location.hash = cible;
+  });
+  champ.addEventListener("keydown", e => { if (e.key === "Escape") fermerRecherche(); });
+})();
+
 function route(){
   const h = location.hash.slice(1);
   document.body.classList.remove("accueil", "defile");
+  if (!h.startsWith("recherche") && !$("#rech").hidden) { $("#rech").hidden = true; $("#rech-btn").setAttribute("aria-expanded", "false"); $("#rech-q").value = ""; }
   if (h.startsWith("p-")) fiche(h.slice(2));
   else if (h.startsWith("c-")) collection(h.slice(2));
   else if (h === "collections") collectionsPage();
   else if (h === "favoris") favorisPage();
+  else if (h.startsWith("recherche")) recherchePage();
   else if (CATEGORIES.some(c => c.sous && h.startsWith(c.id + "-"))) { const c = CATEGORIES.find(c => c.sous && h.startsWith(c.id + "-")); categorie(c.id, h.slice(c.id.length + 1)); }
   else if (h === "tout" || CATEGORIES.some(c => c.id === h)) categorie(h);
   else accueil();
