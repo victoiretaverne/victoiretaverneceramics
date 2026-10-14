@@ -110,9 +110,18 @@ header .bar{position:relative}
 .rech-fermer:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
 body.accueil header:has(.rech:not([hidden])){background:var(--fond);color:var(--encre);border-bottom-color:var(--ligne)}
 @media (max-width:1180px) and (min-width:761px){header .rech-btn{font-size:clamp(.66rem,1.05vw,.82rem)}header .outils{gap:12px}}
-@media (max-width:760px){.outils{position:absolute;top:14px;right:clamp(16px,3vw,40px);gap:14px}header .marque{max-width:calc(100% - var(--l-outils,90px))}header .marque span{white-space:normal}}
+@media (max-width:760px){
+  /* bandeau mobile : logo, nom, favoris, loupe et burger centrés sur une seule ligne */
+  header .bar{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+  header .marque{flex:1 1 auto;min-width:0;max-width:none}
+  header .marque span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:clamp(.56rem,2.5vw,.85rem);letter-spacing:.07em}
+  header .marque{gap:8px}
+  .droite{flex:none}
+  .outils{position:static;gap:12px;align-items:center}
+  .outils > *{display:inline-flex;align-items:center}
+}
 @media (max-width:560px){.fav-txt{display:none}}
-@media (max-width:760px){.droite{width:100%}.droite nav{flex:1}}
+@media (max-width:760px){.droite{width:auto}}
 /* Page favoris en panier */
 .panier{padding-bottom:clamp(48px,8vw,96px)}
 .panier-entete,.panier-ligne{grid-template-columns:96px minmax(0,1fr) 170px 190px 110px 90px;gap:20px}
@@ -179,10 +188,23 @@ header .bar{max-width:none;padding-inline:clamp(16px,3vw,40px)}
 nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.82rem}
 nav a{text-decoration:none;padding-block:4px;border-bottom:0.5px solid transparent}
 nav a:hover,nav a[aria-current="page"]{border-bottom-color:currentColor}
+/* Menu burger (mobile) */
+.burger{display:none}
 @media (max-width:760px){
-  .bar{flex-direction:column;align-items:flex-start;gap:10px;padding-block:12px}
-  nav{width:100%;overflow-x:auto}
-  nav ul{flex-wrap:nowrap;white-space:nowrap}
+  .bar{padding-block:14px;min-height:30px}
+  .burger{all:unset;cursor:pointer;display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:22px;height:22px;color:inherit}
+  .burger span{display:block;height:0.5px;background:currentColor;transition:transform .2s,opacity .2s}
+  header.menu-ouvert .burger span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+  header.menu-ouvert .burger span:nth-child(2){opacity:0}
+  header.menu-ouvert .burger span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+  .burger:focus-visible{outline:1.5px solid currentColor;outline-offset:3px}
+  header nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--fond);color:var(--encre);border-bottom:0.5px solid var(--ligne);padding:4px clamp(16px,3vw,40px) 16px}
+  header.menu-ouvert nav{display:block}
+  header nav ul{flex-direction:column;flex-wrap:nowrap;gap:0;font-size:.85rem}
+  header nav li a{display:block;padding:14px 0;border-bottom:0.5px solid var(--ligne)}
+  header nav a:hover,header nav a[aria-current="page"]{border-bottom-color:var(--ligne)}
+  header nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:0.5px;text-underline-offset:4px}
+  body.accueil header.menu-ouvert{background:var(--fond);color:var(--encre);border-bottom-color:var(--ligne)}
 }
 
 /* Accueil : bandeau photo pleine largeur, logo blanc centré */
@@ -406,10 +428,11 @@ body > header,body > footer{flex:none}
       <span class="caps">Victoire Taverne Céramiques</span>
     </a>
     <div class="droite">
-      <nav aria-label="Catégories"><ul id="menu"></ul></nav>
+      <nav aria-label="Catégories" id="nav-principale"><ul id="menu"></ul></nav>
       <div class="outils">
         <a class="fav-lien" href="#favoris"><span class="caps fav-txt">Mes favoris</span><span class="fav-ico"><svg aria-hidden="true"><use href="#coeur"/></svg><span class="fav-n" id="fav-n"></span></span></a>
         <button type="button" class="rech-btn" id="rech-btn" aria-label="Rechercher" aria-expanded="false" aria-controls="rech"><svg aria-hidden="true"><use href="#loupe"/></svg></button>
+        <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-principale"><span></span><span></span><span></span></button>
       </div>
     </div>
   </div>
@@ -1244,9 +1267,20 @@ function fermerRecherche(){
   champ.addEventListener("keydown", e => { if (e.key === "Escape") fermerRecherche(); });
 })();
 
+/* Burger : ouvre / ferme le menu sur mobile */
+function fermerMenu(){ const hd = document.querySelector("header"); hd.classList.remove("menu-ouvert"); $("#burger").setAttribute("aria-expanded", "false"); }
+$("#burger").addEventListener("click", e => {
+  e.stopPropagation();
+  const hd = document.querySelector("header"), ouvert = hd.classList.toggle("menu-ouvert");
+  $("#burger").setAttribute("aria-expanded", ouvert);
+});
+document.addEventListener("click", e => { if (!e.target.closest("header")) fermerMenu(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") fermerMenu(); });
+
 function route(){
   const h = location.hash.slice(1);
   document.body.classList.remove("accueil", "defile");
+  fermerMenu();
   if (!h.startsWith("recherche") && !$("#rech").hidden) { $("#rech").hidden = true; $("#rech-btn").setAttribute("aria-expanded", "false"); $("#rech-q").value = ""; }
   if (h.startsWith("p-")) fiche(h.slice(2));
   else if (h.startsWith("c-")) collection(h.slice(2));
