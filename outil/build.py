@@ -246,6 +246,8 @@ def construire():
         T = {k: "\n\n".join(v) for k, v in textes.items()}
         champs = {"Accroche": "accroche", "Présentation": "intro", "Commander": "commande", "Délais": "delais",
                   "Livraison": "livraison", "Personnalisation": "personnalisation", "Compte Instagram": "instagram"}
+        if "Bandeau d'annonce" in T:  # vide dans Notion = pas de bandeau
+            html = re.sub(r'(\n  annonce: )"(?:[^"\\\n]|\\.)*"(,?\n)', lambda m: m.group(1) + js(T["Bandeau d'annonce"].strip()) + m.group(2), html, count=1)
         for titre, cle in champs.items():
             if T.get(titre):
                 val = T[titre].lstrip("@") if cle == "instagram" else T[titre]
