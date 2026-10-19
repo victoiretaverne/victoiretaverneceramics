@@ -6,10 +6,12 @@ on:
   workflow_dispatch:        # bouton « Run workflow » pour forcer une mise à jour
   push:
     branches: [main]
-    paths: ["outil/**"]
+    paths: ["outil/**", "site/**"]
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: site
@@ -18,6 +20,9 @@ concurrency:
 jobs:
   construire:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,11 +35,23 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: python outil/build.py
       - name: Enregistrer si le site a changé
+        id: maj
         run: |
           if ! git diff --quiet -- site/; then
+            echo "change=oui" >> "$GITHUB_OUTPUT"
             git config user.name "Mise à jour automatique"
             git config user.email "actions@users.noreply.github.com"
             git add site/
             git commit -m "Mise à jour depuis Notion"
             git push
           fi
+      # Publication sur GitHub Pages (gratuit, mises à jour illimitées)
+      - name: Préparer la publication
+        if: steps.maj.outputs.change == 'oui' || github.event_name != 'schedule'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Publier sur GitHub Pages
+        id: deploiement
+        if: steps.maj.outputs.change == 'oui' || github.event_name != 'schedule'
+        uses: actions/deploy-pages@v4
