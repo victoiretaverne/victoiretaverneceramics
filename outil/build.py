@@ -2,7 +2,7 @@
 """
 Construit site/index.html à partir de Notion.
 
-- Lit la base « Pièces », la base « Collections », la base « Couleurs » et la page « Textes du site ».
+- Lit la base « Pièces », la base « Collections », la base « Couleurs », la base « Familles de couleurs » et la page « Textes du site ».
 - Injecte ces données dans outil/template.html (mise en page du site).
 - Injecte la liste des photos (outil/photos.json, mise à jour à chaque « MAJ » photos).
 - Coche / décoche la case « Photo manquante » de chaque pièce dans Notion.
@@ -22,6 +22,7 @@ SORTIE = os.path.join(RACINE, "site", "index.html")
 DS_PIECES = "13c40088-7a5d-44b0-89c4-220c341d7849"
 DS_COLLECTIONS = "f01af7fc-c98d-488c-bf6b-b3021c5cd7ba"
 DS_COULEURS = "11998360-3be7-4cee-991e-5c975c80a625"
+DS_FAMILLES = "b640798b-97a3-4ea6-8d4d-8f0e91db59a0"
 PAGE_TEXTES = "3f7943906724811ca36ad0c7d3561e2b"
 NOTION_VERSION = "2025-09-03"
 
@@ -175,6 +176,12 @@ def construire():
             for c in cols if c["publie"])
         html = remplacer_bloc(html, "const NOTION_COLLECTIONS = [", "\n];", bloc)
 
+        # ---------- Familles de couleurs (supplément en %) ----------
+        sup_famille = {}
+        for fam in toutes_les_lignes(DS_FAMILLES):
+            v = prop(fam, "Supplément (%)")
+            sup_famille[fam["id"].replace("-", "")] = float(v) if v not in (None, "") else 0.0
+
         # ---------- Couleurs ----------
         couleurs, id_coul = [], {}
         for c in toutes_les_lignes(DS_COULEURS):
@@ -191,10 +198,12 @@ def construire():
             hexa = lambda s: ("#" + s.lstrip("#")).upper() if s else ""
             cid = slug(nom)
             id_coul[c["id"].replace("-", "")] = cid
-            couleurs.append({"id": cid, "nom": nom, "c1": hexa(c1), "c2": hexa(c2), "c3": hexa(c3), "ordre": prop(c, "Ordre")})
+            fams = [f for f in (prop(c, "Famille") or []) if f in sup_famille]
+            sup = max((sup_famille[f] for f in fams), default=0.0)
+            couleurs.append({"id": cid, "nom": nom, "c1": hexa(c1), "c2": hexa(c2), "c3": hexa(c3), "sup": round(sup, 2), "ordre": prop(c, "Ordre")})
         couleurs.sort(key=lambda d: (d["ordre"] is None, d["ordre"] or 0, d["nom"]))
         bloc = "const NOTION_COULEURS = [\n" + ",\n".join(
-            "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2", "c3") if d[k] or k != "c3"}) for d in couleurs)
+            "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2", "c3", "sup") if d[k] or k not in ("c3", "sup")}) for d in couleurs)
         if "const NOTION_COULEURS = [" in html:  # gabarit sans pastilles : on ignore
             html = remplacer_bloc(html, "const NOTION_COULEURS = [", "\n];", bloc)
 
