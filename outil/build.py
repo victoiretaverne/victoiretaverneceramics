@@ -200,14 +200,29 @@ def construire():
             id_coul[c["id"].replace("-", "")] = cid
             fams = [f for f in (prop(c, "Famille") or []) if f in sup_famille]
             sup = max((sup_famille[f] for f in fams), default=0.0)
-            couleurs.append({"id": cid, "nom": nom, "c1": hexa(c1), "c2": hexa(c2), "c3": hexa(c3), "sup": round(sup, 2), "ordre": prop(c, "Ordre")})
+            couleurs.append({"id": cid, "nom": nom, "c1": hexa(c1), "c2": hexa(c2), "c3": hexa(c3), "sup": round(sup, 2), "ordre": prop(c, "Ordre"), "fams": fams})
         couleurs.sort(key=lambda d: (d["ordre"] is None, d["ordre"] or 0, d["nom"]))
+        # Familles -> couleurs, et rang d'affichage (supplément croissant, puis ordre)
+        coul_de_famille, info_coul = {}, {}
+        for rang, d in enumerate(couleurs):
+            info_coul[d["id"]] = (d["sup"], rang)
+            for f in d["fams"]:
+                coul_de_famille.setdefault(f, []).append(d["id"])
         bloc = "const NOTION_COULEURS = [\n" + ",\n".join(
             "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2", "c3", "sup") if d[k] or k not in ("c3", "sup")}) for d in couleurs)
         if "const NOTION_COULEURS = [" in html:  # gabarit sans pastilles : on ignore
             html = remplacer_bloc(html, "const NOTION_COULEURS = [", "\n];", bloc)
 
         # ---------- Pièces ----------
+        def couleurs_de_piece(p):
+            # Couleurs = toutes celles des familles choisies + les couleurs à l'unité
+            ids = []
+            for f in (prop(p, "Familles de couleurs") or []):
+                ids += coul_de_famille.get(f, [])
+            ids += [id_coul[c] for c in (prop(p, "Couleurs") or []) if c in id_coul]
+            ids = list(dict.fromkeys(ids))
+            return sorted(ids, key=lambda i: info_coul[i])
+
         pieces, maj_photos = [], []
         for p in toutes_les_lignes(DS_PIECES):
             pid = p["id"].replace("-", "")
@@ -223,7 +238,7 @@ def construire():
                 continue
             d = {"id": sid, "nom": nom, "cats": prop(p, "Catégories") or [],
                  "colls": coll_de_piece.get(pid, []),
-                 "coul": [id_coul[c] for c in (prop(p, "Couleurs") or []) if c in id_coul],
+                 "coul": couleurs_de_piece(p),
                  "desc": prop(p, "Description") or "", "formats": prop(p, "Formats") or ""}
             for cle, nomp in (("sous", "Sous-catégorie"), ("compo", "Composition"), ("ordre", "Ordre"), ("delai", "Délai")):
                 v = prop(p, nomp)
