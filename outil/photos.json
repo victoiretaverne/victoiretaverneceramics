@@ -15,13 +15,19 @@
    "photos/coquetier-saliere-1.jpg",
    "photos/coquetier-saliere-2.jpg",
    "photos/coquetier-saliere-3.jpg",
-   "photos/coquetier-saliere-4.jpg"
+   "photos/coquetier-saliere-4.jpg",
+   "photos/coquetier-saliere-5.jpg"
   ],
   "bol-v-uni": [
    "photos/bol-v-uni-1.jpg"
   ],
   "gamelle-a-pois": [
    "photos/gamelle-a-pois-1.jpg"
+  ],
+  "bol-petit-dejeuner": [
+   "photos/bol-petit-dejeuner-1.jpg",
+   "photos/bol-petit-dejeuner-2.jpg",
+   "photos/bol-petit-dejeuner-3.jpg"
   ],
   "bol-v-a-pois": [
    "photos/bol-v-a-pois-1.jpg"
@@ -51,6 +57,9 @@
   "etoiles-de-noel": [
    "photos/etoiles-de-noel-1.jpg"
   ],
+  "saliere": [
+   "photos/saliere-1.jpg"
+  ],
   "porte-savon-rond": [
    "photos/porte-savon-rond-1.jpg",
    "photos/porte-savon-rond-2.jpg",
@@ -62,11 +71,11 @@
   "couverts-a-salade": [
    "photos/couverts-a-salade-1.jpg"
   ],
-  "vase-ikebana-mini": [
-   "photos/vase-ikebana-mini-1.jpg",
-   "photos/vase-ikebana-mini-2.jpg",
-   "photos/vase-ikebana-mini-3.jpg",
-   "photos/vase-ikebana-mini-4.jpg"
+  "vase-kenzan": [
+   "photos/vase-kenzan-1.jpg",
+   "photos/vase-kenzan-2.jpg",
+   "photos/vase-kenzan-3.jpg",
+   "photos/vase-kenzan-4.jpg"
   ],
   "vase-camille": [
    "photos/vase-camille-1.jpg",
