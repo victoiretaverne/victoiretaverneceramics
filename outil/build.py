@@ -215,11 +215,14 @@ def construire():
 
         # ---------- Pièces ----------
         def couleurs_de_piece(p):
-            # Couleurs = toutes celles des familles choisies + les couleurs à l'unité
+            # Colonne « Couleurs » des pièces = familles de couleurs (ancien nom : « Familles de couleurs »).
+            # Chaque famille donne toutes ses couleurs ; une couleur seule reste acceptée.
             ids = []
-            for f in (prop(p, "Familles de couleurs") or []):
-                ids += coul_de_famille.get(f, [])
-            ids += [id_coul[c] for c in (prop(p, "Couleurs") or []) if c in id_coul]
+            for x in (prop(p, "Couleurs") or []) + (prop(p, "Familles de couleurs") or []):
+                if x in sup_famille:
+                    ids += coul_de_famille.get(x, [])
+                elif x in id_coul:
+                    ids.append(id_coul[x])
             ids = list(dict.fromkeys(ids))
             return sorted(ids, key=lambda i: info_coul[i])
 
