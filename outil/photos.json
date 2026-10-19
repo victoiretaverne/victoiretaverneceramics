@@ -54,6 +54,11 @@
    "photos/oreille-1.jpg",
    "photos/oreille-2.jpg"
   ],
+  "rond-de-serviette": [
+   "photos/rond-de-serviette-1.jpg",
+   "photos/rond-de-serviette-2.jpg",
+   "photos/rond-de-serviette-3.jpg"
+  ],
   "etoiles-de-noel": [
    "photos/etoiles-de-noel-1.jpg"
   ],
@@ -90,6 +95,10 @@
    "photos/vase-ikebana-1.jpg",
    "photos/vase-ikebana-2.jpg",
    "photos/vase-ikebana-3.jpg"
+  ],
+  "vase-zoe": [
+   "photos/vase-zoe-1.jpg",
+   "photos/vase-zoe-2.jpg"
   ],
   "vase-isabelle": [
    "photos/vase-isabelle-1.jpg"
