@@ -213,7 +213,7 @@ def construire():
             for f in d["fams"]:
                 coul_de_famille.setdefault(f, []).append(d["id"])
         bloc = "const NOTION_COULEURS = [\n" + ",\n".join(
-            "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2", "c3", "sup") if d[k] or k not in ("c3", "sup")}) for d in couleurs)
+            "  " + js({k: d[k] for k in ("id", "nom", "c1", "c2", "c3") if d[k] or k != "c3"}) for d in couleurs)
         if "const NOTION_COULEURS = [" in html:  # gabarit sans pastilles : on ignore
             html = remplacer_bloc(html, "const NOTION_COULEURS = [", "\n];", bloc)
 

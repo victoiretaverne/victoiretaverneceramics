@@ -1,7 +1,7 @@
 {
  "pieces": {
-  "coquetier-saliere-en-terre-melee": [
-   "photos/coquetier-saliere-en-terre-melee-1.jpg"
+  "coquetier-saliere-en-terres-melees": [
+   "photos/coquetier-saliere-en-terres-melees-1.jpg"
   ],
   "porte-oeufs": [
    "photos/porte-oeufs-1.jpg",
@@ -11,12 +11,17 @@
    "photos/coquetier-simple-1.jpg",
    "photos/coquetier-simple-2.jpg"
   ],
+  "coquetier-simple-a-carreaux": [
+   "photos/coquetier-simple-a-carreaux-1.jpg"
+  ],
   "coquetier-saliere": [
    "photos/coquetier-saliere-1.jpg",
    "photos/coquetier-saliere-2.jpg",
    "photos/coquetier-saliere-3.jpg",
-   "photos/coquetier-saliere-4.jpg",
-   "photos/coquetier-saliere-5.jpg"
+   "photos/coquetier-saliere-4.jpg"
+  ],
+  "coquetier-saliere-a-carreaux": [
+   "photos/coquetier-saliere-a-carreaux-1.jpg"
   ],
   "bol-v-uni": [
    "photos/bol-v-uni-1.jpg"
@@ -144,19 +149,19 @@
   ]
  },
  "collections": {
+  "pois": [
+   "photos/coll-pois-1.jpg",
+   "photos/coll-pois-2.jpg"
+  ],
   "terre-melees": [
    "photos/coll-terre-melees-1.jpg",
    "photos/coll-terre-melees-2.jpg"
   ],
-  "graphics": [
-   "photos/coll-graphics-1.jpg"
-  ],
   "carreaux": [
    "photos/coll-carreaux-1.jpg"
   ],
-  "pois": [
-   "photos/coll-pois-1.jpg",
-   "photos/coll-pois-2.jpg"
+  "graphics": [
+   "photos/coll-graphics-1.jpg"
   ]
  },
  "categories": {
