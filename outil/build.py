@@ -176,11 +176,15 @@ def construire():
             for c in cols if c["publie"])
         html = remplacer_bloc(html, "const NOTION_COLLECTIONS = [", "\n];", bloc)
 
-        # ---------- Familles de couleurs (supplément en %) ----------
-        sup_famille = {}
+        # ---------- Familles de couleurs ----------
+        # (le supplément en % ne sert plus au calcul du prix : il ordonne seulement les pastilles)
+        sup_famille, coll_de_famille = {}, {}
         for fam in toutes_les_lignes(DS_FAMILLES):
-            v = prop(fam, "Supplément (%)")
-            sup_famille[fam["id"].replace("-", "")] = float(v) if v not in (None, "") else 0.0
+            fid = fam["id"].replace("-", "")
+            v = prop(fam, "Supplément (%)") if "Supplément (%)" in fam["properties"] else None
+            sup_famille[fid] = float(v) if v not in (None, "") else 0.0
+            # collection rattachée à la famille : les pièces qui la proposent y apparaissent
+            coll_de_famille[fid] = [id_site[c] for c in (prop(fam, "Collection") or []) if c in id_site]
 
         # ---------- Couleurs ----------
         couleurs, id_coul = [], {}
@@ -239,11 +243,13 @@ def construire():
                 maj_photos.append((p["id"], not a_photo))
             if not prop(p, "Publié"):
                 continue
+            fams = [x for x in (prop(p, "Couleurs") or []) + (prop(p, "Familles de couleurs") or []) if x in sup_famille]
+            colls = coll_de_piece.get(pid, []) + [c for f in fams for c in coll_de_famille.get(f, [])]
             d = {"id": sid, "nom": nom, "cats": prop(p, "Catégories") or [],
-                 "colls": coll_de_piece.get(pid, []),
+                 "colls": list(dict.fromkeys(colls)),
                  "coul": couleurs_de_piece(p),
                  "desc": prop(p, "Description") or "", "formats": prop(p, "Formats") or ""}
-            for cle, nomp in (("sous", "Sous-catégorie"), ("compo", "Composition"), ("ordre", "Ordre"), ("delai", "Délai")):
+            for cle, nomp in (("sous", "Sous-catégorie"), ("modele", "Modèle"), ("compo", "Composition"), ("ordre", "Ordre"), ("delai", "Délai")):
                 v = prop(p, nomp)
                 if v not in (None, ""):
                     d[cle] = v
