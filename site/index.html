@@ -288,6 +288,12 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .coll-texte p.intro{margin:0;font-size:1.15rem;line-height:1.6;max-width:46ch}
 @media (max-width:860px){.coll-tete{grid-template-columns:1fr}}
 /* Sous-catégories */
+.barre-liste{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding-bottom:24px}
+.barre-liste .sous{padding-bottom:0}
+.tri{display:flex;align-items:center;gap:10px;margin-left:auto}
+.tri label{font-size:.66rem;color:var(--doux)}
+.tri .select select{padding:6px 30px 6px 10px;font-size:.78rem}
+.tri .select::after{right:11px;width:6px;height:6px}
 .sous{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:24px}
 .sous a{text-decoration:none;border:0.5px solid var(--encre);padding:4px 11px;border-radius:999px;font-size:.66rem}
 .sous a:hover{background:var(--rose);border-color:var(--rose)}
@@ -409,6 +415,15 @@ em.taille{font-family:var(--police-texte);font-style:italic;font-weight:400;lett
 .cta:hover{background:#3a3835}
 .cta svg{width:18px;height:18px}
 .cta-note{margin:-12px 0 0;font-size:var(--taille-petit);color:var(--doux)}
+.decli{display:flex;flex-direction:column;gap:10px}.decli .choix-titre{margin:0}
+.decli-liste{display:flex;flex-wrap:wrap;gap:10px}
+.decli-liste a{display:flex;flex-direction:column;gap:6px;width:76px;text-decoration:none}
+.decli-liste .ph{aspect-ratio:1;opacity:.7;transition:opacity .2s}
+.decli-liste .ph .logo{width:40%}.decli-liste .ph span{display:none}
+.decli-liste a:hover .ph,.decli-liste a[aria-current="page"] .ph{opacity:1}
+.decli-liste a[aria-current="page"] .ph{outline:0.5px solid var(--encre);outline-offset:3px}
+.decli-liste small{font-size:.7rem;line-height:1.25;color:var(--doux)}
+.decli-liste a[aria-current="page"] small{color:var(--encre)}
 .aussi{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--police-titre);font-weight:300;text-transform:uppercase;letter-spacing:var(--espacement-titre);font-size:.72rem}
 .aussi .detail{font-style:normal;color:var(--doux)}
 .aussi a{text-decoration:none;border:0.5px solid var(--encre);padding:5px 12px;border-radius:999px}
@@ -528,7 +543,7 @@ const CATEGORIES = [
    (dans le vrai site, ce bloc sera lu directement depuis Notion)
    ============================================================ */
 /* Photos importées depuis Documents > WORK > 4. CÉRAMIQUE > photos fiches produits */
-const PHOTOS = {"pieces": {"coquetier-saliere-en-terre-melee": ["photos/coquetier-saliere-en-terre-melee-1.jpg"], "porte-oeufs": ["photos/porte-oeufs-1.jpg", "photos/porte-oeufs-2.jpg"], "coquetier-simple": ["photos/coquetier-simple-1.jpg", "photos/coquetier-simple-2.jpg"], "coquetier-saliere": ["photos/coquetier-saliere-1.jpg", "photos/coquetier-saliere-2.jpg", "photos/coquetier-saliere-3.jpg", "photos/coquetier-saliere-4.jpg", "photos/coquetier-saliere-5.jpg"], "bol-v-uni": ["photos/bol-v-uni-1.jpg"], "gamelle-a-pois": ["photos/gamelle-a-pois-1.jpg"], "bol-petit-dejeuner": ["photos/bol-petit-dejeuner-1.jpg", "photos/bol-petit-dejeuner-2.jpg", "photos/bol-petit-dejeuner-3.jpg"], "bol-v-a-pois": ["photos/bol-v-a-pois-1.jpg"], "assiette-creuse-picasso": ["photos/assiette-creuse-picasso-1.jpg"], "assiettes-a-dessert-petales": ["photos/assiettes-a-dessert-petales-1.jpg", "photos/assiettes-a-dessert-petales-2.jpg"], "assiette-en-terre-melee": ["photos/assiette-en-terre-melee-1.jpg", "photos/assiette-en-terre-melee-2.jpg", "photos/assiette-en-terre-melee-3.jpg", "photos/assiette-en-terre-melee-4.jpg"], "porte-encens": ["photos/porte-encens-1.jpg", "photos/porte-encens-2.jpg", "photos/porte-encens-3.jpg"], "oreille": ["photos/oreille-1.jpg", "photos/oreille-2.jpg"], "rond-de-serviette": ["photos/rond-de-serviette-1.jpg", "photos/rond-de-serviette-2.jpg", "photos/rond-de-serviette-3.jpg"], "etoiles-de-noel": ["photos/etoiles-de-noel-1.jpg"], "saliere": ["photos/saliere-1.jpg"], "porte-savon-rond": ["photos/porte-savon-rond-1.jpg", "photos/porte-savon-rond-2.jpg", "photos/porte-savon-rond-3.jpg"], "porte-savon-motifs-graphiques": ["photos/porte-savon-motifs-graphiques-1.jpg"], "couverts-a-salade": ["photos/couverts-a-salade-1.jpg"], "vase-kenzan": ["photos/vase-kenzan-1.jpg", "photos/vase-kenzan-2.jpg", "photos/vase-kenzan-3.jpg", "photos/vase-kenzan-4.jpg"], "vase-camille": ["photos/vase-camille-1.jpg", "photos/vase-camille-2.jpg"], "vase-lilas": ["photos/vase-lilas-1.jpg", "photos/vase-lilas-2.jpg", "photos/vase-lilas-3.jpg"], "vase-ikebana": ["photos/vase-ikebana-1.jpg", "photos/vase-ikebana-2.jpg", "photos/vase-ikebana-3.jpg"], "vase-zoe": ["photos/vase-zoe-1.jpg", "photos/vase-zoe-2.jpg"], "vase-isabelle": ["photos/vase-isabelle-1.jpg"], "vase-swirl": ["photos/vase-swirl-1.jpg", "photos/vase-swirl-2.jpg"], "vase-ophelie": ["photos/vase-ophelie-1.jpg", "photos/vase-ophelie-2.jpg"], "vase-sylvestre": ["photos/vase-sylvestre-1.jpg", "photos/vase-sylvestre-2.jpg"], "plat-motifs-graphiques": ["photos/plat-motifs-graphiques-1.jpg"], "bougeoir-mural-brut": ["photos/bougeoir-mural-brut-1.jpg", "photos/bougeoir-mural-brut-2.jpg", "photos/bougeoir-mural-brut-3.jpg", "photos/bougeoir-mural-brut-4.jpg"], "bougeoir-mural-argent": ["photos/bougeoir-mural-argent-1.jpg", "photos/bougeoir-mural-argent-2.jpg", "photos/bougeoir-mural-argent-3.jpg"], "tasse-n3": ["photos/tasse-n3-1.jpg", "photos/tasse-n3-2.jpg"], "tasse-n1": ["photos/tasse-n1-1.jpg"], "tasse-n2": ["photos/tasse-n2-1.jpg"], "tasse-espresso": ["photos/tasse-espresso-1.jpg"]}, "collections": {"terre-melees": ["photos/coll-terre-melees-1.jpg", "photos/coll-terre-melees-2.jpg"], "graphics": ["photos/coll-graphics-1.jpg"], "carreaux": ["photos/coll-carreaux-1.jpg"], "pois": ["photos/coll-pois-1.jpg", "photos/coll-pois-2.jpg"]}, "categories": {"table": ["photos/cat-table-1.jpg"], "objets": ["photos/cat-objets-1.jpg"], "vases": ["photos/cat-vases-1.jpg", "photos/cat-vases-2.jpg"]}};
+const PHOTOS = {"pieces": {"coquetier-saliere-en-terres-melees": ["photos/coquetier-saliere-en-terres-melees-1.jpg"], "porte-oeufs": ["photos/porte-oeufs-1.jpg", "photos/porte-oeufs-2.jpg"], "coquetier-simple": ["photos/coquetier-simple-1.jpg", "photos/coquetier-simple-2.jpg"], "coquetier-simple-a-carreaux": ["photos/coquetier-simple-a-carreaux-1.jpg"], "coquetier-saliere": ["photos/coquetier-saliere-1.jpg", "photos/coquetier-saliere-2.jpg", "photos/coquetier-saliere-3.jpg", "photos/coquetier-saliere-4.jpg"], "coquetier-saliere-a-carreaux": ["photos/coquetier-saliere-a-carreaux-1.jpg"], "bol-v-uni": ["photos/bol-v-uni-1.jpg"], "gamelle-a-pois": ["photos/gamelle-a-pois-1.jpg"], "bol-petit-dejeuner": ["photos/bol-petit-dejeuner-1.jpg", "photos/bol-petit-dejeuner-2.jpg", "photos/bol-petit-dejeuner-3.jpg"], "bol-v-a-pois": ["photos/bol-v-a-pois-1.jpg"], "assiette-creuse-picasso": ["photos/assiette-creuse-picasso-1.jpg"], "assiettes-a-dessert-petales": ["photos/assiettes-a-dessert-petales-1.jpg", "photos/assiettes-a-dessert-petales-2.jpg"], "assiette-en-terre-melee": ["photos/assiette-en-terre-melee-1.jpg", "photos/assiette-en-terre-melee-2.jpg", "photos/assiette-en-terre-melee-3.jpg", "photos/assiette-en-terre-melee-4.jpg"], "porte-encens": ["photos/porte-encens-1.jpg", "photos/porte-encens-2.jpg", "photos/porte-encens-3.jpg"], "oreille": ["photos/oreille-1.jpg", "photos/oreille-2.jpg"], "rond-de-serviette": ["photos/rond-de-serviette-1.jpg", "photos/rond-de-serviette-2.jpg", "photos/rond-de-serviette-3.jpg"], "etoiles-de-noel": ["photos/etoiles-de-noel-1.jpg"], "saliere": ["photos/saliere-1.jpg"], "porte-savon-rond": ["photos/porte-savon-rond-1.jpg", "photos/porte-savon-rond-2.jpg", "photos/porte-savon-rond-3.jpg"], "porte-savon-motifs-graphiques": ["photos/porte-savon-motifs-graphiques-1.jpg"], "couverts-a-salade": ["photos/couverts-a-salade-1.jpg"], "vase-kenzan": ["photos/vase-kenzan-1.jpg", "photos/vase-kenzan-2.jpg", "photos/vase-kenzan-3.jpg", "photos/vase-kenzan-4.jpg"], "vase-camille": ["photos/vase-camille-1.jpg", "photos/vase-camille-2.jpg"], "vase-lilas": ["photos/vase-lilas-1.jpg", "photos/vase-lilas-2.jpg", "photos/vase-lilas-3.jpg"], "vase-ikebana": ["photos/vase-ikebana-1.jpg", "photos/vase-ikebana-2.jpg", "photos/vase-ikebana-3.jpg"], "vase-zoe": ["photos/vase-zoe-1.jpg", "photos/vase-zoe-2.jpg"], "vase-isabelle": ["photos/vase-isabelle-1.jpg"], "vase-swirl": ["photos/vase-swirl-1.jpg", "photos/vase-swirl-2.jpg"], "vase-ophelie": ["photos/vase-ophelie-1.jpg", "photos/vase-ophelie-2.jpg"], "vase-sylvestre": ["photos/vase-sylvestre-1.jpg", "photos/vase-sylvestre-2.jpg"], "plat-motifs-graphiques": ["photos/plat-motifs-graphiques-1.jpg"], "bougeoir-mural-brut": ["photos/bougeoir-mural-brut-1.jpg", "photos/bougeoir-mural-brut-2.jpg", "photos/bougeoir-mural-brut-3.jpg", "photos/bougeoir-mural-brut-4.jpg"], "bougeoir-mural-argent": ["photos/bougeoir-mural-argent-1.jpg", "photos/bougeoir-mural-argent-2.jpg", "photos/bougeoir-mural-argent-3.jpg"], "tasse-n3": ["photos/tasse-n3-1.jpg", "photos/tasse-n3-2.jpg"], "tasse-n1": ["photos/tasse-n1-1.jpg"], "tasse-n2": ["photos/tasse-n2-1.jpg"], "tasse-espresso": ["photos/tasse-espresso-1.jpg"]}, "collections": {"pois": ["photos/coll-pois-1.jpg", "photos/coll-pois-2.jpg"], "terre-melees": ["photos/coll-terre-melees-1.jpg", "photos/coll-terre-melees-2.jpg"], "carreaux": ["photos/coll-carreaux-1.jpg"], "graphics": ["photos/coll-graphics-1.jpg"]}, "categories": {"table": ["photos/cat-table-1.jpg"], "objets": ["photos/cat-objets-1.jpg"], "vases": ["photos/cat-vases-1.jpg", "photos/cat-vases-2.jpg"]}};
 const NOTION_COLLECTIONS = [
   {id:"carreaux", nom:"N°1 : Les carreaux", ordre:40, publie:true, intro:"Collection de pièces ornés d’un quadrillage dessiné à main levée."},
   {id:"graphics", nom:"N°4 : Graphics", ordre:10, publie:true, intro:"Collection explorant une déclinaison de motifs graphiques réalisés à partir de la technique du « sgraffito ». Une méthode qui consiste à inciser la surface de l’argile pour révéler une couche de terre ou d’engobe d’une autre couleur, faisant apparaître le motif au fil du geste.\n\nChaque pièce est façonnée, décorée et émaillée à la main. Le motif devient ainsi le résultat d’un processus, où la matière, le geste et les imperfections propres au travail artisanal trouvent leur place."},
@@ -539,21 +554,21 @@ const NOTION_COLLECTIONS = [
 const GRES = "Céramique - 100% Grès", CRUE = "Terre crue - autodurcissante";
 /* Couleurs (base Notion « Couleurs ») : c2 rempli = pastille en deux moitiés */
 const NOTION_COULEURS = [
-  {"id": "blanc-a-pois", "nom": "Blanc à pois", "c1": "#ECE9E4", "c2": "#D9C9A8", "sup": 30.0},
-  {"id": "carreaux-bleus", "nom": "Carreaux bleus", "c1": "#D0C9BD", "c2": "#273E80", "sup": 10.0},
-  {"id": "marbre-brun", "nom": "Marbré brun", "c1": "#D0C9BD", "c2": "#372E27", "sup": 60.0},
-  {"id": "porcelaine", "nom": "Porcelaine", "c1": "#F1F0ED", "c2": "", "sup": 40.0},
-  {"id": "brun-a-pois", "nom": "Brun à pois", "c1": "#6E4A33", "c2": "#D0C9BD", "sup": 30.0},
-  {"id": "carreaux-noirs", "nom": "Carreaux noirs", "c1": "#D0C9BD", "c2": "#1D1D1B", "sup": 10.0},
+  {"id": "blanc-a-pois", "nom": "Blanc à pois", "c1": "#ECE9E4", "c2": "#D9C9A8"},
+  {"id": "carreaux-bleus", "nom": "Carreaux bleus", "c1": "#D0C9BD", "c2": "#273E80"},
+  {"id": "marbre-brun", "nom": "Marbré brun", "c1": "#D0C9BD", "c2": "#372E27"},
+  {"id": "porcelaine", "nom": "Porcelaine", "c1": "#F1F0ED", "c2": ""},
+  {"id": "brun-a-pois", "nom": "Brun à pois", "c1": "#6E4A33", "c2": "#D0C9BD"},
+  {"id": "carreaux-noirs", "nom": "Carreaux noirs", "c1": "#D0C9BD", "c2": "#1D1D1B"},
   {"id": "gres-naturel", "nom": "Grès naturel", "c1": "#D0C9BD", "c2": ""},
-  {"id": "marbre-ocre", "nom": "Marbré ocre", "c1": "#D0C9BD", "c2": "#98744A", "sup": 60.0},
-  {"id": "marbre-noir", "nom": "Marbré noir", "c1": "#D0C9BD", "c2": "#2A2826", "sup": 60.0},
-  {"id": "ocre-a-pois", "nom": "Ocre à pois", "c1": "#C08A3E", "c2": "#D0C9BD", "sup": 30.0},
-  {"id": "terre-brune", "nom": "Terre brune", "c1": "#372E27", "c2": "", "sup": 20.0},
-  {"id": "marbre-tricolore", "nom": "Marbré tricolore", "c1": "#372E27", "c2": "#98744A", "c3": "#D0C9BD", "sup": 60.0},
-  {"id": "noir-a-pois", "nom": "Noir à pois", "c1": "#D0C9BD", "c2": "#1D1D1B", "sup": 30.0},
-  {"id": "terre-rousse", "nom": "Terre rousse", "c1": "#98744A", "c2": "", "sup": 20.0},
-  {"id": "terre-noire", "nom": "Terre noire", "c1": "#1D1D1B", "c2": "", "sup": 20.0},
+  {"id": "marbre-ocre", "nom": "Marbré ocre", "c1": "#D0C9BD", "c2": "#98744A"},
+  {"id": "marbre-noir", "nom": "Marbré noir", "c1": "#D0C9BD", "c2": "#2A2826"},
+  {"id": "ocre-a-pois", "nom": "Ocre à pois", "c1": "#C08A3E", "c2": "#D0C9BD"},
+  {"id": "terre-brune", "nom": "Terre brune", "c1": "#372E27", "c2": ""},
+  {"id": "marbre-tricolore", "nom": "Marbré tricolore", "c1": "#372E27", "c2": "#98744A", "c3": "#D0C9BD"},
+  {"id": "noir-a-pois", "nom": "Noir à pois", "c1": "#D0C9BD", "c2": "#1D1D1B"},
+  {"id": "terre-rousse", "nom": "Terre rousse", "c1": "#98744A", "c2": ""},
+  {"id": "terre-noire", "nom": "Terre noire", "c1": "#1D1D1B", "c2": ""},
   {"id": "bleu-gris", "nom": "Bleu gris", "c1": "#92A2A0", "c2": ""},
   {"id": "baby-blue", "nom": "Baby blue", "c1": "#93B2BB", "c2": ""},
   {"id": "baby-pink", "nom": "Baby pink", "c1": "#DCACA2", "c2": ""},
@@ -562,34 +577,34 @@ const NOTION_COULEURS = [
   {"id": "bordeaux", "nom": "Bordeaux", "c1": "#692737", "c2": ""},
   {"id": "jaune", "nom": "Jaune", "c1": "#E9CF34", "c2": ""},
   {"id": "blanc-brillant", "nom": "Blanc brillant", "c1": "#F1F0ED", "c2": ""},
-  {"id": "gres-naturel-blanc-bleu-gris", "nom": "Grès naturel - blanc - bleu gris", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#5F7588", "sup": 80.0},
-  {"id": "gres-naturel-blanc-bleu-nuit", "nom": "Grès naturel - blanc - bleu nuit", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#0F1F4C", "sup": 80.0},
-  {"id": "gres-naturel-blanc-jaune", "nom": "Grès naturel - blanc - jaune", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#E9CF34", "sup": 80.0},
-  {"id": "gres-naturel-blanc-jaune-beurre", "nom": "Grès naturel - blanc - jaune beurre", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#D6CC9D", "sup": 80.0},
-  {"id": "gres-naturel-blanc-noir", "nom": "Grès naturel - blanc - noir", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#1D1D1B", "sup": 80.0},
-  {"id": "gres-naturel-blanc-ocre", "nom": "Grès naturel - blanc - ocre", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#A6844C", "sup": 80.0},
-  {"id": "gres-naturel-blanc-orage", "nom": "Grès naturel - blanc - orage", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#293B44", "sup": 80.0},
-  {"id": "gres-naturel-blanc-taupe", "nom": "Grès naturel - blanc - taupe", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#7F7765", "sup": 80.0},
-  {"id": "gres-naturel-blanc-vieux-rose", "nom": "Grès naturel - blanc - vieux rose", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#D0938A", "sup": 80.0},
-  {"id": "gres-naturel-brun-blanc", "nom": "Grès naturel - brun - blanc", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#EFEBDF", "sup": 80.0},
-  {"id": "gres-naturel-brun-bleu-gris", "nom": "Grès naturel - brun - bleu gris", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#5F7588", "sup": 80.0},
-  {"id": "gres-naturel-brun-bleu-nuit", "nom": "Grès naturel - brun - bleu nuit", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#0F1F4C", "sup": 80.0},
-  {"id": "gres-naturel-brun-jaune", "nom": "Grès naturel - brun - jaune", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#E9CF34", "sup": 80.0},
-  {"id": "gres-naturel-brun-jaune-beurre", "nom": "Grès naturel - brun - jaune beurre", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#D6CC9D", "sup": 80.0},
-  {"id": "gres-naturel-brun-noir", "nom": "Grès naturel - brun - noir", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#1D1D1B", "sup": 80.0},
-  {"id": "gres-naturel-brun-ocre", "nom": "Grès naturel - brun - ocre", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#A6844C", "sup": 80.0},
-  {"id": "gres-naturel-brun-orage", "nom": "Grès naturel - brun - orage", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#293B44", "sup": 80.0},
-  {"id": "gres-naturel-brun-taupe", "nom": "Grès naturel - brun - taupe", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#7F7765", "sup": 80.0},
-  {"id": "gres-naturel-brun-vieux-rose", "nom": "Grès naturel - brun - vieux rose", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#D0938A", "sup": 80.0},
-  {"id": "gres-naturel-ocre-bleu-gris", "nom": "Grès naturel - ocre - bleu gris", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#5F7588", "sup": 80.0},
-  {"id": "gres-naturel-ocre-bleu-nuit", "nom": "Grès naturel - ocre - bleu nuit", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#0F1F4C", "sup": 80.0},
-  {"id": "gres-naturel-ocre-jaune", "nom": "Grès naturel - ocre - jaune", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#E9CF34", "sup": 80.0},
-  {"id": "gres-naturel-ocre-jaune-beurre", "nom": "Grès naturel - ocre - jaune beurre", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#D6CC9D", "sup": 80.0},
-  {"id": "gres-naturel-ocre-noir", "nom": "Grès naturel - ocre - noir", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#1D1D1B", "sup": 80.0},
-  {"id": "gres-naturel-ocre-ocre", "nom": "Grès naturel - ocre - ocre", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#A6844C", "sup": 80.0},
-  {"id": "gres-naturel-ocre-orage", "nom": "Grès naturel - ocre - orage", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#293B44", "sup": 80.0},
-  {"id": "gres-naturel-ocre-taupe", "nom": "Grès naturel - ocre - taupe", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#7F7765", "sup": 80.0},
-  {"id": "gres-naturel-ocre-vieux-rose", "nom": "Grès naturel - ocre - vieux rose", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#D0938A", "sup": 80.0}
+  {"id": "gres-naturel-blanc-bleu-gris", "nom": "Grès naturel - blanc - bleu gris", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#5F7588"},
+  {"id": "gres-naturel-blanc-bleu-nuit", "nom": "Grès naturel - blanc - bleu nuit", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#0F1F4C"},
+  {"id": "gres-naturel-blanc-jaune", "nom": "Grès naturel - blanc - jaune", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#E9CF34"},
+  {"id": "gres-naturel-blanc-jaune-beurre", "nom": "Grès naturel - blanc - jaune beurre", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#D6CC9D"},
+  {"id": "gres-naturel-blanc-noir", "nom": "Grès naturel - blanc - noir", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#1D1D1B"},
+  {"id": "gres-naturel-blanc-ocre", "nom": "Grès naturel - blanc - ocre", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#A6844C"},
+  {"id": "gres-naturel-blanc-orage", "nom": "Grès naturel - blanc - orage", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#293B44"},
+  {"id": "gres-naturel-blanc-taupe", "nom": "Grès naturel - blanc - taupe", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#7F7765"},
+  {"id": "gres-naturel-blanc-vieux-rose", "nom": "Grès naturel - blanc - vieux rose", "c1": "#D0C9BD", "c2": "#EFEBDF", "c3": "#D0938A"},
+  {"id": "gres-naturel-brun-blanc", "nom": "Grès naturel - brun - blanc", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#EFEBDF"},
+  {"id": "gres-naturel-brun-bleu-gris", "nom": "Grès naturel - brun - bleu gris", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#5F7588"},
+  {"id": "gres-naturel-brun-bleu-nuit", "nom": "Grès naturel - brun - bleu nuit", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#0F1F4C"},
+  {"id": "gres-naturel-brun-jaune", "nom": "Grès naturel - brun - jaune", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#E9CF34"},
+  {"id": "gres-naturel-brun-jaune-beurre", "nom": "Grès naturel - brun - jaune beurre", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#D6CC9D"},
+  {"id": "gres-naturel-brun-noir", "nom": "Grès naturel - brun - noir", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#1D1D1B"},
+  {"id": "gres-naturel-brun-ocre", "nom": "Grès naturel - brun - ocre", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#A6844C"},
+  {"id": "gres-naturel-brun-orage", "nom": "Grès naturel - brun - orage", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#293B44"},
+  {"id": "gres-naturel-brun-taupe", "nom": "Grès naturel - brun - taupe", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#7F7765"},
+  {"id": "gres-naturel-brun-vieux-rose", "nom": "Grès naturel - brun - vieux rose", "c1": "#D0C9BD", "c2": "#372E27", "c3": "#D0938A"},
+  {"id": "gres-naturel-ocre-bleu-gris", "nom": "Grès naturel - ocre - bleu gris", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#5F7588"},
+  {"id": "gres-naturel-ocre-bleu-nuit", "nom": "Grès naturel - ocre - bleu nuit", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#0F1F4C"},
+  {"id": "gres-naturel-ocre-jaune", "nom": "Grès naturel - ocre - jaune", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#E9CF34"},
+  {"id": "gres-naturel-ocre-jaune-beurre", "nom": "Grès naturel - ocre - jaune beurre", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#D6CC9D"},
+  {"id": "gres-naturel-ocre-noir", "nom": "Grès naturel - ocre - noir", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#1D1D1B"},
+  {"id": "gres-naturel-ocre-ocre", "nom": "Grès naturel - ocre - ocre", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#A6844C"},
+  {"id": "gres-naturel-ocre-orage", "nom": "Grès naturel - ocre - orage", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#293B44"},
+  {"id": "gres-naturel-ocre-taupe", "nom": "Grès naturel - ocre - taupe", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#7F7765"},
+  {"id": "gres-naturel-ocre-vieux-rose", "nom": "Grès naturel - ocre - vieux rose", "c1": "#D0C9BD", "c2": "#98744A", "c3": "#D0938A"}
 ];
 const NOTION_PIECES = [
   {"id": "oreille", "nom": "Oreille", "cats": ["Petits objets"], "colls": [], "coul": ["gres-naturel"], "desc": "Oreille modelée à la main en terre non cuite. Chaque pièce est unique.", "formats": "12 x 9 cm environ | 80", "compo": "Terre crue - autodurcissante", "ordre": 10, "delai": "1 à 2 semaines"},
@@ -700,6 +715,7 @@ const PIECES = NOTION_PIECES.slice().sort(tri).map(p => ({
   id:p.id, nom:p.nom, desc:p.desc, compo:p.compo, delai:p.delai, photos:photosDe(p.id),
   cats:p.cats.map(c => slugCat[c]).filter(Boolean),
   sous:p.sous ? slugSous[p.sous] : undefined,
+  modele:p.modele,
   f:lireFormats(p.formats),
   coul:(p.coul || []).map(c => NOTION_COULEURS.find(x => x.id === c)).filter(Boolean)
 })).sort((x, y) => (x.photos.length ? 0 : 1) - (y.photos.length ? 0 : 1));  /* pièces « photo à venir » en fin de liste */
@@ -760,7 +776,7 @@ function pastilles(p, actif, attr, taille){
     `<button type="button" class="pastille" role="radio" aria-checked="${i === actif}" ${attr}="${i}" title="${esc(c.nom)}" aria-label="${esc(c.nom)}" style="background:${fondPastille(c)}"></button>`).join("")}</div>`;
 }
 /* Familles de couleurs : certaines couleurs ajoutent un supplément (en %) au prix de base, arrondi à 0,50 € */
-const supCoul = c => (c && +c.sup) || 0;
+const supCoul = c => 0;  /* prix fixes : plus de supplément selon la couleur (les déclinaisons ont leurs propres prix) */
 const prixAvec = (prix, c) => prix == null ? null : (supCoul(c) ? Math.round(prix * (1 + supCoul(c) / 100) * 2) / 2 : prix);
 const supMin = p => p.coul && p.coul.length ? Math.min(...p.coul.map(supCoul)) : 0;
 const prixMin = p => { const v = p.f.lignes.map(l => l.prix).filter(x => x != null); return v.length ? prixAvec(Math.min(...v), {sup: supMin(p)}) : null; };
@@ -944,24 +960,48 @@ function melanger(liste, cle, cleSans = cle){
   return avec.concat(suite);
 }
 
+let TRI = "selection";
+try { TRI = sessionStorage.getItem("vtc-tri") || "selection"; } catch (e) {}
 function categorie(id, sousId){
   const c = CATEGORIES.find(x => x.id === id);
   let liste = id === "tout" ? PIECES : PIECES.filter(p => p.cats.includes(id));
   const s = c && c.sous && sousId ? c.sous.find(x => x.id === sousId) : null;
   if (s) liste = liste.filter(p => p.sous === s.id);
   /* Mélange : jamais deux pièces de la même catégorie (ou sous-catégorie) côte à côte */
-  if (id === "tout") liste = melanger(liste, p => p.cats[0], p => p.sous || p.cats[0]);
-  else if (!s && c && c.sous) liste = melanger(liste, p => p.sous || "autre");
+  /* Ordre de Notion respecté ; le mélange (jamais deux pièces de la même catégorie côte à côte)
+     ne joue qu'entre pièces de même numéro d'ordre */
+  const parOrdre = (l, f) => {
+    const g = new Map(); l.forEach(p => { const k = NOTION_PIECES.find(n => n.id === p.id).ordre ?? 1e9; if (!g.has(k)) g.set(k, []); g.get(k).push(p); });
+    const avec = [], sans = [];
+    [...g.keys()].sort((x, y) => x - y).forEach(k => { const m = f(g.get(k)); avec.push(...m.filter(p => p.photos.length)); sans.push(...m.filter(p => !p.photos.length)); });
+    return avec.concat(sans);
+  };
+  if (id === "tout") liste = parOrdre(liste, l => melanger(l, p => p.cats[0], p => p.sous || p.cats[0]));
+  else if (!s && c && c.sous) liste = parOrdre(liste, l => melanger(l, p => p.sous || "autre"));
+  else liste = parOrdre(liste, l => l);
+  /* Tri par prix (le prix « dès » de la vignette) ; pièces sans prix en fin de liste */
+  if (TRI !== "selection") {
+    const sens = TRI === "prix-desc" ? -1 : 1;
+    liste = liste.slice().sort((a, b) => {
+      const pa = prixMin(a), pb = prixMin(b);
+      if (pa == null || pb == null) return (pa == null) - (pb == null);
+      return sens * (pa - pb);
+    });
+  }
   menu(id);
   const nomCat = c ? c.nom : "Toutes les pièces";
   const fil = s
     ? `<a href="#accueil">Accueil</a> / <a href="#${c.id}">${esc(c.nom)}</a> / ${esc(s.nom)}`
     : `<a href="#accueil">Accueil</a> / ${esc(nomCat)}`;
   const sousNav = c && c.sous
-    ? `<nav class="wrap sous" aria-label="Sous-catégories">${c.sous.map(x =>
+    ? `<nav class="sous" aria-label="Sous-catégories">${c.sous.map(x =>
         `<a class="caps" href="#${c.id}-${x.id}" ${s && s.id === x.id ? 'aria-current="page"' : ""}>${esc(x.nom)}</a>`).join("")}
         <a class="caps" href="#${c.id}" ${!s ? 'aria-current="page"' : ""}>Tout voir</a></nav>`
     : "";
+  const tri = liste.length > 1 ? `<div class="tri"><label class="caps" for="tri">Trier</label>
+      <div class="select"><select id="tri">${[["selection", "Sélection"], ["prix-asc", "Prix croissant"], ["prix-desc", "Prix décroissant"]]
+        .map(([v, t]) => `<option value="${v}" ${TRI === v ? "selected" : ""}>${t}</option>`).join("")}</select></div></div>` : "";
+  const barre = sousNav || tri ? `<div class="wrap barre-liste">${sousNav}${tri}</div>` : "";
   const vide = '<p class="vide detail">Aucune pièce pour le moment.</p>';
   const contenu = c && c.affichage === "lignes"
     ? `<section class="wrap lignes">${liste.map(ligne).join("") || vide}</section>`
@@ -972,12 +1012,34 @@ function categorie(id, sousId){
     <h1 class="caps">${esc(s ? s.nom : nomCat)}</h1>
     ${c ? (c.texte ? `<p>${esc(c.texte)}</p>` : "") : `<p class="detail">${liste.length} modèles, tous réalisés sur demande.</p>`}
   </section>
-  ${sousNav}
+  ${barre}
   ${contenu}`;
+  const t = $("#tri");
+  if (t) t.addEventListener("change", () => {
+    TRI = t.value; try { sessionStorage.setItem("vtc-tri", TRI); } catch (e) {}
+    const y = window.scrollY; categorie(id, sousId); window.scrollTo(0, y);
+  });
 }
 
 function ligneOpt(o){
   return `<div class="opt"><span>${esc(o[0])}</span><b>${euros(o[2])}</b>${o[1] ? `<span class="detail">${esc(o[1])}</span>` : ""}</div>`;
+}
+
+/* Déclinaisons : fiches du même modèle (même forme, autre couleur ou motif) */
+function declinaisonsHtml(p){
+  if (!p.modele) return "";
+  const liste = PIECES.filter(x => x.modele === p.modele);
+  if (liste.length < 2) return "";
+  /* nom court : on retire le début commun avec le nom du modèle (« Assiette à pois » → « À pois ») */
+  const base = p.modele.toLowerCase().replace(/[«»“”"]/g, "").replace(/\s+/g, " ").trim();
+  const court = n => {
+    const nn = n.replace(/[«»“”"]/g, "").replace(/\s+/g, " ").trim();
+    let r = nn.toLowerCase().startsWith(base) ? nn.slice(base.length).trim() : nn;
+    r = r.replace(/^(en|de)\s+/i, "") || nn;
+    return r.charAt(0).toUpperCase() + r.slice(1);
+  };
+  return `<div class="decli"><p class="caps choix-titre">Existe aussi en</p><div class="decli-liste">${liste.map(x =>
+    `<a href="#p-${x.id}" ${x.id === p.id ? 'aria-current="page"' : ""}>${visuel(x.photos[0], hash(x), "")}<small>${esc(court(x.nom))}</small></a>`).join("")}</div></div>`;
 }
 
 function fiche(id){
@@ -1040,6 +1102,7 @@ function fiche(id){
         <p class="prix-tete">${prixTete}</p>
       </div>
       <p class="desc">${md(p.desc).replace(/\n/g, "<br>")}</p>
+      ${declinaisonsHtml(p)}
       ${couleursHtml}
       ${optionsHtml}
       ${p.compo ? `<p class="compo"><span class="caps">Matière</span><span>${esc(p.compo.replace(" - ", " · "))}</span></p>` : ""}
