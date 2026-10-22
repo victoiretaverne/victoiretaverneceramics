@@ -13,7 +13,7 @@
 <title>Victoire Taverne Céramiques</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,500;0,700;1,400&family=Jost:ital,wght@0,300;0,400;1,300;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Jost:ital,wght@0,300;0,400;1,300;1,400&display=swap">
 <style>
 /* Layout : une colonne sobre, grille produits 2→3→4, fiche produit en deux colonnes (galerie / infos collantes) */
 :root{
@@ -31,37 +31,39 @@
   --tuile-1:#e2ddd5; --tuile-2:#e6cfc8; --tuile-3:#d9d6bf;
   /* ——— TYPOGRAPHIE (modifiable) ——— */
   --police-titre:"Jost", "Helvetica Neue", Arial, sans-serif;
-  --police-texte:"Gelasio", Georgia, "Times New Roman", serif;
-  --police-prix:"Jost", "Helvetica Neue", Arial, sans-serif;
-  --poids-titre:300; --poids-prix:400; --style-prix:italic; --poids-texte:400; --poids-fort:700;
-  --taille-texte:1.0625rem; --taille-titre:clamp(1.6rem,3.2vw,2.4rem);
-  --taille-petit:.875rem; --espacement-titre:.09em;
+  --police-texte:"DM Mono", ui-monospace, Menlo, monospace;
+  --police-italique:"DM Mono", ui-monospace, Menlo, monospace;  /* italiques du corps de texte */
+  --police-prix:"DM Mono", ui-monospace, Menlo, monospace;
+  --poids-titre:300; --poids-prix:300; --style-prix:normal; --poids-texte:300; --poids-fort:700;
+  --taille-texte:.9rem; --taille-titre:clamp(1.6rem,3.2vw,2.4rem);
+  --taille-petit:.78rem; --espacement-titre:.16em;
   color-scheme:light;
   --logo-img:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSItMiAtMiAxNDYgMTA4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPiA8cGF0aCBkPSJNMTAwLjUzNyA4OS45MTk3QzkzLjc4NzYgOTYuMjE5MiA5MC4yNjcxIDk5LjQ5NjIgODUuNjgzOSA5Ni4yMTg4QzgyLjUzODQgOTMuOTY5NCA4Mi41Mzg0IDg3LjIxOTkgODIuNTM4NCA4MS44MjAyQzgyLjUzODQgNzUuMzQwNyA4NC40ODQgNjUuOTIxMyA4NS42ODM5IDYxLjEyMTZMODcuMjYwOSA1NC41OTY4TDg4LjgzOCA0OC4wNzJDODguODM4IDQ4LjA3MiA5MSA0Mi41IDg1LjY4MzkgNTIuNUM4MC4zNjc4IDYyLjUgNzQuNDM5IDczLjM1MDUgNjQuMDg5NyA4MUM1My43NDA0IDg4LjY0OTUgNDUuOTQ5NiA3Ny4zMjU3IDQ0LjUgNzEuNUM0My40MTAzIDY3LjEyMDkgNDIuNSA1NS4yNzE1IDUwLjY2NjQgNDUuOTg4N0M1Mi44MTU5IDQzLjU0NTQgNjQuODQyNCAzNC45Mjk5IDY0LjA4OTcgNDYuNDg4N0M2My42NjY0IDUyLjk4ODcgNjIuMzczNCA1OC45MjU5IDYxLjM4NTYgNjMuOTg4N0M1NC4xNjY0IDEwMC45ODkgMzguMjA5MiAxMDMuNDcgMjkuNjU1NCAxMDEuNDk2QzIzLjgxMDIgMTAwLjE0NiAxNi45MzkyIDk0LjA5NjYgMTUuNjQ1NSA4NS45OTcyQzE0LjYzNTUgNzkuNjc0MSAxNS4wMjgzIDY5LjQ5NzIgMTcuNjQ1NiA2MS4xMjE2QzIwLjE0NTYgNTMuMTIxNiAyOS43Mjc2IDM3LjQwNjggMzIuNjQ1NiAzMS4wNTk2QzM1LjE0NTYgMjUuNjIxNiA0Mi42ODI0IDcuNTEyMzUgMzguNjU1NSAzLjQ5NjI5QzM0LjY0NTUgLTAuNTAyODA5IDI1LjQ1ODggNC41NjY1NCAyMy4xNDI2IDYuNDk2ODNDMTcuMTQyNiAxMS40OTcxIDkuNjI1NDcgMjAuNDU0MiA2LjE0MjY4IDI5LjQ5NzJDMi4yNjU2OSAzOS41NjM3IC0wLjM2MDAyIDUwLjQ5NzIgNS4xNDQ5NSA1NS4yNzE1IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+IDxwYXRoIGQ9Ik05OS4xNzI1IDg4LjQ1NzhDOTguNzY5NCA4OC44MDM0IDk4LjUyNzkgODkuMjkwMiA5OC41MDk5IDg5LjgyMDZDOTguNDkxNCA5MC4zNTA0IDk4LjY5NzggOTAuODgwNCA5OS4wNzUgOTEuMjg0NUM5OS40NTIyIDkxLjY4ODcgOTkuOTY2NyA5MS45MzExIDEwMC40OTcgOTEuOTQ5MUMxMDEuMDI3IDkxLjk2NzcgMTAxLjUyOSA5MS43NjAzIDEwMS45MDIgOTEuMzgyQzEwMS45MDIgOTEuMzgyIDEwMS45MDIgOTEuMzgyIDEwMS45MDIgOTEuMzgyQzEwMi4yNzMgOTEuMDA3NSAxMDIuNjUgOTAuNjAxNiAxMDIuOTk3IDkwLjIxMDVDMTA5LjA2MSA4My4wMDc4IDExMy40ODggNzUuMTk2NCAxMTcuOTk1IDY3LjMyNDFDMTE4LjI0NCA2Ni44NzkgMTE4LjQ5NSA2Ni40Mjg2IDExOC43MjUgNjYuMDA2OEMxMTguODE2IDY1LjgzOTEgMTE4LjgzNiA2NS42Mzc5IDExOC43ODUgNjUuNDQ5OUMxMTguNzM0IDY1LjI2MTggMTE4LjYxNSA2NS4xMDIzIDExOC40NTIgNjUuMDA0MUMxMTguMjg4IDY0LjkwNTkgMTE4LjA5MSA2NC44NzY1IDExNy45MDEgNjQuOTE5OEMxMTcuNzExIDY0Ljk2MzIgMTE3LjU0MyA2NS4wNzU5IDExNy40MzggNjUuMjM1M0MxMTcuNDM4IDY1LjIzNTMgMTE3LjQzOCA2NS4yMzUzIDExNy40MzggNjUuMjM1M0MxMTcuMTggNjUuNjI0MyAxMTYuODkzIDY2LjA1MzUgMTE2LjYxMSA2Ni40NzI3QzExMS41NDIgNzMuODU3NSAxMDYuMzIzIDgxLjM5MzcgMTAwLjIwMiA4Ny41MjYxQzk5Ljg2NSA4Ny44NDc2IDk5LjUwNzkgODguMTczNSA5OS4xNzI1IDg4LjQ1NzhaIiBmaWxsPSIjMDAwIi8+IDxwYXRoIGQ9Ik01NC4wNTg3IDI1LjMzMTVDNTMuNTQzNSAyNS40NTc4IDUzLjEwMjYgMjUuNzgzNCA1Mi44MzQxIDI2LjI0MDlDNTIuNTY1NiAyNi42OTgzIDUyLjQ5MTUgMjcuMjUwMSA1Mi42MjcgMjcuNzcwOEM1Mi43NjI1IDI4LjI5MTUgNTMuMDk2MiAyOC43MzcyIDUzLjU1MzcgMjkuMDA1NkM1NC4wMTEyIDI5LjI3NDIgNTQuNTU0OSAyOS4zNDM1IDU1LjA2NjMgMjkuMjAyNUM1Ni40NzUzIDI4LjgxNDMgNTcuODk2IDI4LjQyNzIgNTkuMzE3OCAyOC4wNDI0QzcyLjUyNjggMjQuNTA1MyA4NS44MTM1IDIwLjk1NDkgOTkuMTMyNSAxOC4xMjhDMTExLjYxOCAxNS41MDQgMTI0LjI3NiAxMy44MDE0IDEzNi45MDUgMTEuNzQ3NUMxMzguMzYgMTEuNTE0NiAxMzkuNzk2IDExLjI4MjYgMTQxLjI3NSAxMS4wNDI3QzE0MS40NjkgMTEuMDExMyAxNDEuNjQzIDEwLjkwMzEgMTQxLjc1OSAxMC43NDM3QzE0MS44NzYgMTAuNTg0MiAxNDEuOTI2IDEwLjM4NjYgMTQxLjg5NyAxMC4xOTI2QzE0MS44NjggOS45OTg2IDE0MS43NjMgOS44MjM3MyAxNDEuNjA2IDkuNzA0ODRDMTQxLjQ0OCA5LjU4NjA1IDE0MS4yNSA5LjUzMjk4IDE0MS4wNTYgOS41NTg5QzE0MS4wNTYgOS41NTg5IDE0MS4wNTYgOS41NTg5IDE0MS4wNTYgOS41NTg5QzEzOS41NzIgOS43NTczOSAxMzguMTMgOS45NDc5NCAxMzYuNjcxIDEwLjEzOTVDMTI0LjAxNyAxMS44MzE2IDExMS4yNjggMTMuMTc5OSA5OC42MjkgMTUuNDY0MkM4NS4wNjkxIDE3Ljk0MzkgNzEuNzEyNiAyMS4xMTUzIDU4LjM1ODUgMjQuMjg4QzU2LjkyMTggMjQuNjMzNiA1NS40ODU4IDI0Ljk4MTYgNTQuMDU4NyAyNS4zMzE1WiIgZmlsbD0iIzAwMCIvPiA8cGF0aCBkPSJNMTI1LjQ3IDQ2Ljg5MDlDMTI0LjkyOCA0Ny4wNDQ5IDEyNC41NCA0Ny4zNzY4IDEyNC40NTUgNDcuOTAyNkMxMjQuMzY2IDQ4LjQyMzIgMTI0LjU4NyA0OS4wOTQ5IDEyNS4wMDUgNDkuNjgwOUMxMjUuNDI0IDUwLjI2NjkgMTI1Ljk4OCA1MC42OTM2IDEyNi41MDkgNTAuNzc4MkMxMjcuMDM0IDUwLjg2OCAxMjcuNDc0IDUwLjYwODUgMTI3Ljc5NSA1MC4xNDU5QzEyNy43OTUgNTAuMTQ1OSAxMjcuNzk1IDUwLjE0NTkgMTI3Ljc5NSA1MC4xNDU5QzEyNy44NTMgNTAuMDYzOCAxMjcuOTEgNDkuOTgxOCAxMjcuOTY4IDQ5Ljg5OTdDMTI4LjY5NiA0OC44NjE1IDEyOS40MjQgNDcuODIzMyAxMzAuMTUyIDQ2Ljc4NTFMMTI5Ljc4MyA0Ni45MDM0QzEzMC4yODggNDYuNzI1MSAxMzAuNzkzIDQ2LjU0NjggMTMxLjI5OSA0Ni4zNjg2QzEzMS4zOTMgNDYuMzM1MiAxMzEuNDg4IDQ2LjMwMTkgMTMxLjU4MiA0Ni4yNjg2QzEzMS40ODggNDYuMjM1MiAxMzEuMzkzIDQ2LjIwMTkgMTMxLjI5OSA0Ni4xNjg2QzEzMC43OTMgNDUuOTkwMyAxMzAuMjg4IDQ1LjgxMiAxMjkuNzgzIDQ1LjYzMzhMMTI5LjQwMyA0NS43Njc4TDEyOS40MTQgNDUuNzUyQzEyOC4xOTUgNDYuMTAzOCAxMjYuOTc3IDQ2LjQ1NTcgMTI1Ljc1OSA0Ni44MDc1QzEyNS42NjMgNDYuODM1MyAxMjUuNTY3IDQ2Ljg2MzEgMTI1LjQ3IDQ2Ljg5MDlaIiBmaWxsPSIjMDAwIi8+IDxwYXRoIGQ9Ik00OC41OTA0IDc4LjM2MjhDNDguNTkwNCA3OC4zNjI4IDUzLjk0MzEgODMuMjE3NiA1Ny44MzU3IDc1LjkwNDciIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4gPHBhdGggZD0iTTYwLjUwMDggNjlDNjAuNTAwOCA2OSA1NCA5MCA2Ny4zNjcyIDc4LjEwMjMiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4gPHBhdGggZD0iTTgzLjIzODMgNjcuNzE5NUM4My4yMzgzIDY3LjcxOTUgODMuODE4NiA2MS44MzgxIDc5LjAzNDMgNjUuOTE4MSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPiA8cmVjdCB4PSI4MSIgeT0iNTgiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDAiLz4gPHBhdGggZD0iTTYxLjQ4NDMgNzEuNTAzNEM1OC45OTgyIDgxLjUgNjAuNSA4MiA2Ni40OTY5IDc3IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMC41Ii8+IDxwYXRoIGQ9Ik04MS41MDU4IDc0LjQ5ODFDODIuNTAzNCA2NC45OTk5IDgzIDYyIDc3LjUwOTggNjkuNTAwMyIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjAuNSIvPiA8L3N2Zz4g");
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--fond);color:var(--encre);font-family:var(--police-texte);font-weight:var(--poids-texte);font-size:var(--taille-texte);line-height:1.55;-webkit-font-smoothing:antialiased}
+body{background:var(--fond);color:var(--encre);font-family:var(--police-texte);font-weight:var(--poids-texte);font-size:var(--taille-texte);line-height:1.7;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 a{color:inherit}
 .wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
+h1.caps,h2.caps{font-weight:400}
 .caps{font-family:var(--police-titre);text-transform:uppercase;letter-spacing:var(--espacement-titre);font-weight:var(--poids-titre)}
 .compo{display:flex;gap:12px;align-items:baseline;margin:0;font-size:var(--taille-petit);color:var(--doux)}
 .compo .caps{font-size:.72rem;color:var(--encre)}
 #finition-note{margin:0;color:var(--doux);font-size:var(--taille-petit)}
 #finition-note:empty,#format-detail:empty{display:none}
-.brouillon{font-family:var(--police-texte);font-style:italic;text-transform:none;letter-spacing:0;font-size:.8rem;color:var(--doux);border:0.5px dashed var(--doux);padding:1px 8px;border-radius:999px;vertical-align:middle}
+.brouillon{font-family:var(--police-italique);font-style:italic;text-transform:none;letter-spacing:0;font-size:.8rem;color:var(--doux);border:0.5px dashed var(--doux);padding:1px 8px;border-radius:999px;vertical-align:middle}
 .coll-texte p.intro + p.intro{margin-top:-4px}
 /* Logo (image en masque : prend la couleur du texte) */
 .logo{display:block;flex:none;aspect-ratio:146/108;background-color:currentColor;-webkit-mask:var(--logo-img) center/contain no-repeat;mask:var(--logo-img) center/contain no-repeat}
 .ph-photo{background:var(--tuile-1)}
 .ph-vide{background:#D9D6D1}
-.ph-vide span{font-family:var(--police-texte);font-style:italic;font-weight:300;font-size:.9rem;color:var(--doux)}
+.ph-vide span{font-family:var(--police-italique);font-style:italic;font-weight:300;font-size:.9rem;color:var(--doux)}
 .ph-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 /* Prix */
 .apd{font-family:var(--police-prix);font-style:italic;font-weight:300;font-size:1em;letter-spacing:.02em;color:var(--doux)}
 .carte-prix b,.prix-tete b,.opt b{font-family:var(--police-prix);font-weight:var(--poids-prix);font-style:var(--style-prix);font-variant-numeric:tabular-nums;letter-spacing:.02em}
-em,.detail{font-style:italic;font-weight:300}
+em,.detail{font-family:var(--police-italique);font-style:italic;font-weight:300}
 strong,b{font-weight:var(--poids-fort)}
 :focus-visible{outline:1.5px solid var(--encre);outline-offset:3px}
 
@@ -159,7 +161,7 @@ a:has(.ph){text-decoration:none} /* pas de soulignement noir sous « Photo à ve
 a,button{text-decoration-color:currentColor;text-decoration-thickness:0.5px} /* soulignement : même couleur et même finesse que le trait des lettres */.panier-photo .ph{aspect-ratio:4/5}
 .panier-infos{display:flex;flex-direction:column;gap:10px;min-width:0}
 .panier-nom{text-decoration:none;font-size:.9rem}
-.panier-detail{margin:0;font-size:var(--taille-petit);color:var(--doux);font-style:italic}
+.panier-detail{font-family:var(--police-italique);margin:0;font-size:var(--taille-petit);color:var(--doux);font-style:italic}
 .panier-choix{display:flex;flex-wrap:wrap;gap:8px}
 .panier-choix .select{flex:1 1 180px;max-width:320px}
 .panier-choix select{padding:9px 36px 9px 10px;font-size:.8rem}
@@ -178,15 +180,15 @@ a,button{text-decoration-color:currentColor;text-decoration-thickness:0.5px} /* 
 .panier-qte button:focus-visible,.panier-retirer:focus-visible{outline:1.5px solid var(--encre);outline-offset:2px}
 .panier-prix{margin:0;text-align:right;font-size:.95rem}
 .panier-barre{color:var(--doux);font-family:var(--police-prix);font-weight:300;font-style:italic;font-size:.85em;text-decoration-thickness:0.5px}
-.panier-lot{display:block;margin-top:4px;font-family:var(--police-texte);font-style:italic;font-size:.75rem;color:var(--doux);line-height:1.35}.panier-prix b{white-space:nowrap}
+.panier-lot{display:block;margin-top:4px;font-family:var(--police-italique);font-style:italic;font-size:.75rem;color:var(--doux);line-height:1.35}.panier-prix b{white-space:nowrap}
 .panier-prix b,.panier-somme b{font-family:var(--police-prix);font-weight:300;font-style:italic}
 .panier-total{display:flex;justify-content:flex-end;align-items:baseline;gap:18px;padding:22px 0 6px;border-top:var(--filet);margin-top:-1px}
 .panier-total p{margin:0}
 .panier-livraison{display:flex;justify-content:flex-end;align-items:baseline;gap:18px;padding:18px 0;border-bottom:0.5px solid var(--ligne)}
 .panier-livraison p{margin:0}.panier-livraison .caps{font-size:.85rem}
-.panier-liv-texte{font-family:var(--police-texte);font-style:italic;color:var(--doux);font-size:var(--taille-petit);text-align:right}.panier-total .caps{font-size:1.25rem}
+.panier-liv-texte{font-family:var(--police-italique);font-style:italic;color:var(--doux);font-size:var(--taille-petit);text-align:right}.panier-total .caps{font-size:1.25rem}
 .panier-somme{font-size:1.25rem}
-.panier-note{margin:4px 0 0;font-size:var(--taille-petit);color:var(--doux);font-style:italic;text-align:right}
+.panier-note{font-family:var(--police-italique);margin:4px 0 0;font-size:var(--taille-petit);color:var(--doux);font-style:italic;text-align:right}
 .panier-actions{margin-top:44px;margin-left:auto;max-width:420px;display:flex;flex-direction:column;gap:14px}
 .panier-actions .cta-note{margin:0}
 @media (max-width:700px){
@@ -246,9 +248,10 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .intro h1{padding-left:1cm}
 .intro-texte{margin-right:1cm}
 .intro h1{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.2;margin:0;text-wrap:balance}
+.intro h1 .lieu{font-weight:300;font-size:.72em;white-space:nowrap}
 .intro-texte{display:flex;flex-direction:column;gap:10px;min-width:0;padding-left:clamp(20px,3vw,40px);border-left:0.5px solid var(--ligne)}
 .intro .chapeau{margin:0;font-size:clamp(1.05rem,1.45vw,1.2rem);line-height:1.5;color:var(--encre);text-wrap:pretty}
-.intro .pratique{margin:0;font-style:italic;font-weight:300;font-size:.95rem;color:var(--doux)}
+.intro .pratique{font-family:var(--police-italique);margin:0;font-style:italic;font-weight:300;font-size:.95rem;color:var(--doux)}
 .intro .logo-xl{width:clamp(90px,14vw,150px);height:auto;margin-bottom:28px;display:block}
 @media (max-width:760px){.intro{grid-template-columns:1fr;align-items:start}.intro-texte{padding-left:0;border-left:0;margin-right:0}.intro h1{padding-left:0}}
 
@@ -325,7 +328,7 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 
 .section-tete{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:var(--filet);padding-top:14px;margin-bottom:24px}
 .section-tete h2{font-size:1rem;margin:0}
-.lien-jost,.section-tete .detail,.coll-ligne-tete a.voir,.coll-ligne-bas a.voir{font-family:var(--police-titre);font-style:normal;font-weight:300;text-transform:uppercase;letter-spacing:var(--espacement-titre);font-size:.72rem;color:var(--doux)}
+.lien-jost,.section-tete .detail,.coll-ligne-tete a.voir,.coll-ligne-bas a.voir{font-family:var(--police-texte);font-style:normal;font-weight:300;text-transform:none;letter-spacing:-.01em;font-size:var(--taille-petit);color:var(--doux)}
 
 /* Grille produits */
 .grille{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 18px;padding-bottom:clamp(48px,8vw,96px)}
@@ -404,7 +407,7 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .riche-liste li{padding:10px 14px;font-family:var(--police-titre);font-weight:300;font-size:.9rem;letter-spacing:.03em;cursor:pointer}
 .riche-liste li:hover,.riche-liste li:focus{background:rgba(0,0,0,.05);outline:none}
 .riche-liste li[aria-selected="true"]{background:rgba(0,0,0,.08)}
-em.taille{font-family:var(--police-texte);font-style:italic;font-weight:400;letter-spacing:0}
+em.taille{font-family:var(--police-italique);font-style:italic;font-weight:400;letter-spacing:0}
 .format-unique{margin:-8px 0 0;font-size:var(--taille-petit)}
 .panier-format{margin:0;font-family:var(--police-titre);font-weight:300;font-size:.85rem}
 .panier-col .riche-btn{padding:9px 32px 9px 10px;font-size:.8rem}
@@ -425,7 +428,7 @@ em.taille{font-family:var(--police-texte);font-style:italic;font-weight:400;lett
 .decli-liste small{font-size:.7rem;line-height:1.25;color:var(--doux)}
 .decli-liste a[aria-current="page"] small{color:var(--encre)}
 .aussi{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--police-titre);font-weight:300;text-transform:uppercase;letter-spacing:var(--espacement-titre);font-size:.72rem}
-.aussi .detail{font-style:normal;color:var(--doux)}
+.aussi .detail{font-family:inherit;font-style:normal;color:var(--doux)}
 .aussi a{text-decoration:none;border:0.5px solid var(--encre);padding:5px 12px;border-radius:999px}
 .aussi a:hover{background:var(--rose);border-color:var(--rose)}
 details{border-top:0.5px solid var(--ligne)}
@@ -543,7 +546,7 @@ const CATEGORIES = [
    (dans le vrai site, ce bloc sera lu directement depuis Notion)
    ============================================================ */
 /* Photos importées depuis Documents > WORK > 4. CÉRAMIQUE > photos fiches produits */
-const PHOTOS = {"pieces": {"coquetier-saliere-en-terres-melees": ["photos/coquetier-saliere-en-terres-melees-1.jpg"], "porte-oeufs": ["photos/porte-oeufs-1.jpg", "photos/porte-oeufs-2.jpg"], "coquetier-simple": ["photos/coquetier-simple-1.jpg", "photos/coquetier-simple-2.jpg"], "coquetier-simple-a-carreaux": ["photos/coquetier-simple-a-carreaux-1.jpg"], "coquetier-saliere": ["photos/coquetier-saliere-1.jpg", "photos/coquetier-saliere-2.jpg", "photos/coquetier-saliere-3.jpg", "photos/coquetier-saliere-4.jpg"], "coquetier-saliere-a-carreaux": ["photos/coquetier-saliere-a-carreaux-1.jpg"], "bol-v-uni": ["photos/bol-v-uni-1.jpg"], "gamelle-a-pois": ["photos/gamelle-a-pois-1.jpg"], "bol-petit-dejeuner": ["photos/bol-petit-dejeuner-1.jpg", "photos/bol-petit-dejeuner-2.jpg", "photos/bol-petit-dejeuner-3.jpg"], "bol-v-a-pois": ["photos/bol-v-a-pois-1.jpg"], "assiette-creuse-picasso": ["photos/assiette-creuse-picasso-1.jpg"], "assiettes-a-dessert-petales": ["photos/assiettes-a-dessert-petales-1.jpg", "photos/assiettes-a-dessert-petales-2.jpg"], "assiette-en-terre-melee": ["photos/assiette-en-terre-melee-1.jpg", "photos/assiette-en-terre-melee-2.jpg", "photos/assiette-en-terre-melee-3.jpg", "photos/assiette-en-terre-melee-4.jpg"], "porte-encens": ["photos/porte-encens-1.jpg", "photos/porte-encens-2.jpg", "photos/porte-encens-3.jpg"], "oreille": ["photos/oreille-1.jpg", "photos/oreille-2.jpg"], "rond-de-serviette": ["photos/rond-de-serviette-1.jpg", "photos/rond-de-serviette-2.jpg", "photos/rond-de-serviette-3.jpg"], "etoiles-de-noel": ["photos/etoiles-de-noel-1.jpg"], "saliere": ["photos/saliere-1.jpg"], "porte-savon-rond": ["photos/porte-savon-rond-1.jpg", "photos/porte-savon-rond-2.jpg", "photos/porte-savon-rond-3.jpg"], "porte-savon-motifs-graphiques": ["photos/porte-savon-motifs-graphiques-1.jpg"], "couverts-a-salade": ["photos/couverts-a-salade-1.jpg"], "vase-kenzan": ["photos/vase-kenzan-1.jpg", "photos/vase-kenzan-2.jpg", "photos/vase-kenzan-3.jpg", "photos/vase-kenzan-4.jpg"], "vase-camille": ["photos/vase-camille-1.jpg", "photos/vase-camille-2.jpg"], "vase-lilas": ["photos/vase-lilas-1.jpg", "photos/vase-lilas-2.jpg", "photos/vase-lilas-3.jpg"], "vase-ikebana": ["photos/vase-ikebana-1.jpg", "photos/vase-ikebana-2.jpg", "photos/vase-ikebana-3.jpg"], "vase-zoe": ["photos/vase-zoe-1.jpg", "photos/vase-zoe-2.jpg"], "vase-isabelle": ["photos/vase-isabelle-1.jpg"], "vase-swirl": ["photos/vase-swirl-1.jpg", "photos/vase-swirl-2.jpg"], "vase-ophelie": ["photos/vase-ophelie-1.jpg", "photos/vase-ophelie-2.jpg"], "vase-sylvestre": ["photos/vase-sylvestre-1.jpg", "photos/vase-sylvestre-2.jpg"], "plat-motifs-graphiques": ["photos/plat-motifs-graphiques-1.jpg"], "bougeoir-mural-brut": ["photos/bougeoir-mural-brut-1.jpg", "photos/bougeoir-mural-brut-2.jpg", "photos/bougeoir-mural-brut-3.jpg", "photos/bougeoir-mural-brut-4.jpg"], "bougeoir-mural-argent": ["photos/bougeoir-mural-argent-1.jpg", "photos/bougeoir-mural-argent-2.jpg", "photos/bougeoir-mural-argent-3.jpg"], "tasse-n3": ["photos/tasse-n3-1.jpg", "photos/tasse-n3-2.jpg"], "tasse-n1": ["photos/tasse-n1-1.jpg"], "tasse-n2": ["photos/tasse-n2-1.jpg"], "tasse-espresso": ["photos/tasse-espresso-1.jpg"]}, "collections": {"pois": ["photos/coll-pois-1.jpg", "photos/coll-pois-2.jpg"], "terre-melees": ["photos/coll-terre-melees-1.jpg", "photos/coll-terre-melees-2.jpg"], "carreaux": ["photos/coll-carreaux-1.jpg"], "graphics": ["photos/coll-graphics-1.jpg"]}, "categories": {"table": ["photos/cat-table-1.jpg"], "objets": ["photos/cat-objets-1.jpg"], "vases": ["photos/cat-vases-1.jpg", "photos/cat-vases-2.jpg"]}};
+const PHOTOS = {"pieces": {"coquetier-saliere-en-terres-melees": ["photos/coquetier-saliere-en-terres-melees-1.jpg"], "porte-oeufs": ["photos/porte-oeufs-1.jpg", "photos/porte-oeufs-2.jpg"], "coquetier-simple": ["photos/coquetier-simple-1.jpg", "photos/coquetier-simple-2.jpg"], "coquetier-simple-a-carreaux": ["photos/coquetier-simple-a-carreaux-1.jpg"], "coquetier-saliere": ["photos/coquetier-saliere-1.jpg", "photos/coquetier-saliere-2.jpg", "photos/coquetier-saliere-3.jpg", "photos/coquetier-saliere-4.jpg"], "coquetier-saliere-a-carreaux": ["photos/coquetier-saliere-a-carreaux-1.jpg"], "bol-v-uni": ["photos/bol-v-uni-1.jpg"], "gamelle-a-pois": ["photos/gamelle-a-pois-1.jpg"], "bol-petit-dejeuner": ["photos/bol-petit-dejeuner-1.jpg", "photos/bol-petit-dejeuner-2.jpg", "photos/bol-petit-dejeuner-3.jpg"], "bol-v-a-pois": ["photos/bol-v-a-pois-1.jpg"], "assiette-creuse-picasso": ["photos/assiette-creuse-picasso-1.jpg"], "assiettes-a-dessert-petales": ["photos/assiettes-a-dessert-petales-1.jpg", "photos/assiettes-a-dessert-petales-2.jpg"], "assiette-en-terre-melee": ["photos/assiette-en-terre-melee-1.jpg", "photos/assiette-en-terre-melee-2.jpg", "photos/assiette-en-terre-melee-3.jpg", "photos/assiette-en-terre-melee-4.jpg"], "porte-encens": ["photos/porte-encens-1.jpg", "photos/porte-encens-2.jpg", "photos/porte-encens-3.jpg"], "oreille": ["photos/oreille-1.jpg", "photos/oreille-2.jpg"], "rond-de-serviette": ["photos/rond-de-serviette-1.jpg", "photos/rond-de-serviette-2.jpg", "photos/rond-de-serviette-3.jpg"], "etoiles-de-noel": ["photos/etoiles-de-noel-1.jpg"], "saliere": ["photos/saliere-1.jpg"], "porte-savon-rond": ["photos/porte-savon-rond-1.jpg", "photos/porte-savon-rond-2.jpg", "photos/porte-savon-rond-3.jpg"], "porte-savon-motifs-graphiques": ["photos/porte-savon-motifs-graphiques-1.jpg"], "couverts-a-salade": ["photos/couverts-a-salade-1.jpg"], "vase-kenzan": ["photos/vase-kenzan-1.jpg", "photos/vase-kenzan-2.jpg", "photos/vase-kenzan-3.jpg", "photos/vase-kenzan-4.jpg"], "vase-camille": ["photos/vase-camille-1.jpg", "photos/vase-camille-2.jpg"], "vase-lilas": ["photos/vase-lilas-1.jpg", "photos/vase-lilas-2.jpg", "photos/vase-lilas-3.jpg"], "vase-ikebana": ["photos/vase-ikebana-1.jpg", "photos/vase-ikebana-2.jpg", "photos/vase-ikebana-3.jpg"], "vase-zoe": ["photos/vase-zoe-1.jpg", "photos/vase-zoe-2.jpg"], "vase-isabelle": ["photos/vase-isabelle-1.jpg"], "vase-swirl": ["photos/vase-swirl-1.jpg", "photos/vase-swirl-2.jpg"], "vase-ophelie": ["photos/vase-ophelie-1.jpg", "photos/vase-ophelie-2.jpg"], "vase-sylvestre": ["photos/vase-sylvestre-1.jpg", "photos/vase-sylvestre-2.jpg"], "plat-motifs-graphiques": ["photos/plat-motifs-graphiques-1.jpg"], "bougeoir-mural-brut": ["photos/bougeoir-mural-brut-1.jpg", "photos/bougeoir-mural-brut-2.jpg", "photos/bougeoir-mural-brut-3.jpg", "photos/bougeoir-mural-brut-4.jpg"], "bougeoir-mural-argent": ["photos/bougeoir-mural-argent-1.jpg", "photos/bougeoir-mural-argent-2.jpg", "photos/bougeoir-mural-argent-3.jpg"], "tasse-a-pois": ["photos/tasse-a-pois-1.jpg", "photos/tasse-a-pois-2.jpg"], "tasse-n3": ["photos/tasse-n3-1.jpg", "photos/tasse-n3-2.jpg"], "tasse-n1": ["photos/tasse-n1-1.jpg"], "tasse-n2": ["photos/tasse-n2-1.jpg"], "tasse-espresso": ["photos/tasse-espresso-1.jpg"]}, "collections": {"pois": ["photos/coll-pois-1.jpg", "photos/coll-pois-2.jpg"], "terre-melees": ["photos/coll-terre-melees-1.jpg", "photos/coll-terre-melees-2.jpg"], "carreaux": ["photos/coll-carreaux-1.jpg"], "graphics": ["photos/coll-graphics-1.jpg"]}, "categories": {"table": ["photos/cat-table-1.jpg"], "objets": ["photos/cat-objets-1.jpg"], "vases": ["photos/cat-vases-1.jpg", "photos/cat-vases-2.jpg"]}};
 const NOTION_COLLECTIONS = [
   {id:"carreaux", nom:"N°1 : Les carreaux", ordre:40, publie:true, intro:"Collection de pièces ornés d’un quadrillage dessiné à main levée."},
   {id:"graphics", nom:"N°4 : Graphics", ordre:10, publie:true, intro:"Collection explorant une déclinaison de motifs graphiques réalisés à partir de la technique du « sgraffito ». Une méthode qui consiste à inciser la surface de l’argile pour révéler une couche de terre ou d’engobe d’une autre couleur, faisant apparaître le motif au fil du geste.\n\nChaque pièce est façonnée, décorée et émaillée à la main. Le motif devient ainsi le résultat d’un processus, où la matière, le geste et les imperfections propres au travail artisanal trouvent leur place."},
@@ -826,16 +829,12 @@ function menu(actif){
 /* Sélection de l'accueil : 2 lignes de 4. Plus tard, les pièces les plus consultées (liste SITE.populaires) ;
    en attendant, les premières pièces de chaque catégorie, en privilégiant celles qui ont une photo. */
 function selectionAccueil(){
+  /* Accueil : les 8 premières pièces (avec photo) selon la colonne Ordre de Notion */
   const max = 8, choix = [];
   (SITE.populaires || []).forEach(id => { const p = PIECES.find(x => x.id === id); if (p && !choix.includes(p)) choix.push(p); });
-  /* Catégories en alternance (table, vases, objets, table…) pour ne jamais avoir deux voisins de la même catégorie */
-  const files = ["table", "vases", "objets"].map(cat => PIECES.filter(p => p.cats.includes(cat) && !choix.includes(p))
-    .sort((x, y) => (y.photos.length > 0) - (x.photos.length > 0)));
-  for (let tour = 0; choix.length < max && files.some(f => f.length); tour++) {
-    const f = files[tour % files.length];
-    while (f.length && choix.includes(f[0])) f.shift();
-    if (f.length) choix.push(f.shift());
-  }
+  const rang = p => NOTION_PIECES.find(n => n.id === p.id).ordre ?? 1e9;
+  PIECES.filter(p => p.photos.length && !choix.includes(p)).sort((x, y) => rang(x) - rang(y))
+    .forEach(p => { if (choix.length < max) choix.push(p); });
   return choix.slice(0, max);
 }
 
@@ -858,7 +857,7 @@ function accueil(){
     <span class="logo bandeau-logo" aria-hidden="true"></span>
   </section>
   <section class="wrap intro">
-    <h1 class="caps">${esc(SITE.accroche)}</h1>
+    <h1 class="caps">${(() => { const t = SITE.accroche || "", i = t.lastIndexOf(","); return i > 0 ? `${esc(t.slice(0, i + 1))} <span class="lieu">${esc(t.slice(i + 1).trim())}</span>` : esc(t); })()}</h1>
     <div class="intro-texte">${paras(SITE.intro).map((t, i) => `<p class="${i === 0 ? "chapeau" : "pratique"}">${md(t).replace(/\n/g, "<br>")}</p>`).join("")}</div>
   </section>
   <section class="wrap">
