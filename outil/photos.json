@@ -44,20 +44,70 @@
    "photos/assiettes-a-dessert-petales-1.jpg",
    "photos/assiettes-a-dessert-petales-2.jpg"
   ],
+  "assiette-a-pois": [
+   "photos/assiette-a-pois-1.jpg",
+   "photos/assiette-a-pois-2.jpg"
+  ],
   "assiette-en-terre-melee": [
    "photos/assiette-en-terre-melee-1.jpg",
    "photos/assiette-en-terre-melee-2.jpg",
    "photos/assiette-en-terre-melee-3.jpg",
-   "photos/assiette-en-terre-melee-4.jpg"
+   "photos/assiette-en-terre-melee-4.jpg",
+   "photos/assiette-en-terre-melee-5.jpg"
+  ],
+  "assiette-unie": [
+   "photos/assiette-unie-1.jpg",
+   "photos/assiette-unie-2.jpg"
   ],
   "porte-encens": [
    "photos/porte-encens-1.jpg",
    "photos/porte-encens-2.jpg",
-   "photos/porte-encens-3.jpg"
+   "photos/porte-encens-3.jpg",
+   "photos/porte-encens-4.jpg"
   ],
   "oreille": [
    "photos/oreille-1.jpg",
    "photos/oreille-2.jpg"
+  ],
+  "stock-porte-savon-ovale-motifs-graphiques-gres-jaune-brun": [
+   "photos/stock-porte-savon-ovale-motifs-graphiques-gres-jaune-brun-1.jpg"
+  ],
+  "stock-porte-encens-marron": [
+   "photos/stock-porte-encens-marron-1.jpg"
+  ],
+  "stock-assiette-unie-20-terre-brune": [
+   "photos/stock-assiette-unie-20-terre-brune-1.jpg",
+   "photos/stock-assiette-unie-20-terre-brune-2.jpg"
+  ],
+  "stock-porte-savon-ovale-a-carreaux-carreaux-bleus": [
+   "photos/stock-porte-savon-ovale-a-carreaux-carreaux-bleus-1.jpg"
+  ],
+  "stock-coquetier-saliere-bleu-gris": [
+   "photos/stock-coquetier-saliere-bleu-gris-1.jpg"
+  ],
+  "stock-porte-savon-ovale-motifs-graphiques-ocre-blanc-brun": [
+   "photos/stock-porte-savon-ovale-motifs-graphiques-ocre-blanc-brun-1.jpg"
+  ],
+  "stock-porte-encens-bleu-gris": [
+   "photos/stock-porte-encens-bleu-gris-1.jpg"
+  ],
+  "stock-porte-encens-terre-ocre": [
+   "photos/stock-porte-encens-terre-ocre-1.jpg"
+  ],
+  "stock-plat-motifs-graphiques-gres-rose-brun": [
+   "photos/stock-plat-motifs-graphiques-gres-rose-brun-1.jpg"
+  ],
+  "stock-assiette-a-pois-20-noir-a-pois": [
+   "photos/stock-assiette-a-pois-20-noir-a-pois-1.jpg"
+  ],
+  "stock-porte-savon-ovale-motifs-graphiques": [
+   "photos/stock-porte-savon-ovale-motifs-graphiques-1.jpg"
+  ],
+  "stock-assiette-a-pois-20-ocre-a-pois": [
+   "photos/stock-assiette-a-pois-20-ocre-a-pois-1.jpg"
+  ],
+  "stock-coquetier-saliere-en-terre-melee-ocre": [
+   "photos/stock-coquetier-saliere-en-terre-melee-ocre-1.jpg"
   ],
   "rond-de-serviette": [
    "photos/rond-de-serviette-1.jpg",
@@ -70,13 +120,25 @@
   "saliere": [
    "photos/saliere-1.jpg"
   ],
+  "porte-savon-oval-a-carreaux": [
+   "photos/porte-savon-oval-a-carreaux-1.jpg",
+   "photos/porte-savon-oval-a-carreaux-2.jpg",
+   "photos/porte-savon-oval-a-carreaux-3.jpg"
+  ],
   "porte-savon-rond": [
    "photos/porte-savon-rond-1.jpg",
    "photos/porte-savon-rond-2.jpg",
-   "photos/porte-savon-rond-3.jpg"
+   "photos/porte-savon-rond-3.jpg",
+   "photos/porte-savon-rond-4.jpg"
+  ],
+  "porte-savon-rond-a-carreaux": [
+   "photos/porte-savon-rond-a-carreaux-1.jpg",
+   "photos/porte-savon-rond-a-carreaux-2.jpg"
   ],
   "porte-savon-motifs-graphiques": [
-   "photos/porte-savon-motifs-graphiques-1.jpg"
+   "photos/porte-savon-motifs-graphiques-1.jpg",
+   "photos/porte-savon-motifs-graphiques-2.jpg",
+   "photos/porte-savon-motifs-graphiques-3.jpg"
   ],
   "couverts-a-salade": [
    "photos/couverts-a-salade-1.jpg"
@@ -99,11 +161,15 @@
   "vase-ikebana": [
    "photos/vase-ikebana-1.jpg",
    "photos/vase-ikebana-2.jpg",
-   "photos/vase-ikebana-3.jpg"
+   "photos/vase-ikebana-3.jpg",
+   "photos/vase-ikebana-4.jpg",
+   "photos/vase-ikebana-5.jpg",
+   "photos/vase-ikebana-6.jpg"
   ],
   "vase-zoe": [
    "photos/vase-zoe-1.jpg",
-   "photos/vase-zoe-2.jpg"
+   "photos/vase-zoe-2.jpg",
+   "photos/vase-zoe-3.jpg"
   ],
   "vase-isabelle": [
    "photos/vase-isabelle-1.jpg"
@@ -122,6 +188,10 @@
   ],
   "plat-motifs-graphiques": [
    "photos/plat-motifs-graphiques-1.jpg"
+  ],
+  "plat-a-carreaux": [
+   "photos/plat-a-carreaux-1.jpg",
+   "photos/plat-a-carreaux-2.jpg"
   ],
   "bougeoir-mural-brut": [
    "photos/bougeoir-mural-brut-1.jpg",
@@ -155,11 +225,14 @@
  "collections": {
   "pois": [
    "photos/coll-pois-1.jpg",
-   "photos/coll-pois-2.jpg"
+   "photos/coll-pois-2.jpg",
+   "photos/coll-pois-3.jpg",
+   "photos/coll-pois-4.jpg"
   ],
   "terre-melees": [
    "photos/coll-terre-melees-1.jpg",
-   "photos/coll-terre-melees-2.jpg"
+   "photos/coll-terre-melees-2.jpg",
+   "photos/coll-terre-melees-3.jpg"
   ],
   "carreaux": [
    "photos/coll-carreaux-1.jpg"
