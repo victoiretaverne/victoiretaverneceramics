@@ -253,6 +253,7 @@ def construire():
                 v = prop(p, nomp)
                 if v not in (None, ""):
                     d[cle] = v
+            d["cree"] = (p.get("created_time") or "")[:10]  # date de création dans Notion
             if "Nouveauté" in p["properties"] and prop(p, "Nouveauté"):
                 d["nouveau"] = (p.get("created_time") or "")[:10] or True  # date de création, pour trier les nouveautés
             pieces.append(d)
