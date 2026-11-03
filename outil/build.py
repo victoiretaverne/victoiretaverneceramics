@@ -253,6 +253,8 @@ def construire():
                 v = prop(p, nomp)
                 if v not in (None, ""):
                     d[cle] = v
+            if "Nouveauté" in p["properties"] and prop(p, "Nouveauté"):
+                d["nouveau"] = (p.get("created_time") or "")[:10] or True  # date de création, pour trier les nouveautés
             pieces.append(d)
         pieces.sort(key=lambda d: (d.get("ordre") is None, d.get("ordre") or 0, d["nom"]))
         bloc = "const NOTION_PIECES = [\n" + ",\n".join("  " + js(d) for d in pieces)
