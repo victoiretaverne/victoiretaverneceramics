@@ -23,6 +23,7 @@ DS_PIECES = "13c40088-7a5d-44b0-89c4-220c341d7849"
 DS_COLLECTIONS = "f01af7fc-c98d-488c-bf6b-b3021c5cd7ba"
 DS_COULEURS = "11998360-3be7-4cee-991e-5c975c80a625"
 DS_FAMILLES = "b640798b-97a3-4ea6-8d4d-8f0e91db59a0"
+DS_COMMANDES = "d361014f-f5d7-40c5-82c6-19574f7ba9bc"
 PAGE_TEXTES = "3f7943906724811ca36ad0c7d3561e2b"
 NOTION_VERSION = "2025-09-03"
 
@@ -120,6 +121,8 @@ def prop(p, nom):
         return v["number"]
     if t == "select":
         return v["select"]["name"] if v["select"] else None
+    if t == "status":
+        return v["status"]["name"] if v["status"] else None
     if t == "multi_select":
         return [o["name"] for o in v["multi_select"]]
     if t == "relation":
@@ -230,7 +233,7 @@ def construire():
             ids = list(dict.fromkeys(ids))
             return sorted(ids, key=lambda i: info_coul[i])
 
-        pieces, maj_photos = [], []
+        pieces, maj_photos, id_piece = [], [], {}
         for p in toutes_les_lignes(DS_PIECES):
             pid = p["id"].replace("-", "")
             nom = prop(p, "Nom") or ""
@@ -257,6 +260,38 @@ def construire():
             if "Nouveauté" in p["properties"] and prop(p, "Nouveauté"):
                 d["nouveau"] = (p.get("created_time") or "")[:10] or True  # date de création, pour trier les nouveautés
             pieces.append(d)
+            id_piece[pid] = d
+        # ---------- Pièces en stock (base Commandes : « Sur le site » coché, sans cliente, fabrication « Prête ») ----------
+        # Les lignes identiques (même pièce, même couleur, même prix) sont regroupées avec leur quantité.
+        mere_de = {p_id: d["id"] for p_id, d in id_piece.items()}
+        stock = {}
+        try:
+            lignes_cmd = toutes_les_lignes(DS_COMMANDES)
+        except Exception as e:
+            print("Stock ignoré :", e); lignes_cmd = []
+        for c in lignes_cmd:
+            if not prop(c, "Sur le site") or (prop(c, "Cliente") or "").strip() or prop(c, "Fabrication") != "Prête":
+                continue
+            produit = prop(c, "Produit") or ""
+            if not produit:
+                continue
+            couleur = prop(c, "Couleur / finition") or ""
+            nom = f"{produit} - {couleur}" if couleur else produit
+            sid = "stock-" + slug(nom)
+            meres = [mere_de[m] for m in (prop(c, "Pièce du catalogue") or []) if m in mere_de]
+            prix = prop(c, "Prix unitaire")
+            if sid in stock:
+                stock[sid]["qte"] += int(prop(c, "Qté") or 1)
+                continue
+            k = photos_de(photos, sid)
+            if k and k != sid:
+                photos["pieces"][sid] = photos["pieces"][k]
+            stock[sid] = {"id": sid, "nom": produit, "couleur": couleur, "prix": prix,
+                          "qte": int(prop(c, "Qté") or 1), "mere": meres[0] if meres else None}
+        bloc = "const NOTION_STOCK = [\n" + ",\n".join("  " + js(d) for d in stock.values())
+        if "const NOTION_STOCK = [" in html:
+            html = remplacer_bloc(html, "const NOTION_STOCK = [", "\n];", bloc)
+
         pieces.sort(key=lambda d: (d.get("ordre") is None, d.get("ordre") or 0, d["nom"]))
         bloc = "const NOTION_PIECES = [\n" + ",\n".join("  " + js(d) for d in pieces)
         html = remplacer_bloc(html, "const NOTION_PIECES = [", "\n];", bloc)
