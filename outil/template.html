@@ -779,6 +779,25 @@ NOTION_STOCK.forEach(x => {
     base:x.remise && x.prix ? x.prix : null, defaut:x.defaut || ""
   });
 });
+/* Liste « En stock » mélangée : on alterne les familles de pièces pour éviter d'aligner des pièces similaires
+   (pièces avec photo d'abord). Ordre fixe, pour que la page ne change pas à chaque visite. */
+{
+  const brut = PIECES.filter(p => p.stock), autres = PIECES.filter(p => !p.stock);
+  const melanger = liste => {
+    const groupes = new Map();
+    liste.forEach(p => { const k = String(p.produit || "").split(" ")[0].toLowerCase();  /* famille : assiette, porte-savon, porte-encens… */ if (!groupes.has(k)) groupes.set(k, []); groupes.get(k).push(p); });
+    const g = [...groupes.values()].sort((a, b) => b.length - a.length), out = [];
+    let dernier = null;
+    while (out.length < liste.length) {
+      const dispo = g.filter(x => x.length).sort((a, b) => b.length - a.length);
+      const pris = (dispo.find(x => x !== dernier) || dispo[0]);
+      out.push(pris.shift()); dernier = pris;
+    }
+    return out;
+  };
+  const melange = [...melanger(brut.filter(p => p.photos.length)), ...melanger(brut.filter(p => !p.photos.length))];
+  PIECES.length = 0; PIECES.push(...autres, ...melange);
+}
 const STOCK = PIECES.filter(p => p.stock);
 const COLLECTIONS = NOTION_COLLECTIONS.slice().sort(tri).map(c => ({
   ...c, photos:PHOTOS.collections[c.id] || [], pieces:PIECES.filter(p => ((NOTION_PIECES.find(n => n.id === p.id) || {}).colls || []).includes(c.id)).map(p => p.id)
