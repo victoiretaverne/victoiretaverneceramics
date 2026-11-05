@@ -343,6 +343,7 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .carte:hover .ph{opacity:.85}
 .carte-ligne{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .carte-nom{font-size:.85rem;margin:0;min-width:0}
+.nom-coul{font-size:.82em;font-weight:300;color:var(--doux)}
 .carte-prix{font-size:.78rem;margin:0;color:var(--doux);white-space:nowrap;flex:none;text-align:right}
 .carte-prix b{color:var(--doux);font-weight:300}
 
@@ -827,6 +828,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const prixSolde = (p, pct = true) => p.base ? `<s class="panier-barre">${euros(p.base)}</s> <b>${euros(prixMin(p))}</b>${pct ? ` <span class="solde">−${Math.round((1 - prixMin(p) / p.base) * 100)} %</span>` : ""}` : null;  /* vignettes : sans le pourcentage */
 /* Étiquette « −30 % » dans le coin de la photo principale d'une pièce soldée */
 const badgeSolde = p => p.base ? `<span class="badge-photo">−${Math.round((1 - prixMin(p) / p.base) * 100)} %</span>` : "";
+/* Nom sur les vignettes : pour une pièce en stock, la couleur en plus petit et plus léger (comme sur la fiche) */
+const nomCarte = p => p.stock && p.couleur ? `${esc(p.produit)} <span class="nom-coul">—&nbsp;${esc(p.couleur)}</span>` : esc(p.nom);
 const euros = n => n == null || isNaN(n) ? "Prix sur demande" : (Number.isInteger(n) ? n : n.toFixed(2).replace(".", ",")) + " €";
 /* Libellé d'un format en HTML : la taille en italique, le reste en romain.
    ex. « Lot de 1 · <em>20 cm environ</em> · 25 € » */
@@ -914,7 +917,7 @@ function carte(p){
       <div class="carte-points" aria-hidden="true">${p.photos.map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</div>
     </div>` : "";
   return `<div class="carte-box"><a class="carte" href="#p-${p.id}">${media}
-    <div class="carte-ligne"><p class="carte-nom caps">${esc(p.nom)}</p><p class="carte-prix">${prix}</p></div></a>${nav}${boutonFav(p, "coin")}</div>`;
+    <div class="carte-ligne"><p class="carte-nom caps">${nomCarte(p)}</p><p class="carte-prix">${prix}</p></div></a>${nav}${boutonFav(p, "coin")}</div>`;
 }
 
 function menu(actif){
@@ -1017,7 +1020,7 @@ function ligne(p){
   const prix = prixSolde(p, false) || (nbOptions(p) > 1 ? `<span class="apd">dès</span> <b>${euros(prixMin(p))}</b>` : `<b>${euros(prixMin(p))}</b>`);
   return `<a class="ligne" href="#p-${p.id}">
     <div class="trio">${[0,1,2].map(k => visuel(p.photos[k], hash(p) + k, "photo " + (k + 1))).join("")}</div>
-    <div class="carte-ligne"><p class="carte-nom caps">${esc(p.nom)}</p><p class="carte-prix">${prix}</p></div></a>`;
+    <div class="carte-ligne"><p class="carte-nom caps">${nomCarte(p)}</p><p class="carte-prix">${prix}</p></div></a>`;
 }
 
 function collectionsPage(){
