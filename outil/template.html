@@ -1233,7 +1233,9 @@ function fiche(id){
   };
   const prixTete = prixTeteHtml();
   const delai = p.delai ? `Comptez ${p.delai} de fabrication une fois votre commande validée.` : SITE.delais;
-  const voisins = PIECES.filter(x => x.id !== p.id && x.cats.some(c => p.cats.includes(c))).slice(0, 4);
+  /* « Vous aimerez aussi » : d'abord les autres versions du même modèle, puis des pièces de la même catégorie */
+  const memeModele = p.modele && !p.stock ? PIECES.filter(x => x.id !== p.id && !x.stock && x.modele === p.modele) : [];
+  const voisins = [...memeModele, ...PIECES.filter(x => x.id !== p.id && !memeModele.includes(x) && x.cats.some(c => p.cats.includes(c)))].slice(0, 4);
 
   $("#page").innerHTML = `
   <div class="wrap" style="padding-top:22px"><div class="fil"><a href="#accueil">Accueil</a> / <a href="#${p.cats[0]}">${esc(catNom(p.cats[0]))}</a> / ${esc(p.nom)}</div></div>
@@ -1250,7 +1252,7 @@ function fiche(id){
       </div>
       ${p.stock ? `<p class="stock-tag caps">En stock<span class="sep">•</span>disponibilité immédiate${p.qte > 1 ? `<span class="sep">•</span>${p.qte} pièces` : ""}</p>` : ""}
       <p class="desc">${md(p.desc).replace(/\n/g, "<br>")}</p>
-      ${p.stock ? stockInfosHtml(p) : declinaisonsHtml(p)}
+      ${p.stock ? stockInfosHtml(p) : ""}
       ${couleursHtml}
       ${optionsHtml}
       ${p.compo ? `<p class="compo"><span class="caps">Matière</span><span>${esc(p.compo.replace(" - ", " · "))}</span></p>` : ""}
@@ -1268,7 +1270,7 @@ function fiche(id){
       <div class="aussi"><span class="detail">Dans :</span>${p.cats.map(c => `<a href="#${c}">${esc(catNom(c))}</a>`).join("")}${p.sous ? (() => { for (const c of CATEGORIES.filter(c => p.cats.includes(c.id) && c.sous)) { const s = c.sous.find(x => x.id === p.sous); if (s) return `<a href="#${c.id}-${s.id}">${esc(s.nom)}</a>`; } return ""; })() : ""}${COLLECTIONS.filter(c => c.pieces.includes(p.id)).map(c => `<a href="#c-${c.id}">${esc(c.nom.replace(/^Collection\s*/i, ""))}</a>`).join("")}</div>
     </div>
   </article>
-  ${voisins.length ? `<section class="wrap"><div class="section-tete"><h2 class="caps">Dans la même catégorie</h2></div><div class="grille">${voisins.map(carte).join("")}</div></section>` : ""}`;
+  ${voisins.length ? `<section class="wrap"><div class="section-tete"><h2 class="caps">Vous aimerez aussi</h2></div><div class="grille">${voisins.map(carte).join("")}</div></section>` : ""}`;
 
   const sel = $("#format"), selFin = $("#finition");
   if (sel) {
