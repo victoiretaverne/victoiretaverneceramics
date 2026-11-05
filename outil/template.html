@@ -762,7 +762,7 @@ const PIECES = NOTION_PIECES.slice().sort(tri).map(p => ({
   id:p.id, nom:p.nom, desc:p.desc, compo:p.compo, delai:p.delai, photos:photosDe(p.id),
   cats:p.cats.map(c => slugCat[c]).filter(Boolean),
   sous:p.sous ? slugSous[p.sous] : undefined,
-  modele:p.modele, nouveau:p.nouveau, cree:p.cree,
+  modele:p.modele, nouveau:p.nouveau, cree:p.cree, horsNouv:p.horsNouv,
   f:lireFormats(p.formats),
   coul:(p.coul || []).map(c => NOTION_COULEURS.find(x => x.id === c)).filter(Boolean)
 })).sort((x, y) => (x.photos.length ? 0 : 1) - (y.photos.length ? 0 : 1));  /* pièces « photo à venir » en fin de liste */
@@ -897,7 +897,7 @@ function selectionAccueil(){
 const nouveautes = () => {
   const date = p => String(p.nouveau === true ? p.cree : (p.nouveau || p.cree || ""));
   const cochees = PIECES.filter(p => p.nouveau).sort((a, b) => date(b).localeCompare(date(a)));
-  const autres = PIECES.filter(p => !p.stock && !p.nouveau && p.photos.length).sort((a, b) => date(b).localeCompare(date(a)));
+  const autres = PIECES.filter(p => !p.stock && !p.nouveau && !p.horsNouv && p.photos.length).sort((a, b) => date(b).localeCompare(date(a)));
   const l = cochees.concat(autres).slice(0, 20);
   return l.filter(p => p.photos.length).concat(l.filter(p => !p.photos.length));
 };

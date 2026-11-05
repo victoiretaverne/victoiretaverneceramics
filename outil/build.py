@@ -259,6 +259,9 @@ def construire():
             d["cree"] = (p.get("created_time") or "")[:10]  # date de création dans Notion
             if "Nouveauté" in p["properties"] and prop(p, "Nouveauté"):
                 d["nouveau"] = (p.get("created_time") or "")[:10] or True  # date de création, pour trier les nouveautés
+            if "Hors nouveautés" in p["properties"] and prop(p, "Hors nouveautés"):
+                d["horsNouv"] = True  # jamais dans les Nouveautés
+                d.pop("nouveau", None)
             pieces.append(d)
             id_piece[pid] = d
         # ---------- Pièces en stock (base Commandes : « Sur le site » coché, sans cliente, fabrication « Prête ») ----------
