@@ -1171,7 +1171,7 @@ function declinaisonsHtml(p){
 function stockInfosHtml(p){
   const autres = STOCK.filter(x => x.id !== p.id && x.mere && x.mere === p.mere);
   return `<div class="stock-dispo">
-      ${p.defaut ? `<p class="stock-defaut"><span class="caps">Petit défaut</span><span class="detail">${esc(p.defaut)}${p.base ? ` · vendue −${Math.round((1 - prixMin(p) / p.base) * 100)} %` : ""}</span></p>` : ""}
+      ${p.defaut ? `<p class="caps choix-titre">Défaut<span class="coul-nom">${esc(p.defaut)}</span></p>` : ""}
     </div>
     ${autres.length ? `<div class="decli"><p class="caps choix-titre">Aussi en stock</p><div class="decli-liste">${autres.map(x =>
       `<a href="#p-${x.id}">${visuel(x.photos[0], hash(x), "")}<small>${esc(x.couleur || x.produit)}</small></a>`).join("")}</div></div>` : ""}`;
