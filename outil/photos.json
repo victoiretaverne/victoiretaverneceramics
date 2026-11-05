@@ -48,6 +48,11 @@
    "photos/assiette-a-pois-1.jpg",
    "photos/assiette-a-pois-2.jpg"
   ],
+  "assiette-motifs-graphiques": [
+   "photos/assiette-motifs-graphiques-1.jpg",
+   "photos/assiette-motifs-graphiques-2.jpg",
+   "photos/assiette-motifs-graphiques-3.jpg"
+  ],
   "assiette-en-terre-melee": [
    "photos/assiette-en-terre-melee-1.jpg",
    "photos/assiette-en-terre-melee-2.jpg",
@@ -113,6 +118,18 @@
    "photos/rond-de-serviette-1.jpg",
    "photos/rond-de-serviette-2.jpg",
    "photos/rond-de-serviette-3.jpg"
+  ],
+  "coupelle-tripode-a-pois": [
+   "photos/coupelle-tripode-a-pois-1.jpg",
+   "photos/coupelle-tripode-a-pois-2.jpg",
+   "photos/coupelle-tripode-a-pois-3.jpg"
+  ],
+  "saliere-tripode-cuillere-a-pois": [
+   "photos/saliere-tripode-cuillere-a-pois-1.jpg",
+   "photos/saliere-tripode-cuillere-a-pois-2.jpg",
+   "photos/saliere-tripode-cuillere-a-pois-3.jpg",
+   "photos/saliere-tripode-cuillere-a-pois-4.jpg",
+   "photos/saliere-tripode-cuillere-a-pois-5.jpg"
   ],
   "etoiles-de-noel": [
    "photos/etoiles-de-noel-1.jpg"
