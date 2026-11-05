@@ -436,8 +436,8 @@ em.taille{font-family:var(--police-italique);font-style:italic;font-weight:400;l
 .stock-defaut{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;padding:10px 12px;border:0.5px dashed var(--encre)}
 .stock-defaut .caps{font-size:.72rem}
 .solde{font-family:var(--police-prix);font-size:.8em;letter-spacing:.04em;white-space:nowrap}
-.stock-mere{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center;text-decoration:none;border-top:var(--filet);border-bottom:var(--filet);padding:14px 0}
-.stock-mere .ph{aspect-ratio:1}
+.stock-mere{display:grid;grid-template-columns:1fr 76px;gap:14px;align-items:center;text-decoration:none;border-top:var(--filet);border-bottom:var(--filet);padding:14px 0}
+.stock-mere .ph{aspect-ratio:1;order:2}
 .stock-mere .ph .logo{width:40%}.stock-mere .ph span{display:none}
 .stock-mere > span{display:flex;flex-direction:column;gap:4px}
 .stock-mere .caps{font-size:.72rem}
