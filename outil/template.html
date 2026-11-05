@@ -1178,7 +1178,7 @@ function stockInfosHtml(p){
 function stockAutresHtml(p){
   const autres = STOCK.filter(x => x.id !== p.id && x.mere && x.mere === p.mere);
   return `${autres.length ? `<div class="decli"><p class="caps choix-titre">Aussi en stock</p><div class="decli-liste">${autres.map(x =>
-      `<a href="#p-${x.id}">${visuel(x.photos[0], hash(x), "")}<small>${esc(x.couleur || x.produit)}</small></a>`).join("")}</div></div>` : ""}`;
+      `<a href="#p-${x.id}">${visuel(x.photos[0], hash(x), "")}<small>${esc(x.couleur && x.couleur !== p.couleur ? x.couleur : x.produit)}</small></a>`).join("")}</div></div>` : ""}`;
 }
 function stockMereHtml(p){
   const m = PIECES.find(x => x.id === p.mere);
