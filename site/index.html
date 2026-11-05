@@ -683,7 +683,7 @@ const NOTION_PIECES = [
   {"id": "couverts-a-salade", "nom": "Couverts à salade", "cats": ["Art de la table"], "colls": [], "coul": ["gres-naturel"], "desc": "Couverts à salade en céramique.", "formats": "12 cm environ | 35", "compo": "Céramique - 100% Grès", "cree": "2026-10-13"},
   {"id": "porte-oeufs", "nom": "Porte-œufs", "cats": ["Art de la table"], "colls": [], "coul": ["gres-naturel", "bleu-gris", "baby-blue", "baby-pink", "coquelicot", "orage", "bordeaux", "jaune", "noir-brillant", "cuivre", "blanc-brillant"], "desc": "Porte-œuf en céramique modelé à main. Chaque pièce est unique.", "formats": "20 x 11 cm environ | 80", "sous": "Coquetiers", "compo": "Céramique - 100% Grès", "cree": "2026-10-13"},
   {"id": "rond-de-serviette-a-carreaux", "nom": "Rond de serviette à carreaux", "cats": ["Art de la table"], "colls": ["carreaux"], "coul": ["carreaux-bleus", "carreaux-noirs"], "desc": "Rond de serviette en céramique bords octogonaux. Quadrillage réalisé au crayon à main levée. Chaque pièce est unique.", "formats": "Lot de 1 | 8 x 5 cm | 14\nLot de 4 | 8 x 5 cm | 44", "modele": "Rond de serviette", "compo": "Céramique - 100% Grès", "cree": "2026-10-20"},
-  {"id": "saliere-tripode-a-carreaux-cuillere", "nom": "Salière tripode à carreaux & cuillère", "cats": ["Art de la table"], "colls": ["carreaux"], "coul": ["carreaux-bleus", "carreaux-noirs"], "desc": "Petite salière à carreaux sur trois pieds, livrée avec sa cuillère. Quadrillage réalisé au crayon à main levée. Chaque pièce est unique.", "formats": "Salière + cuillère | Ø8 cm | 25", "modele": "Salière tripode & cuillère", "compo": "Céramique - 100% Grès", "cree": "2026-10-28", "nouveau": "2026-10-28"},
+  {"id": "saliere-tripode-a-carreaux-cuillere", "nom": "Salière tripode à carreaux & cuillère", "cats": ["Art de la table"], "colls": ["carreaux"], "coul": ["carreaux-bleus", "carreaux-noirs"], "desc": "Petite salière à carreaux sur trois pieds, livrée avec sa cuillère. Quadrillage réalisé au crayon à main levée. Chaque pièce est unique.", "formats": "Salière + cuillère | Ø8 cm | 25", "modele": "Salière tripode & cuillère", "compo": "Céramique - 100% Grès", "cree": "2026-10-28", "horsNouv": true},
   {"id": "saliere-tripode-a-pois-cuillere", "nom": "Salière tripode à pois & cuillère", "cats": ["Art de la table"], "colls": ["pois"], "coul": ["blanc-a-pois", "brun-a-pois", "ocre-a-pois", "noir-a-pois"], "desc": "Petite salière à pois sur trois pieds, livrée avec sa cuillère.", "formats": "Salière + cuillère | Ø8 cm | 25", "modele": "Salière tripode & cuillère", "compo": "Céramique - 100% Grès", "cree": "2026-10-28", "nouveau": "2026-10-28"},
   {"id": "saliere-a-carreaux", "nom": "Salière à carreaux", "cats": ["Art de la table"], "colls": ["carreaux"], "coul": ["carreaux-bleus", "carreaux-noirs"], "desc": "Petite salière sur pied en céramique. Quadrillage réalisé au crayon à main levée. Chaque pièce est unique.", "formats": "Ø7 cm | 14", "modele": "Salière", "compo": "Céramique - 100% Grès", "cree": "2026-10-20"},
   {"id": "vase-zoe", "nom": "Vase Zoé", "cats": ["Vases"], "colls": [], "coul": ["gres-naturel", "bleu-gris", "baby-blue", "baby-pink", "coquelicot", "orage", "jaune", "noir-brillant", "cuivre", "blanc-brillant", "terre-brune", "terre-rousse", "terre-noire"], "desc": "Vase en céramique. Disponible en plusieurs couleurs.", "formats": "Small | 20 cm de haut · *modèle sur la photo* | 90\nMedium | 25 cm de haut | 95\nLarge | 30 cm de haut | 130", "compo": "Céramique - 100% Grès", "cree": "2026-10-19", "nouveau": "2026-10-19"},
@@ -762,7 +762,7 @@ const PIECES = NOTION_PIECES.slice().sort(tri).map(p => ({
   id:p.id, nom:p.nom, desc:p.desc, compo:p.compo, delai:p.delai, photos:photosDe(p.id),
   cats:p.cats.map(c => slugCat[c]).filter(Boolean),
   sous:p.sous ? slugSous[p.sous] : undefined,
-  modele:p.modele, nouveau:p.nouveau, cree:p.cree,
+  modele:p.modele, nouveau:p.nouveau, cree:p.cree, horsNouv:p.horsNouv,
   f:lireFormats(p.formats),
   coul:(p.coul || []).map(c => NOTION_COULEURS.find(x => x.id === c)).filter(Boolean)
 })).sort((x, y) => (x.photos.length ? 0 : 1) - (y.photos.length ? 0 : 1));  /* pièces « photo à venir » en fin de liste */
@@ -897,7 +897,7 @@ function selectionAccueil(){
 const nouveautes = () => {
   const date = p => String(p.nouveau === true ? p.cree : (p.nouveau || p.cree || ""));
   const cochees = PIECES.filter(p => p.nouveau).sort((a, b) => date(b).localeCompare(date(a)));
-  const autres = PIECES.filter(p => !p.stock && !p.nouveau && p.photos.length).sort((a, b) => date(b).localeCompare(date(a)));
+  const autres = PIECES.filter(p => !p.stock && !p.nouveau && !p.horsNouv && p.photos.length).sort((a, b) => date(b).localeCompare(date(a)));
   const l = cochees.concat(autres).slice(0, 20);
   return l.filter(p => p.photos.length).concat(l.filter(p => !p.photos.length));
 };
