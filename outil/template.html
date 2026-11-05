@@ -384,6 +384,7 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .infos h1{font-size:clamp(1.5rem,2.6vw,2rem);margin:0;line-height:1.15}
 .fiche-tete{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
 .fiche-tete h1{min-width:0}
+.stock-tag{display:table;margin:12px 0 0;padding:5px 10px 4px;background:#fff;color:var(--encre);font-size:.72rem;letter-spacing:.1em}
 .h1-coul{font-size:.72em;font-weight:300;color:var(--doux)}
 .prix-tete{font-size:1.05rem;margin:0;white-space:nowrap;flex:none}
 .prix-tete .solde{display:table;margin:8px 0 0 auto;padding:3px 7px 2px;background:#fff;color:var(--encre);font-size:.72rem;letter-spacing:.06em}
@@ -1170,7 +1171,6 @@ function stockInfosHtml(p){
   const autres = STOCK.filter(x => x.id !== p.id && x.mere && x.mere === p.mere);
   return `<div class="stock-dispo">
       ${p.couleur ? `<p class="caps choix-titre">Couleur<span class="coul-nom">${esc(p.couleur)}</span></p>` : ""}
-      <p class="stock-badge"><span class="caps">Disponible immédiatement</span><span class="detail">${p.qte > 1 ? `${p.qte} pièces en stock · ` : "Pièce unique · "}envoi ou remise en main propre</span></p>
       ${p.defaut ? `<p class="stock-defaut"><span class="caps">Petit défaut</span><span class="detail">${esc(p.defaut)}${p.base ? ` · vendue −${Math.round((1 - prixMin(p) / p.base) * 100)} %` : ""}</span></p>` : ""}
     </div>
     ${autres.length ? `<div class="decli"><p class="caps choix-titre">Aussi en stock</p><div class="decli-liste">${autres.map(x =>
@@ -1245,6 +1245,7 @@ function fiche(id){
         <h1 class="caps">${p.stock && p.couleur ? `${esc(p.produit)} <span class="h1-coul">—&nbsp;${esc(p.couleur)}</span>` : esc(p.nom)}</h1>
         <p class="prix-tete">${prixTete}</p>
       </div>
+      ${p.stock ? `<p class="stock-tag caps">En stock · disponibilité immédiate${p.qte > 1 ? ` · ${p.qte} pièces` : ""}</p>` : ""}
       <p class="desc">${md(p.desc).replace(/\n/g, "<br>")}</p>
       ${p.stock ? stockInfosHtml(p) : declinaisonsHtml(p)}
       ${couleursHtml}
