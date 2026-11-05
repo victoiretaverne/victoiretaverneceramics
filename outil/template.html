@@ -427,6 +427,9 @@ em.taille{font-family:var(--police-italique);font-style:italic;font-weight:400;l
 .stock-dispo .choix-titre{margin:0}
 .stock-badge{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;padding:10px 12px;border:0.5px solid var(--encre)}
 .stock-badge .caps{font-size:.72rem}
+.stock-defaut{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;padding:10px 12px;border:0.5px dashed var(--encre)}
+.stock-defaut .caps{font-size:.72rem}
+.solde{font-family:var(--police-prix);font-size:.8em;letter-spacing:.04em;white-space:nowrap}
 .stock-mere{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center;text-decoration:none;border-top:var(--filet);border-bottom:var(--filet);padding:14px 0}
 .stock-mere .ph{aspect-ratio:1}
 .stock-mere .ph .logo{width:40%}.stock-mere .ph span{display:none}
@@ -772,7 +775,8 @@ NOTION_STOCK.forEach(x => {
   PIECES.push({
     id:x.id, nom:x.nom + (x.couleur ? " — " + x.couleur : ""), produit:x.nom, couleur:x.couleur, qte:x.qte || 1,
     desc:mere ? String(mere.desc || "").split(/(?<=[.!?])\s+/).filter(t => !/couleur|coloris/i.test(t)).join(" ") : "", compo:mere ? mere.compo : undefined, photos:PHOTOS.pieces[x.id] || [],
-    cats:["stock"], f:lireFormats(`Pièce unique | | ${x.prix ?? ""}`), coul:[], stock:true, mere:mere ? mere.id : null
+    cats:["stock"], f:lireFormats(`Pièce unique | | ${x.prix != null && x.remise ? Math.round((x.prix - x.remise) * 100) / 100 : (x.prix ?? "")}`), coul:[], stock:true, mere:mere ? mere.id : null,
+    base:x.remise && x.prix ? x.prix : null, defaut:x.defaut || ""
   });
 });
 const STOCK = PIECES.filter(p => p.stock);
@@ -784,6 +788,8 @@ const COLLECTIONS = NOTION_COLLECTIONS.slice().sort(tri).map(c => ({
 const igUrl = "https://ig.me/m/" + SITE.instagram;
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* Prix d'une pièce en stock soldée : prix de base barré, nouveau prix, pourcentage */
+const prixSolde = p => p.base ? `<s class="panier-barre">${euros(p.base)}</s> <b>${euros(prixMin(p))}</b> <span class="solde">−${Math.round((1 - prixMin(p) / p.base) * 100)} %</span>` : null;
 const euros = n => n == null || isNaN(n) ? "Prix sur demande" : (Number.isInteger(n) ? n : n.toFixed(2).replace(".", ",")) + " €";
 /* Libellé d'un format en HTML : la taille en italique, le reste en romain.
    ex. « Lot de 1 · <em>20 cm environ</em> · 25 € » */
@@ -861,7 +867,7 @@ document.addEventListener("scroll", e => {
   if (g) g.hidden = i <= 0; if (d) d.hidden = i >= n - 1;
 }, true);
 function carte(p){
-  const prix = nbOptions(p) > 1 ? `<span class="apd">dès</span> <b>${euros(prixMin(p))}</b>` : `<b>${euros(prixMin(p))}</b>`;
+  const prix = prixSolde(p) || (nbOptions(p) > 1 ? `<span class="apd">dès</span> <b>${euros(prixMin(p))}</b>` : `<b>${euros(prixMin(p))}</b>`);
   /* Plusieurs photos : on peut les faire défiler directement depuis la vignette (flèches au survol, glisser sur mobile) */
   const n = p.photos.length;
   const media = n > 1 ? `<div class="ph-rail" data-rail>${p.photos.map((src, i) => visuel(src, hash(p) + i, "")).join("")}</div>` : visuel(p.photos[0], hash(p), "");
@@ -971,7 +977,7 @@ function carteColl(c, i){
 const trio = (base, labels) => [0,1,2].map(i => tuile(base + i, labels ? labels[i] : "")).join("");
 
 function ligne(p){
-  const prix = nbOptions(p) > 1 ? `<span class="apd">dès</span> <b>${euros(prixMin(p))}</b>` : `<b>${euros(prixMin(p))}</b>`;
+  const prix = prixSolde(p) || (nbOptions(p) > 1 ? `<span class="apd">dès</span> <b>${euros(prixMin(p))}</b>` : `<b>${euros(prixMin(p))}</b>`);
   return `<a class="ligne" href="#p-${p.id}">
     <div class="trio">${[0,1,2].map(k => visuel(p.photos[k], hash(p) + k, "photo " + (k + 1))).join("")}</div>
     <div class="carte-ligne"><p class="carte-nom caps">${esc(p.nom)}</p><p class="carte-prix">${prix}</p></div></a>`;
@@ -1130,6 +1136,7 @@ function stockInfosHtml(p){
   return `<div class="stock-dispo">
       ${p.couleur ? `<p class="caps choix-titre">Couleur<span class="coul-nom">${esc(p.couleur)}</span></p>` : ""}
       <p class="stock-badge"><span class="caps">Disponible immédiatement</span><span class="detail">${p.qte > 1 ? `${p.qte} pièces en stock · ` : "Pièce unique · "}envoi ou remise en main propre</span></p>
+      ${p.defaut ? `<p class="stock-defaut"><span class="caps">Petit défaut</span><span class="detail">${esc(p.defaut)}${p.base ? ` · vendue −${Math.round((1 - prixMin(p) / p.base) * 100)} %` : ""}</span></p>` : ""}
     </div>
     ${autres.length ? `<div class="decli"><p class="caps choix-titre">Aussi en stock</p><div class="decli-liste">${autres.map(x =>
       `<a href="#p-${x.id}">${visuel(x.photos[0], hash(x), "")}<small>${esc(x.couleur || x.produit)}</small></a>`).join("")}</div></div>` : ""}`;
@@ -1182,6 +1189,7 @@ function fiche(id){
       ${pastilles(p, coulInit, "data-coul")}
     </div>` : "";
   const prixTeteHtml = () => {
+    if (p.base) return prixSolde(p);
     const v = L.map(l => l.prix).filter(x => x != null);
     return L.length > 1 ? `<span class="apd">dès</span> <b>${euros(v.length ? prixAvec(Math.min(...v), cSel) : null)}</b>` : `<b>${euros(prixAvec(L[0].prix, cSel))}</b>`;
   };

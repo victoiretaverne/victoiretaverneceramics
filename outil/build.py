@@ -289,8 +289,14 @@ def construire():
             k = photos_de(photos, sid)
             if k and k != sid:
                 photos["pieces"][sid] = photos["pieces"][k]
+            remise = prop(c, "Remise") or 0
             stock[sid] = {"id": sid, "nom": produit, "couleur": couleur, "prix": prix,
                           "qte": int(prop(c, "Qté") or 1), "mere": meres[0] if meres else None}
+            if remise and prix:  # pièce à défaut : prix barré + nouveau prix
+                stock[sid]["remise"] = remise
+            defaut = (prop(c, "Défaut") or "").strip()
+            if defaut:
+                stock[sid]["defaut"] = defaut
         bloc = "const NOTION_STOCK = [\n" + ",\n".join("  " + js(d) for d in stock.values())
         if "const NOTION_STOCK = [" in html:
             html = remplacer_bloc(html, "const NOTION_STOCK = [", "\n];", bloc)
