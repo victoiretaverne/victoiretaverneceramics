@@ -372,6 +372,8 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .vignettes .ph .logo{width:40%}
 .vignettes .ph i{display:none}
 .principale .ph{aspect-ratio:4/5}
+.principale{position:relative}
+.badge-photo{position:absolute;top:14px;left:14px;z-index:2;background:#fff;color:var(--encre);font-family:var(--police-prix);font-size:.78rem;letter-spacing:.06em;padding:4px 9px 3px;pointer-events:none}
 @media (max-width:860px){
   .galerie{grid-template-columns:1fr}
   .vignettes{flex-direction:row;order:2;overflow-x:auto}
@@ -818,6 +820,8 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 /* Prix d'une pièce en stock soldée : prix de base barré, nouveau prix, pourcentage */
 const prixSolde = (p, pct = true) => p.base ? `<s class="panier-barre">${euros(p.base)}</s> <b>${euros(prixMin(p))}</b>${pct ? ` <span class="solde">−${Math.round((1 - prixMin(p) / p.base) * 100)} %</span>` : ""}` : null;  /* vignettes : sans le pourcentage */
+/* Étiquette « −30 % » dans le coin de la photo principale d'une pièce soldée */
+const badgeSolde = p => p.base ? `<span class="badge-photo">−${Math.round((1 - prixMin(p) / p.base) * 100)} %</span>` : "";
 const euros = n => n == null || isNaN(n) ? "Prix sur demande" : (Number.isInteger(n) ? n : n.toFixed(2).replace(".", ",")) + " €";
 /* Libellé d'un format en HTML : la taille en italique, le reste en romain.
    ex. « Lot de 1 · <em>20 cm environ</em> · 25 € » */
@@ -1220,7 +1224,7 @@ function fiche(id){
       ${pastilles(p, coulInit, "data-coul")}
     </div>` : "";
   const prixTeteHtml = () => {
-    if (p.base) return prixSolde(p);
+    if (p.base) return prixSolde(p, false);
     const v = L.map(l => l.prix).filter(x => x != null);
     return L.length > 1 ? `<span class="apd">dès</span> <b>${euros(v.length ? prixAvec(Math.min(...v), cSel) : null)}</b>` : `<b>${euros(prixAvec(L[0].prix, cSel))}</b>`;
   };
@@ -1234,7 +1238,7 @@ function fiche(id){
     <div class="galerie${n < 2 ? " seule" : ""}">
       <div class="vignettes" role="tablist" aria-label="Photos">${photos.map(i =>
         `<button type="button" role="tab" aria-label="Photo ${i + 1}" aria-current="${i === 0}" data-i="${i}">${visuel(p.photos[i], hash(p) + i, "")}</button>`).join("")}</div>
-      <div class="principale" id="principale">${visuel(p.photos[0], hash(p), `photo 1 / ${n}`)}</div>
+      <div class="principale" id="principale">${badgeSolde(p)}${visuel(p.photos[0], hash(p), `photo 1 / ${n}`)}</div>
     </div>
     <div class="infos">
       <div class="fiche-tete">
@@ -1296,7 +1300,7 @@ function fiche(id){
   document.querySelectorAll(".vignettes button").forEach(b => b.addEventListener("click", () => {
     const i = +b.dataset.i;
     document.querySelectorAll(".vignettes button").forEach(x => x.setAttribute("aria-current", x === b));
-    $("#principale").innerHTML = visuel(p.photos[i], hash(p) + i, `photo ${i + 1} / ${n}`);
+    $("#principale").innerHTML = badgeSolde(p) + visuel(p.photos[i], hash(p) + i, `photo ${i + 1} / ${n}`);
   }));
 }
 
