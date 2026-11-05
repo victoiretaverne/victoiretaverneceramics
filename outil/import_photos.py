@@ -1,9 +1,11 @@
 # Importe les photos des dossiers « photos fiches produits » vers photos/ + manifeste photos.json
 import os, re, json, unicodedata, hashlib
 from PIL import Image, ImageOps
-ROOT = "/mnt/user-data/uploads/Documents/WORK/4. CÉRAMIQUE/photos fiches produits"
+ROOT = os.environ.get("PHOTOS_ROOT", "/mnt/user-data/uploads/Documents/WORK/4. CÉRAMIQUE/photos fiches produits")
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site", "photos")
 os.makedirs(OUT, exist_ok=True)
+for _f in os.listdir(OUT):  # repart de zéro : les photos retirées des dossiers disparaissent du site
+    if _f.endswith(".jpg"): os.remove(os.path.join(OUT, _f))
 def slug(s):
     s = s.replace('œ', 'oe').replace('Œ', 'OE')
     s = unicodedata.normalize('NFC', s)
@@ -12,6 +14,9 @@ def slug(s):
 COLL = {"terre-melees": "terre-melees", "les-pois": "pois", "graphics": "graphics", "les-carreaux": "carreaux"}
 CAT = {"art-de-la-table": "table", "vases": "vases", "petits-objets": "objets"}
 man = {"pieces": {}, "collections": {}, "categories": {}, "cover": None}
+_ancien = os.path.join(os.path.dirname(os.path.abspath(__file__)), "photos.json")
+if os.path.exists(_ancien):  # garde les réglages saisis à la main (icône…)
+    man.update({k: v for k, v in json.load(open(_ancien)).items() if k not in man})
 def conv(src, name, w=1600):
     try: im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
     except Exception:  # photo iPhone au format HEIC (même nommée .jpeg)
@@ -38,6 +43,8 @@ for dirpath, dirs, files in os.walk(ROOT):
         if not (re.match(r'^\d+ - ', parts[0]) and len(parts) > 1): continue  # anciens dossiers à la racine ignorés
         piece = parts[1]
         key = slug(piece); bucket, prefix = man["pieces"], ""
+        if parts[0] == "13 - En stock":  # pièces en stock : « Produit - Couleur »
+            key = "stock-" + key
     if not key: print("ignoré :", rel); continue
     lst = bucket.setdefault(key, [])
     for i, f in enumerate(files):

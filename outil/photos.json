@@ -40,6 +40,9 @@
   "assiette-creuse-picasso": [
    "photos/assiette-creuse-picasso-1.jpg"
   ],
+  "assiette-cocteau": [
+   "photos/assiette-cocteau-1.jpg"
+  ],
   "assiettes-a-dessert-petales": [
    "photos/assiettes-a-dessert-petales-1.jpg",
    "photos/assiettes-a-dessert-petales-2.jpg"
@@ -67,22 +70,25 @@
   "porte-encens": [
    "photos/porte-encens-1.jpg",
    "photos/porte-encens-2.jpg",
-   "photos/porte-encens-3.jpg",
-   "photos/porte-encens-4.jpg"
+   "photos/porte-encens-3.jpg"
   ],
   "oreille": [
    "photos/oreille-1.jpg",
    "photos/oreille-2.jpg"
   ],
-  "stock-porte-savon-ovale-motifs-graphiques-gres-jaune-brun": [
-   "photos/stock-porte-savon-ovale-motifs-graphiques-gres-jaune-brun-1.jpg"
-  ],
   "stock-porte-encens-marron": [
-   "photos/stock-porte-encens-marron-1.jpg"
+   "photos/stock-porte-encens-marron-1.jpg",
+   "photos/stock-porte-encens-marron-2.jpg"
+  ],
+  "stock-saliere-tripode-a-pois-cuillere-blanc-a-pois": [
+   "photos/stock-saliere-tripode-a-pois-cuillere-blanc-a-pois-1.jpg"
   ],
   "stock-assiette-unie-20-terre-brune": [
    "photos/stock-assiette-unie-20-terre-brune-1.jpg",
    "photos/stock-assiette-unie-20-terre-brune-2.jpg"
+  ],
+  "stock-porte-savon-rond-baby-pink": [
+   "photos/stock-porte-savon-rond-baby-pink-1.jpg"
   ],
   "stock-porte-savon-ovale-a-carreaux-carreaux-bleus": [
    "photos/stock-porte-savon-ovale-a-carreaux-carreaux-bleus-1.jpg"
@@ -90,8 +96,20 @@
   "stock-coquetier-saliere-bleu-gris": [
    "photos/stock-coquetier-saliere-bleu-gris-1.jpg"
   ],
+  "stock-porte-savon-rond-orage": [
+   "photos/stock-porte-savon-rond-orage-1.jpg"
+  ],
+  "stock-porte-savon-rond-magma": [
+   "photos/stock-porte-savon-rond-magma-1.jpg"
+  ],
   "stock-porte-savon-ovale-motifs-graphiques-ocre-blanc-brun": [
    "photos/stock-porte-savon-ovale-motifs-graphiques-ocre-blanc-brun-1.jpg"
+  ],
+  "stock-porte-savon-ovale-marron-mouchete": [
+   "photos/stock-porte-savon-ovale-marron-mouchete-1.jpg"
+  ],
+  "stock-assiette-motifs-graphiques-12-gres-blanc-terre-noire-engobe-blanc": [
+   "photos/stock-assiette-motifs-graphiques-12-gres-blanc-terre-noire-engobe-blanc-1.jpg"
   ],
   "stock-porte-encens-bleu-gris": [
    "photos/stock-porte-encens-bleu-gris-1.jpg"
@@ -99,20 +117,60 @@
   "stock-porte-encens-terre-ocre": [
    "photos/stock-porte-encens-terre-ocre-1.jpg"
   ],
+  "stock-porte-savon-rond-cuivre": [
+   "photos/stock-porte-savon-rond-cuivre-1.jpg"
+  ],
+  "stock-coupelle-tripode-a-carreaux-10-carreaux-bleus": [
+   "photos/stock-coupelle-tripode-a-carreaux-10-carreaux-bleus-1.jpg"
+  ],
+  "stock-porte-savon-ovale-motifs-graphiques-gres-blanc-terre-ocre-engobe-noir": [
+   "photos/stock-porte-savon-ovale-motifs-graphiques-gres-blanc-terre-ocre-engobe-noir-1.jpg"
+  ],
   "stock-plat-motifs-graphiques-gres-rose-brun": [
    "photos/stock-plat-motifs-graphiques-gres-rose-brun-1.jpg"
   ],
-  "stock-assiette-a-pois-20-noir-a-pois": [
-   "photos/stock-assiette-a-pois-20-noir-a-pois-1.jpg"
+  "stock-porte-savon-ovale-motifs-graphiques-gres-jaune-brun": [
+   "photos/stock-porte-savon-ovale-motifs-graphiques-gres-jaune-brun-1.jpg"
   ],
-  "stock-porte-savon-ovale-motifs-graphiques": [
-   "photos/stock-porte-savon-ovale-motifs-graphiques-1.jpg"
+  "stock-assiette-a-pois-12-blanc-a-pois": [
+   "photos/stock-assiette-a-pois-12-blanc-a-pois-1.jpg"
+  ],
+  "stock-porte-savon-ovale-cuivre": [
+   "photos/stock-porte-savon-ovale-cuivre-1.jpg"
+  ],
+  "stock-coupelle-tripode-a-pois-10-marron-a-pois": [
+   "photos/stock-coupelle-tripode-a-pois-10-marron-a-pois-1.jpg"
+  ],
+  "stock-assiette-a-pois-20-noir-a-pois": [
+   "photos/stock-assiette-a-pois-20-noir-a-pois-1.jpg",
+   "photos/stock-assiette-a-pois-20-noir-a-pois-2.jpg"
+  ],
+  "stock-saliere-tripode-a-pois-cuillere-ocre-a-pois": [
+   "photos/stock-saliere-tripode-a-pois-cuillere-ocre-a-pois-1.jpg"
+  ],
+  "stock-porte-savon-ovale-motifs-graphiques-gres-blanc-terre-noire-bleu": [
+   "photos/stock-porte-savon-ovale-motifs-graphiques-gres-blanc-terre-noire-bleu-1.jpg"
+  ],
+  "stock-saliere-tripode-a-pois-cuillere-noir-a-pois": [
+   "photos/stock-saliere-tripode-a-pois-cuillere-noir-a-pois-1.jpg"
   ],
   "stock-assiette-a-pois-20-ocre-a-pois": [
    "photos/stock-assiette-a-pois-20-ocre-a-pois-1.jpg"
   ],
+  "stock-assiette-motifs-graphiques-20-gres-blanc-terre-noire-engobe-blanc": [
+   "photos/stock-assiette-motifs-graphiques-20-gres-blanc-terre-noire-engobe-blanc-1.jpg"
+  ],
+  "stock-porte-encens-terre-noire": [
+   "photos/stock-porte-encens-terre-noire-1.jpg"
+  ],
+  "stock-assiette-cocteau-12-terre-marron": [
+   "photos/stock-assiette-cocteau-12-terre-marron-1.jpg"
+  ],
   "stock-coquetier-saliere-en-terre-melee-ocre": [
    "photos/stock-coquetier-saliere-en-terre-melee-ocre-1.jpg"
+  ],
+  "stock-plat-a-carreaux-carreaux-bleus": [
+   "photos/stock-plat-a-carreaux-carreaux-bleus-1.jpg"
   ],
   "rond-de-serviette": [
    "photos/rond-de-serviette-1.jpg",
