@@ -1238,7 +1238,7 @@ function fiche(id){
     </div>
     <div class="infos">
       <div class="fiche-tete">
-        <h1 class="caps">${p.stock && p.couleur ? `${esc(p.produit)} <span class="h1-coul">— ${esc(p.couleur)}</span>` : esc(p.nom)}</h1>
+        <h1 class="caps">${p.stock && p.couleur ? `${esc(p.produit)} <span class="h1-coul">—&nbsp;${esc(p.couleur)}</span>` : esc(p.nom)}</h1>
         <p class="prix-tete">${prixTete}</p>
       </div>
       <p class="desc">${md(p.desc).replace(/\n/g, "<br>")}</p>
