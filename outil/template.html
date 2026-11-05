@@ -1182,7 +1182,6 @@ function stockMereHtml(p){
   if (!m) return "";
   return `<a class="stock-mere" href="#p-${m.id}">${visuel(m.photos[0], hash(m), "")}
       <span><span class="caps">Envie d'une autre couleur ou d'un autre format ?</span>
-      <span class="detail">${esc(m.nom)} existe sur commande${m.coul.length > 1 ? ` en ${m.coul.length} couleurs` : ""} (${esc(m.delai || SITE.delais.replace(/^Comptez\s*/i, "").replace(/\s*de fabrication.*$/i, "") || "3 à 4 semaines")} de fabrication).</span>
       <span class="lien-jost">Voir la pièce sur commande →</span></span></a>`;
 }
 
