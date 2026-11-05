@@ -13,7 +13,7 @@ def slug(s):
     return re.sub(r'[^a-z0-9]+', '-', s).strip('-')
 COLL = {"terre-melees": "terre-melees", "les-pois": "pois", "graphics": "graphics", "les-carreaux": "carreaux"}
 CAT = {"art-de-la-table": "table", "vases": "vases", "petits-objets": "objets"}
-man = {"pieces": {}, "collections": {}, "categories": {}, "cover": None}
+man = {"pieces": {}, "collections": {}, "categories": {}, "cover": None, "tons": {}}
 _ancien = os.path.join(os.path.dirname(os.path.abspath(__file__)), "photos.json")
 if os.path.exists(_ancien):  # garde les réglages saisis à la main (icône…)
     man.update({k: v for k, v in json.load(open(_ancien)).items() if k not in man})
@@ -26,6 +26,18 @@ def conv(src, name, w=1600):
         r = w / max(im.size); im = im.resize((round(im.width*r), round(im.height*r)), Image.LANCZOS)
     dst = os.path.join(OUT, name); im.save(dst, 'JPEG', quality=80, optimize=True, progressive=True)
     return "photos/" + name
+def ton_fond(src):
+    """Ton du fond (pourtour de la 1re photo) : clarté moins la chaleur (rouge - bleu).
+    Élevé = fond blanc / clair, bas = fond bois ou sombre. Sert à alterner les fonds dans « En stock »."""
+    try: im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
+    except Exception:
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import heic
+        im = heic.lire(src).convert('RGB')
+    im.thumbnail((200, 200)); w, h = im.size; b = max(4, int(min(w, h) * .12))
+    px = [im.getpixel((x, y)) for y in range(h) for x in range(w) if x < b or y < b or x >= w - b or y >= h - b]
+    clarte = sum(.299 * r + .587 * g + .114 * bl for r, g, bl in px) / len(px)
+    chaleur = sum(r - bl for r, g, bl in px) / len(px)
+    return round(clarte - 1.5 * chaleur)
 IMG = re.compile(r'\.(jpe?g|png|heic|webp)$', re.I)
 for dirpath, dirs, files in os.walk(ROOT):
     files = sorted(f for f in files if IMG.search(f))
@@ -46,6 +58,9 @@ for dirpath, dirs, files in os.walk(ROOT):
         if parts[0] == "13 - En stock":  # pièces en stock : « Produit - Couleur »
             key = "stock-" + key
     if not key: print("ignoré :", rel); continue
+    if bucket is man["pieces"] and key not in man["tons"]:
+        try: man["tons"][key] = ton_fond(os.path.join(dirpath, files[0]))
+        except Exception: pass
     lst = bucket.setdefault(key, [])
     for i, f in enumerate(files):
         try: lst.append(conv(os.path.join(dirpath, f), f"{prefix}{key}-{len(lst)+1}.jpg"))

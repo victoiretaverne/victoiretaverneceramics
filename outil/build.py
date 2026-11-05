@@ -291,7 +291,8 @@ def construire():
                 photos["pieces"][sid] = photos["pieces"][k]
             remise = prop(c, "Remise") or 0
             stock[sid] = {"id": sid, "nom": produit, "couleur": couleur, "prix": prix,
-                          "qte": int(prop(c, "Qté") or 1), "mere": meres[0] if meres else None}
+                          "qte": int(prop(c, "Qté") or 1), "mere": meres[0] if meres else None,
+                          "cree": (c.get("created_time") or "")[:10]}  # date d'ajout au stock
             if remise and prix:  # pièce à défaut : prix barré + nouveau prix
                 stock[sid]["remise"] = remise
             defaut = (prop(c, "Défaut") or "").strip()
@@ -344,7 +345,7 @@ def construire():
         print("NOTION_TOKEN absent : reconstruction sans relire Notion.")
 
     # ---------- Photos ----------
-    bloc = "const PHOTOS = " + js({k: photos[k] for k in ("pieces", "collections", "categories")}) + ";"
+    bloc = "const PHOTOS = " + js({k: photos[k] for k in ("pieces", "collections", "categories", "tons") if k in photos}) + ";"
     html = re.sub(r"const PHOTOS = .*?;\n", lambda m: bloc + "\n", html, count=1, flags=re.S)
 
     os.makedirs(os.path.dirname(SORTIE), exist_ok=True)

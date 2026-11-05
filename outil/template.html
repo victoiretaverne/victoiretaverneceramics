@@ -776,26 +776,33 @@ NOTION_STOCK.forEach(x => {
     id:x.id, nom:x.nom + (x.couleur ? " — " + x.couleur : ""), produit:x.nom, couleur:x.couleur, qte:x.qte || 1,
     desc:mere ? String(mere.desc || "").split(/(?<=[.!?])\s+/).filter(t => !/couleur|coloris/i.test(t)).join(" ") : "", compo:mere ? mere.compo : undefined, photos:PHOTOS.pieces[x.id] || [],
     cats:["stock"], f:lireFormats(`Pièce unique | | ${x.prix != null && x.remise ? Math.round((x.prix - x.remise) * 100) / 100 : (x.prix ?? "")}`), coul:[], stock:true, mere:mere ? mere.id : null,
-    base:x.remise && x.prix ? x.prix : null, defaut:x.defaut || ""
+    base:x.remise && x.prix ? x.prix : null, defaut:x.defaut || "", cree:x.cree || ""
   });
 });
-/* Liste « En stock » mélangée : on alterne les familles de pièces pour éviter d'aligner des pièces similaires
-   (pièces avec photo d'abord). Ordre fixe, pour que la page ne change pas à chaque visite. */
+/* Liste « En stock » : on alterne les fonds de photo (clairs / bois) et les familles de pièces,
+   pour un ensemble homogène sans pièces similaires côte à côte. Pièces avec photo d'abord. Ordre fixe. */
 {
   const brut = PIECES.filter(p => p.stock), autres = PIECES.filter(p => !p.stock);
-  const melanger = liste => {
-    const groupes = new Map();
-    liste.forEach(p => { const k = String(p.produit || "").split(" ")[0].toLowerCase();  /* famille : assiette, porte-savon, porte-encens… */ if (!groupes.has(k)) groupes.set(k, []); groupes.get(k).push(p); });
-    const g = [...groupes.values()].sort((a, b) => b.length - a.length), out = [];
-    let dernier = null;
-    while (out.length < liste.length) {
-      const dispo = g.filter(x => x.length).sort((a, b) => b.length - a.length);
-      const pris = (dispo.find(x => x !== dernier) || dispo[0]);
-      out.push(pris.shift()); dernier = pris;
+  const tons = PHOTOS.tons || {}, valeurs = brut.map(p => tons[p.id]).filter(v => v != null).sort((a, b) => a - b);
+  const seuil = valeurs.length ? valeurs[Math.floor(valeurs.length / 2)] : 0;
+  const clair = p => tons[p.id] == null ? null : tons[p.id] >= seuil;
+  const famille = p => String(p.produit || "").split(" ")[0].toLowerCase();
+  const alterner = liste => {
+    const reste = liste.slice(), out = [];
+    while (reste.length) {
+      const der = out[out.length - 1], avant = out[out.length - 2];
+      const nb = f => reste.filter(p => famille(p) === f).length;
+      let best = 0, score = -1;
+      reste.forEach((p, i) => {
+        const s = (der && clair(p) !== clair(der) ? 4 : 0) + (der && famille(p) !== famille(der) ? 3 : 0)
+          + (avant && famille(p) !== famille(avant) ? 1 : 0) + nb(famille(p)) / 100;
+        if (s > score) { score = s; best = i; }
+      });
+      out.push(reste.splice(best, 1)[0]);
     }
     return out;
   };
-  const melange = [...melanger(brut.filter(p => p.photos.length)), ...melanger(brut.filter(p => !p.photos.length))];
+  const melange = [...alterner(brut.filter(p => p.photos.length)), ...alterner(brut.filter(p => !p.photos.length))];
   PIECES.length = 0; PIECES.push(...autres, ...melange);
 }
 const STOCK = PIECES.filter(p => p.stock);
@@ -1087,7 +1094,10 @@ function categorie(id, sousId){
   else if (!s && c && c.sous) liste = parOrdre(liste, l => melanger(l, p => p.sous || "autre"));
   else liste = parOrdre(liste, l => l);
   /* Tri par prix (le prix « dès » de la vignette) ; pièces sans prix en fin de liste */
-  if (TRI !== "selection") {
+  if (TRI === "recent" || TRI === "ancien") {
+    const sens = TRI === "recent" ? -1 : 1;
+    liste = liste.slice().sort((a, b) => (!a.cree - !b.cree) || sens * String(a.cree).localeCompare(String(b.cree)));
+  } else if (TRI !== "selection") {
     const sens = TRI === "prix-desc" ? -1 : 1;
     liste = liste.slice().sort((a, b) => {
       const pa = prixMin(a), pb = prixMin(b);
@@ -1106,7 +1116,7 @@ function categorie(id, sousId){
         <a class="caps" href="#${c.id}" ${!s ? 'aria-current="page"' : ""}>Tout voir</a></nav>`
     : "";
   const tri = liste.length > 1 ? `<div class="tri"><label class="caps" for="tri">Trier</label>
-      <div class="select"><select id="tri">${[["selection", "Sélection"], ["prix-asc", "Prix croissant"], ["prix-desc", "Prix décroissant"]]
+      <div class="select"><select id="tri">${[["selection", "Sélection"], ["recent", "Ajouts récents"], ["ancien", "Ajouts anciens"], ["prix-asc", "Prix croissant"], ["prix-desc", "Prix décroissant"]]
         .map(([v, t]) => `<option value="${v}" ${TRI === v ? "selected" : ""}>${t}</option>`).join("")}</select></div></div>` : "";
   const barre = sousNav || tri ? `<div class="wrap barre-liste">${sousNav}${tri}</div>` : "";
   const vide = `<p class="vide detail">${id === "stock" ? "Aucune pièce en stock pour le moment. Toutes les pièces restent disponibles sur commande." : "Aucune pièce pour le moment."}</p>`;
