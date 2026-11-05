@@ -212,6 +212,7 @@ header .bar{max-width:none;padding-inline:clamp(16px,3vw,40px)}
 nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.82rem}
 nav a{text-decoration:none;padding-block:4px;border-bottom:0.5px solid transparent}
 nav a:hover,nav a[aria-current="page"]{border-bottom-color:currentColor}
+nav a.menu-stock{background:#fff;color:var(--encre);padding:4px 8px 3px;border-bottom:0}  /* « En stock » surligné en blanc */
 /* Menu burger (mobile) */
 .burger{display:none}
 @media (max-width:760px){
@@ -228,6 +229,7 @@ nav a:hover,nav a[aria-current="page"]{border-bottom-color:currentColor}
   header nav li a{display:block;padding:14px 0;border-bottom:0.5px solid var(--ligne)}
   header nav a:hover,header nav a[aria-current="page"]{border-bottom-color:var(--ligne)}
   header nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:0.5px;text-underline-offset:4px}
+  header nav li a.menu-stock{display:inline-block;margin-block:12px;padding:6px 10px 5px;border-bottom:0}
   body.accueil header.menu-ouvert{background:var(--fond);color:var(--encre);border-bottom-color:var(--ligne)}
 }
 
@@ -917,7 +919,7 @@ function carte(p){
 
 function menu(actif){
   $("#menu").innerHTML = [...(nouveautes().length ? [["nouveautes","Nouveautés"]] : []), ["collections","Collections"], ...CATEGORIES.map(c => [c.id, c.nom]), ["stock","En stock"]]
-    .map(([id, nom]) => `<li><a class="caps" href="#${id}" ${actif === id ? 'aria-current="page"' : ""}>${esc(nom)}</a></li>`).join("");
+    .map(([id, nom]) => `<li><a class="caps${id === "stock" ? " menu-stock" : ""}" href="#${id}" ${actif === id ? 'aria-current="page"' : ""}>${esc(nom)}</a></li>`).join("");
   const f = document.querySelector(".fav-lien"); if (f) actif === "favoris" ? f.setAttribute("aria-current", "page") : f.removeAttribute("aria-current");
 }
 
