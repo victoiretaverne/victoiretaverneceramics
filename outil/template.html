@@ -1260,7 +1260,7 @@ function fiche(id){
       ${p.stock ? stockMereHtml(p) : ""}
       <div>
         <details><summary class="caps">${p.stock ? "Disponibilité et livraison" : "Délais et livraison"}</summary><p>${esc(p.stock ? "Pièce déjà prête : pas de délai de fabrication, elle part dès votre commande validée." : delai)}</p><p>${esc(SITE.livraison)}</p></details>
-        <details><summary class="caps">Personnalisation</summary><p>${esc(SITE.personnalisation)}</p></details>
+        ${p.stock ? "" : `<details><summary class="caps">Personnalisation</summary><p>${esc(SITE.personnalisation)}</p></details>`}
       </div>
       <div class="aussi"><span class="detail">Dans :</span>${p.cats.map(c => `<a href="#${c}">${esc(catNom(c))}</a>`).join("")}${p.sous ? (() => { for (const c of CATEGORIES.filter(c => p.cats.includes(c.id) && c.sous)) { const s = c.sous.find(x => x.id === p.sous); if (s) return `<a href="#${c.id}-${s.id}">${esc(s.nom)}</a>`; } return ""; })() : ""}${COLLECTIONS.filter(c => c.pieces.includes(p.id)).map(c => `<a href="#c-${c.id}">${esc(c.nom.replace(/^Collection\s*/i, ""))}</a>`).join("")}</div>
     </div>
