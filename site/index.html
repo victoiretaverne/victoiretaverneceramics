@@ -305,6 +305,16 @@ body:not(.logo-blanc) .bandeau-photo::after{background:rgba(236,233,228,.12)}
 .sous a{text-decoration:none;border:0.5px solid var(--encre);padding:4px 11px;border-radius:999px;font-size:.66rem}
 .sous a:hover{background:var(--rose);border-color:var(--rose)}
 .sous a[aria-current="page"]{background:var(--encre);color:var(--fond);border-color:var(--encre)}
+/* Filtres budget (ordinateur uniquement) */
+.outils{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-left:auto}
+.budget{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.budget .lab{font-size:.66rem;color:var(--doux);margin-right:4px}
+.budget button{font:inherit;font-family:var(--police-titre);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;background:none;color:var(--encre);border:0.5px dashed var(--encre);padding:4px 11px;border-radius:999px;cursor:pointer}
+.budget button:hover{background:var(--rose);border-color:var(--rose);border-style:solid}
+.budget button[aria-pressed="true"]{background:var(--rose);border:0.5px solid var(--rose)}
+.budget button[aria-pressed="true"]::after{content:" ×";letter-spacing:0}
+.barre-liste .tri{margin-left:0}
+@media (max-width:760px){.outils{margin-left:0;width:100%;justify-content:flex-end}.budget{display:none}}
 
 /* Lignes : 1 modèle = 3 photos côte à côte */
 .lignes{display:flex;flex-direction:column;gap:clamp(44px,7vw,80px);padding-bottom:clamp(48px,8vw,96px)}
@@ -900,8 +910,8 @@ const catNom = id => id === "stock" ? CAT_STOCK.nom : (CATEGORIES.find(c => c.id
 const tuile = (i, label) => `<div class="ph t${(i % 3) + 1}"><span class="logo" aria-hidden="true"></span>${label ? `<i>${label}</i>` : ""}</div>`;
 const hash = (p) => p.nom.length;
 /* Photo réelle si disponible, sinon emplacement */
-const ZOOM_PHOTOS = {"photos/assiette-en-terre-melee-1.jpg": 1.1, "photos/vase-ophelie-1.jpg": 1.3, "photos/vase-sylvestre-1.jpg": 1.2, "photos/gamelle-a-pois-1.jpg": 1.2, "photos/stock-plat-a-carreaux-carreaux-bleus-1.jpg": 1.1};  /* zoom ponctuel sur certaines photos */
-const visuel = (src, i, label) => src ? `<div class="ph ph-photo"><img src="${esc(src)}" alt="" loading="lazy"${ZOOM_PHOTOS[src] ? ` style="transform:scale(${ZOOM_PHOTOS[src]})"` : ""}></div>` : `<div class="ph ph-vide"><span>Photo à venir</span></div>`;
+const ZOOM_PHOTOS = {"photos/assiette-en-terre-melee-1.jpg": 1.1, "photos/vase-ophelie-1.jpg": 1.3, "photos/vase-sylvestre-1.jpg": 1.2, "photos/gamelle-a-pois-1.jpg": 1.2, "photos/stock-plat-a-carreaux-carreaux-bleus-1.jpg": 1.1, "photos/stock-porte-encens-bleu-gris-1.jpg": [1.6, "0% 58%"], "photos/stock-porte-encens-terre-ocre-1.jpg": [1.5, "100% 0%"]};  /* nombre = zoom au centre ; [zoom, "x% y%"] = zoom sur un point */  /* zoom ponctuel sur certaines photos */
+const visuel = (src, i, label) => src ? `<div class="ph ph-photo"><img src="${esc(src)}" alt="" loading="lazy"${ZOOM_PHOTOS[src] ? ` style="transform:scale(${[].concat(ZOOM_PHOTOS[src])[0]});transform-origin:${[].concat(ZOOM_PHOTOS[src])[1] || "50% 50%"}"` : ""}></div>` : `<div class="ph ph-vide"><span>Photo à venir</span></div>`;
 
 /* Défilement des photos dans les vignettes */
 document.addEventListener("click", e => {
@@ -1102,6 +1112,9 @@ function melanger(liste, cle, cleSans = cle){
 
 let TRI = "selection";
 try { TRI = sessionStorage.getItem("vtc-tri") || "selection"; } catch (e) {}
+const BUDGETS = [30, 50, 80];  /* filtres « Moins de … € » (sur le prix de départ de la pièce) */
+let BUDGET = 0;
+try { BUDGET = +sessionStorage.getItem("vtc-budget") || 0; } catch (e) {}
 function categorie(id, sousId){
   const c = id === "stock" ? CAT_STOCK : CATEGORIES.find(x => x.id === id);
   let liste = id === "tout" ? PIECES.filter(p => !p.stock) : PIECES.filter(p => p.cats.includes(id));
@@ -1131,6 +1144,9 @@ function categorie(id, sousId){
       return sens * (pa - pb);
     });
   }
+  const avantBudget = liste.length;
+  const budgetActif = BUDGET && !matchMedia("(max-width:760px)").matches;  /* pas de filtre budget sur mobile */
+  if (budgetActif) liste = liste.filter(p => { const v = prixMin(p); return v != null && v < BUDGET; });
   menu(id);
   const nomCat = c ? c.nom : "Toutes les pièces";
   const fil = s
@@ -1141,11 +1157,13 @@ function categorie(id, sousId){
         `<a class="caps" href="#${c.id}-${x.id}" ${s && s.id === x.id ? 'aria-current="page"' : ""}>${esc(x.nom)}</a>`).join("")}
         <a class="caps" href="#${c.id}" ${!s ? 'aria-current="page"' : ""}>Tout voir</a></nav>`
     : "";
-  const tri = liste.length > 1 ? `<div class="tri"><label class="caps" for="tri">Trier</label>
+  const budget = avantBudget > 1 ? `<div class="budget" role="group" aria-label="Filtrer par budget"><span class="caps lab">Budget</span>${BUDGETS.map(b =>
+      `<button type="button" data-budget="${b}" aria-pressed="${BUDGET === b}">Moins de ${b} €</button>`).join("")}</div>` : "";
+  const tri = avantBudget > 1 ? `<div class="tri"><label class="caps" for="tri">Trier</label>
       <div class="select"><select id="tri">${[["selection", "Sélection"], ["recent", "Ajouts récents"], ["ancien", "Ajouts anciens"], ["prix-asc", "Prix croissant"], ["prix-desc", "Prix décroissant"]]
         .map(([v, t]) => `<option value="${v}" ${TRI === v ? "selected" : ""}>${t}</option>`).join("")}</select></div></div>` : "";
-  const barre = sousNav || tri ? `<div class="wrap barre-liste">${sousNav}${tri}</div>` : "";
-  const vide = `<p class="vide detail">${id === "stock" ? "Aucune pièce en stock pour le moment. Toutes les pièces restent disponibles sur commande." : "Aucune pièce pour le moment."}</p>`;
+  const barre = sousNav || tri || budget ? `<div class="wrap barre-liste">${sousNav}<div class="outils">${budget}${tri}</div></div>` : "";
+  const vide = `<p class="vide detail">${budgetActif && avantBudget ? `Aucune pièce à moins de ${BUDGET} € ici. <a href="#" data-budget="0">Voir toutes les pièces</a>` : id === "stock" ? "Aucune pièce en stock pour le moment. Toutes les pièces restent disponibles sur commande." : "Aucune pièce pour le moment."}</p>`;
   const contenu = c && c.affichage === "lignes"
     ? `<section class="wrap lignes">${liste.map(ligne).join("") || vide}</section>`
     : `<section class="wrap"><div class="grille">${liste.map(carte).join("")}</div>${liste.length ? "" : vide}</section>`;
@@ -1157,6 +1175,12 @@ function categorie(id, sousId){
   </section>
   ${barre}
   ${contenu}`;
+  $("#page").querySelectorAll("[data-budget]").forEach(b => b.addEventListener("click", e => {
+    e.preventDefault();
+    const v = +b.dataset.budget; BUDGET = BUDGET === v ? 0 : v;
+    try { sessionStorage.setItem("vtc-budget", BUDGET); } catch (e) {}
+    const y = window.scrollY; categorie(id, sousId); window.scrollTo(0, y);
+  }));
   const t = $("#tri");
   if (t) t.addEventListener("change", () => {
     TRI = t.value; try { sessionStorage.setItem("vtc-tri", TRI); } catch (e) {}
