@@ -911,7 +911,7 @@ const catNom = id => id === "stock" ? CAT_STOCK.nom : (CATEGORIES.find(c => c.id
 const tuile = (i, label) => `<div class="ph t${(i % 3) + 1}"><span class="logo" aria-hidden="true"></span>${label ? `<i>${label}</i>` : ""}</div>`;
 const hash = (p) => p.nom.length;
 /* Photo réelle si disponible, sinon emplacement */
-const ZOOM_PHOTOS = {"photos/assiette-en-terre-melee-1.jpg": 1.1, "photos/vase-ophelie-1.jpg": 1.3, "photos/vase-sylvestre-1.jpg": 1.2, "photos/gamelle-a-pois-1.jpg": 1.2, "photos/stock-plat-a-carreaux-carreaux-bleus-1.jpg": 1.1};  /* nombre = zoom au centre ; [zoom, "x% y%"] = zoom sur un point */  /* zoom ponctuel sur certaines photos */
+const ZOOM_PHOTOS = {"photos/assiette-en-terre-melee-1.jpg": 1.1, "photos/vase-ophelie-1.jpg": 1.3, "photos/vase-sylvestre-1.jpg": 1.2, "photos/gamelle-a-pois-1.jpg": 1.2, "photos/stock-plat-a-carreaux-carreaux-bleus-1.jpg": 1.1, "photos/egouttoir-1.jpg": 1.1};  /* nombre = zoom au centre ; [zoom, "x% y%"] = zoom sur un point */  /* zoom ponctuel sur certaines photos */
 const visuel = (src, i, label) => src ? `<div class="ph ph-photo"><img src="${esc(src)}" alt="" loading="lazy"${ZOOM_PHOTOS[src] ? ` style="transform:scale(${[].concat(ZOOM_PHOTOS[src])[0]});transform-origin:${[].concat(ZOOM_PHOTOS[src])[1] || "50% 50%"}"` : ""}></div>` : `<div class="ph ph-vide"><span>Photo à venir</span></div>`;
 
 /* Défilement des photos dans les vignettes */
@@ -963,8 +963,10 @@ function selectionAccueil(){
 
 /* Nouveautés : d'abord les pièces cochées « Nouveauté » dans Notion, puis les plus récemment créées,
    20 au maximum, pièces avec photo d'abord */
+/* Ajustements manuels de l'ordre des Nouveautés : date de tri imposée (plus récente = plus haut) */
+const DATE_NOUVEAUTE = {"coupelle-tripode": "2026-10-28.3", "assiette-cocteau": "2026-10-28.2"};
 const nouveautes = () => {
-  const date = p => String(p.nouveau === true ? p.cree : (p.nouveau || p.cree || ""));
+  const date = p => DATE_NOUVEAUTE[p.id] || String(p.nouveau === true ? p.cree : (p.nouveau || p.cree || ""));
   const cochees = PIECES.filter(p => p.nouveau).sort((a, b) => date(b).localeCompare(date(a)));
   const autres = PIECES.filter(p => !p.stock && !p.nouveau && !p.horsNouv && p.photos.length).sort((a, b) => date(b).localeCompare(date(a)));
   const l = cochees.concat(autres).slice(0, 20);
