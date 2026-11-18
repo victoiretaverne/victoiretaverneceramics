@@ -247,7 +247,10 @@ def construire():
             if not prop(p, "Publié"):
                 continue
             fams = [x for x in (prop(p, "Couleurs") or []) + (prop(p, "Familles de couleurs") or []) if x in sup_famille]
-            colls = coll_de_piece.get(pid, []) + [c for f in fams for c in coll_de_famille.get(f, [])]
+            # Collections héritées des familles seulement si toutes ses familles sont « de collection »
+            # (une pièce unie qui propose aussi les carreaux ne rejoint pas la collection Carreaux)
+            herite = fams and all(coll_de_famille.get(f) for f in fams)
+            colls = coll_de_piece.get(pid, []) + ([c for f in fams for c in coll_de_famille.get(f, [])] if herite else [])
             d = {"id": sid, "nom": nom, "cats": prop(p, "Catégories") or [],
                  "colls": list(dict.fromkeys(colls)),
                  "coul": couleurs_de_piece(p),
