@@ -231,6 +231,9 @@ def construire():
                 elif x in id_coul:
                     ids.append(id_coul[x])
             ids = list(dict.fromkeys(ids))
+            # Pas de bordeaux sur les vases
+            if "Vases" in (prop(p, "Catégories") or []):
+                ids = [i for i in ids if i != "bordeaux"]
             return sorted(ids, key=lambda i: info_coul[i])
 
         pieces, maj_photos, id_piece = [], [], {}
