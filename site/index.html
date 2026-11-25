@@ -722,16 +722,19 @@ const NOTION_PIECES = [
 ];
 /* Pièces en stock (base Commandes de Notion, « Sur le site » coché) */
 const NOTION_STOCK = [
+  {"id": "stock-porte-encens-terre-ocre", "nom": "Porte-encens", "couleur": "Terre ocre", "prix": 35, "qte": 3, "mere": "porte-encens", "cree": "2026-11-25"},
+  {"id": "stock-saliere-tripode-a-pois-cuillere-ocre-a-pois", "nom": "Salière tripode à pois & cuillère", "couleur": "Ocre à pois", "prix": 25, "qte": 4, "mere": "saliere-tripode-a-pois-cuillere", "cree": "2026-11-25"},
+  {"id": "stock-porte-encens-baby-blue", "nom": "Porte-encens", "couleur": "Baby blue", "prix": 35, "qte": 1, "mere": "porte-encens", "cree": "2026-11-25"},
   {"id": "stock-saliere-tripode-a-carreaux-cuillere-terre-marron-a-carreaux", "nom": "Salière tripode à carreaux & cuillère", "couleur": "Terre marron à carreaux", "prix": 25, "qte": 1, "mere": "saliere-tripode-a-carreaux-cuillere", "cree": "2026-11-21"},
   {"id": "stock-saliere-tripode-a-pois-cuillere-noir-a-pois", "nom": "Salière tripode à pois & cuillère", "couleur": "Noir à pois", "prix": 25, "qte": 1, "mere": "saliere-tripode-a-pois-cuillere", "cree": "2026-11-21"},
   {"id": "stock-coupelle-tripode-a-carreaux-10-terre-marron-a-carreaux", "nom": "Coupelle tripode à carreaux Ø10", "couleur": "Terre marron à carreaux", "prix": 18, "qte": 1, "mere": "coupelle-tripode-a-carreaux", "cree": "2026-11-21"},
   {"id": "stock-vase-ophelie-medium-blanc-mat", "nom": "Vase Ophélie Medium", "couleur": "Blanc mat", "prix": 75, "qte": 1, "mere": "vase-ophelie", "cree": "2026-11-18"},
   {"id": "stock-assiette-a-carreaux-20-carreaux-bleus", "nom": "Assiette à carreaux Ø20", "couleur": "Carreaux bleus", "prix": 22, "qte": 2, "mere": "assiette-a-carreaux", "cree": "2026-11-18"},
+  {"id": "stock-vase-kenzan-petit-baby-blue", "nom": "Vase Kenzan (petit)", "couleur": "Baby blue", "prix": 45, "qte": 1, "mere": "vase-kenzan", "cree": "2026-11-06"},
   {"id": "stock-porte-savon-ovale-marron-mouchete", "nom": "Porte-savon ovale", "couleur": "Marron moucheté", "prix": 20, "qte": 1, "mere": "porte-savon-oval", "cree": "2026-11-05"},
   {"id": "stock-coupelle-tripode-a-carreaux-10-carreaux-bleus", "nom": "Coupelle tripode à carreaux Ø10", "couleur": "Carreaux bleus", "prix": 18, "qte": 1, "mere": "coupelle-tripode-a-carreaux", "cree": "2026-11-05"},
   {"id": "stock-assiette-motifs-graphiques-20-gres-blanc-terre-noire-engobe-blanc", "nom": "Assiette motifs graphiques Ø20", "couleur": "Grès blanc - terre noire - engobe blanc", "prix": 34, "qte": 1, "mere": "assiette-motifs-graphiques", "cree": "2026-11-05"},
   {"id": "stock-assiette-a-pois-12-blanc-a-pois", "nom": "Assiette à pois Ø12", "couleur": "Blanc à pois", "prix": 14, "qte": 1, "mere": "assiette-a-pois", "cree": "2026-11-05"},
-  {"id": "stock-saliere-tripode-a-pois-cuillere-ocre-a-pois", "nom": "Salière tripode à pois & cuillère", "couleur": "Ocre à pois", "prix": 25, "qte": 1, "mere": "saliere-tripode-a-pois-cuillere", "cree": "2026-11-05"},
   {"id": "stock-saliere-tripode-a-pois-cuillere-blanc-a-pois", "nom": "Salière tripode à pois & cuillère", "couleur": "Blanc à pois", "prix": 25, "qte": 1, "mere": "saliere-tripode-a-pois-cuillere", "cree": "2026-11-05"},
   {"id": "stock-assiette-cocteau-12-terre-marron", "nom": "Assiette Cocteau Ø12", "couleur": "Terre marron", "prix": 14, "qte": 1, "mere": "assiette-cocteau", "cree": "2026-11-05", "remise": 2.8, "defaut": "Trait en diagonale sur l'assiette"},
   {"id": "stock-coupelle-tripode-a-pois-10-marron-a-pois", "nom": "Coupelle tripode à pois Ø10", "couleur": "Marron à pois", "prix": 18, "qte": 1, "mere": "coupelle-tripode-a-pois", "cree": "2026-11-05"},
@@ -744,7 +747,6 @@ const NOTION_STOCK = [
   {"id": "stock-coquetier-saliere-en-terre-melee-ocre", "nom": "Coquetier & salière en terre-mêlée", "couleur": "Ocre", "prix": 18, "qte": 2, "mere": "coquetier-saliere-en-terres-melees", "cree": "2026-11-03"},
   {"id": "stock-porte-savon-ovale-cuivre", "nom": "Porte-savon ovale", "couleur": "Cuivre", "prix": 20, "qte": 1, "mere": "porte-savon-oval", "cree": "2026-10-28"},
   {"id": "stock-porte-savon-ovale-motifs-graphiques-gres-blanc-terre-noire-bleu", "nom": "Porte-savon ovale motifs graphiques", "couleur": "Grès blanc - terre noire - bleu", "prix": 39, "qte": 1, "mere": "porte-savon-motifs-graphiques", "cree": "2026-10-28"},
-  {"id": "stock-porte-encens-terre-ocre", "nom": "Porte-encens", "couleur": "Terre ocre", "prix": 35, "qte": 1, "mere": "porte-encens", "cree": "2026-10-28"},
   {"id": "stock-porte-savon-ovale-motifs-graphiques-gres-blanc-terre-ocre-engobe-noir", "nom": "Porte-savon ovale motifs graphiques", "couleur": "Grès blanc - terre ocre - engobe noir", "prix": 39, "qte": 1, "mere": "porte-savon-motifs-graphiques", "cree": "2026-10-28"},
   {"id": "stock-plat-a-carreaux-carreaux-bleus", "nom": "Plat à carreaux", "couleur": "Carreaux bleus", "prix": 50, "qte": 1, "mere": "plat-a-carreaux", "cree": "2026-10-28"},
   {"id": "stock-porte-encens-marron", "nom": "Porte-encens", "couleur": "Marron", "prix": 35, "qte": 1, "mere": "porte-encens", "cree": "2026-10-25"},
